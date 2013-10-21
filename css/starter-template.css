@@ -9,3 +9,8 @@ body {
 .highlight:hover {
 	background: #9ACFEA
 }
+
+.calendar-page {
+	padding: 0px 15%;
+	text-align: center;
+}
