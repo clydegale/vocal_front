@@ -15,11 +15,11 @@ function internalImport() {
 }
 
 function externalFileImport() {
-	var calendar = $('#calendar').calendar({events_source: "events.json.php"});
+	var calendar = $('#calendar').calendar({events_source: "eventsNew.json.php"});
 }
 
 function externalURLImport() {
-	var calendar = $('#calendar').calendar({events_source: "https://63.141.251.75/mockup/events.json.php"});	
+	var calendar = $('#calendar').calendar({events_source: "http://vocal.pi/eventsNew.json.php"});	
 } 
 
 function errorImport() {

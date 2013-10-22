@@ -3,7 +3,7 @@
 	"use strict";
 
 	var options = {
-		events_source: 'http://vocal.pi/events.json.php',
+		events_source: 'http://vocal.pi/eventsNew.json.php',
 		view: 'month',
 		tmpl_path: 'tmpls/',
 		tmpl_cache: false,
