@@ -4,7 +4,7 @@ function internalImport() {
 				{
 			    	"id":"123",
 					"title": "Mein Event",
-					"url": "google.com",
+					"url": "http://google.com",
 					"class": "event-important",
 					"start": "1382375654405",
 					"end": "1382379254000"
@@ -19,17 +19,16 @@ function externalFileImport() {
 }
 
 function externalURLImport() {
-	var calendar = $('#calendar').calendar({events_source: "http://vocal.pi/events.json.php"});	
+	var calendar = $('#calendar').calendar({events_source: "https://63.141.251.75/mockup/events.json.php"});	
 } 
 
 function errorImport() {
-	var calendar = $('#calendar').calendar({events_source: function() {
-			return [
-				{
-				    "success": 0,
-				    "error": "error message here"
-				}
-			];
-		}
-	});	
+	var calendar = $('#calendar').calendar({events_source: function(){
+		alert("bla");
+		return [
+		{
+			"success": 0,
+			"error": "Error while loading"
+		}];
+	}});	
 }

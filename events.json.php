@@ -1,3 +1,6 @@
+<?php
+	header("Access-Control-Allow-Origin: *");
+?>
 {
 	"success": 1,
 	"result": [
@@ -74,4 +77,5 @@
 			"end": "1382552054000"
 		}
 	]
+
 }
