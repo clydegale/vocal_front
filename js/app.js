@@ -8,6 +8,7 @@
 		tmpl_path: 'tmpls/',
 		tmpl_cache: false,
 		day: 'now',
+		language: 'de-DE',
 		onAfterEventsLoad: function(events) {
 			if(!events) {
 				return;
