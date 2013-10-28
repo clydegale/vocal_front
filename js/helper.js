@@ -32,3 +32,9 @@ function errorImport() {
 		}];
 	}});	
 }
+
+function clearContainer() {
+	var content = $('#content')
+	console.log(content);
+	content.html('');
+}
