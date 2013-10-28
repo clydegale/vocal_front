@@ -37,9 +37,9 @@
         
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li id="home" class="active"><a href="loggedIn.html">Home</a></li>
-            <li><a id="cal" href="cal.html">Kalender</a></li>
-            <li><a id="settings" href="#">Einstellungen</a></li>
+            <li id="home-navbar"><a href="loggedIn.html">Home</a></li>
+            <li><a id="calendar-navbar" href="cal.html">Kalender</a></li>
+            <li><a id="settings-navbar" href="#">Einstellungen</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           	<li>
@@ -55,30 +55,16 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="contentLoggedIn"></div><!-- /.container -->
 
-      <div class="starter-template">
-        <h1>Willkommen beim Vovinam Event Kalender</h1>
-		
-		<div class="col-sm-6"> 
-			<a href="cal.html">
-				<img src="resources/Calendar-icon.png" alt="" class="img-rounded img-responsive highlight" width="40%" height="40%" style="margin: 0 auto">
-			</a>	
-			<a href="cal.html"><p>Kalender Anzeigen</p></a>
-		</div>
-		<div class="col-sm-6">
-			<img src="resources/Settings-icon.png" alt="" class="img-rounded img-responsive highlight" width="40%" height="40%" style="margin: 0 auto">
-			<p>Einstellungen Anzeigen</p>			
-		</div>
-      </div>
-
-    </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/siteManager.js"></script>
+    <script type="text/javascript" src="js/helper.js"></script>
   </body>
 </html>
