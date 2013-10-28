@@ -23,9 +23,9 @@
 			console.log("Error with AJAX Query to the overview.html template");
 		})
 		.always(function(){
-			$('#home-navbar').addClass("active")
+			$('#home-navbar').addClass("active");
 			$('#calendar-navbar').removeClass("active");
-			$('#settings-navbar').removeClass("active")
+			$('#settings-navbar').removeClass("active");
 		});
 	}
 	
@@ -48,9 +48,9 @@
 			console.log("Error with AJAX Query to the calendar.html template");
 		})
 		.always(function(){
-			$('#home-navbar').removeClass("active")
+			$('#home-navbar').removeClass("active");
 			$('#calendar-navbar').addClass("active");
-			$('#settings-navbar').removeClass("active")
+			$('#settings-navbar').removeClass("active");
 		});	  
 	}
 	
@@ -69,9 +69,9 @@
 			console.log("Error with AJAX Query to the settings.html template");
 		})
 		.always(function(){
-			$('#home-navbar').removeClass("active")
+			$('#home-navbar').removeClass("active");
 			$('#calendar-navbar').removeClass("active");
-			$('#settings-navbar').addClass("active")
+			$('#settings-navbar').addClass("active");
 		});		
 	}
 		
