@@ -11,6 +11,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="css/calendar.css">
 
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
@@ -37,9 +39,9 @@
         
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li id="home-navbar"><a href="loggedIn.html">Home</a></li>
-            <li><a id="calendar-navbar" href="cal.html">Kalender</a></li>
-            <li><a id="settings-navbar" href="#">Einstellungen</a></li>
+            <li id="home-navbar"><a href="javascript:void(0)" onclick="loadOverview()">Home</a></li>
+            <li id="calendar-navbar"><a href="javascript:void(0)" onclick="loadCalendar()">Kalender</a></li>
+            <li id="settings-navbar"><a href="javascript:void(0)" onclick="">Einstellungen</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           	<li>
@@ -64,6 +66,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="js/calendar.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/language/de-DE.js"></script>
+    <script type="text/javascript" src="js/app.js"></script> -->
     <script type="text/javascript" src="js/siteManager.js"></script>
     <script type="text/javascript" src="js/helper.js"></script>
   </body>

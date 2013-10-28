@@ -1,9 +1,10 @@
 "use strict";
 
-(function($) {
+// (function($) {
 	
 	var managerOptions = {
 		templateDir : "tmpls/ui/",
+		jsDir		: "js/",
 		
 	}	
 	
@@ -38,6 +39,10 @@
 		})
 		.done(function(html) {
 			$('#contentLoggedIn').html(html);
+			$.getScript(managerOptions.jsDir + "calendar.js");
+			$.getScript(managerOptions.jsDir + "underscore-min.js");
+			$.getScript(managerOptions.jsDir + "language/de-DE.js");
+			$.getScript(managerOptions.jsDir + "app.js");
 		})
 		.fail(function() {
 			console.log("Error with AJAX Query to the calendar.html template");
@@ -73,4 +78,4 @@
 	$(document).ready(
 		loadOverview()
 	);
-}(jQuery));
+// }(jQuery));
