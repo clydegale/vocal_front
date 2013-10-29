@@ -51,42 +51,93 @@
 	<div class="starter-template">
         <h1>Willkommen beim Vovinam Event Kalender</h1>
         <!-- only visible for small devices -->
-        <div class="visible-xs visible-sm">
+        <!-- <div class="visible-xs visible-sm">
         	<div class="row">
-		        <div class="" style="margin-bottom: 5px">
-			      <input type="text" class="form-control" placeholder="Username">
-			    </div>
-			    <div class="" style="margin-bottom: 5px">
-			      <input type="password" class="form-control" placeholder="Password">
-			    </div>
 	        </div>
-			    <div class="row">
-			    	<div class="col-xs-12 col-md-6 pull-left" style="margin-top: 8px; margin-bottom: 8px">    		
-				    	<input type="checkbox" class="">  Merke meinen Login
-			    	</div>
-					<a href="loggedIn.html" class="btn btn-primary pull-right col-md-1 col-xs-12">Login</a>
-			    	<a href="" class="pull-right col-md-5 col-xs-12" style="margin-top: 8px; margin-bottom: 8px">Noch kein Account? Hier klicken</a>
-			    </div>
-		</div>
+			<div class="row">
+			</div>
+		</div> -->
 		<!-- /only visible for small devices -->
 		
 		<!-- only visible for larger devices -->	
-		<div class="hidden-xs hidden-sm">
-        	<div class="row">
-		        <div class="" style="margin-bottom: 5px; padding-left: 33%; padding-right: 33%">
-			      <input type="text" class="form-control" placeholder="Username">
-			    </div>
-			    <div class="" style="margin-bottom: 5px; padding-left: 33%; padding-right: 33%">
-			      <input type="password" class="form-control" placeholder="Password">
-			    </div>
-	        </div>
-			    <div class="row" style="padding-left: 33%; padding-right: 33%; margin-left: -4px; margin-right: -4px">
-			    	<div class="pull-left" style="margin-top: 8px; margin-bottom: 8px">    		
-				    	<input type="checkbox" class="">  Merke meinen Login
-			    	</div>
-					<a href="loggedIn.html" class="btn btn-primary pull-right">Login</a>
-			    	<a href="" class="pull-right">Noch kein Account? Hier klicken</a>
-			    </div>
+		<div class="">
+			<form class="form-horizontal" role="form">
+				<!-- Vorname Inputfield -->
+				<div class="form-group">
+					<div class="col-lg-2 col-lg-2 col-sm-2 col-xs-3">						
+						<label class="control-label pull-right">Vorname</label>
+					</div>
+					<div class="col-lg-8 col-sm-10 col-xs-9">						
+	    				<input type="text" class="form-control" placeholder="Vorname">
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+				<!-- Nachname Inputfield -->
+				<div class="form-group">
+					<div class="col-lg-2 col-lg-2 col-sm-2 col-xs-3">
+						<label class="control-label pull-right">Nachname</label>
+					</div>
+					<div class="col-lg-8 col-sm-10 col-xs-9">
+	    				<input type="text" class="form-control" placeholder="Nachname">
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+				<!-- Passwort Inputfield -->
+				<div class="form-group">
+					<div class="col-lg-2 col-lg-2 col-sm-2 col-xs-3">
+						<label class="control-label pull-right">Passwort</label>
+					</div>
+					<div class="col-lg-8 col-sm-10 col-xs-9">
+	    				<input type="password" class="form-control" placeholder="Passwort">
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+				<!-- E-Mail Adress Inputfield -->
+				<div class="form-group">
+					<div class="col-lg-2 col-lg-2 col-sm-2 col-xs-3">
+						<label class="control-label pull-right">E-Mail Adresse</label>
+					</div>
+					<div class="col-lg-8 col-sm-10 col-xs-9">
+	    				<input type="email" class="form-control" placeholder="E-Mail Adresse">
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+				<!-- Standort selection -->
+				<div class="form-group">
+					<div class="col-lg-2 col-lg-2 col-sm-2 col-xs-3">
+						<label class="control-label pull-right">Standort</label>
+					</div>
+					<div class="col-lg-8 col-sm-10 col-xs-9">
+			    		<select class="form-control">
+							<option>Standort1</option>
+							<option>Standort2</option>
+							<option>Standort3</option>
+						</select>
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+				<!-- Gürtelfarbe selection -->
+				<div class="form-group">
+					<div class="col-lg-2 col-sm-2 col-xs-3">
+						<label class="control-label pull-right">Gürtelfarbe</label>
+					</div>
+					<div class="col-lg-8 col-sm-10 col-xs-9">
+						<select class="form-control">
+							<option>Weiß</option>
+							<option>Blau</option>
+							<option>Gelb</option>
+							<option>Rot</option>
+						</select>
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+				<div class="form-group" style="padding-left: 20px; padding-right: 14px">
+					<div class="col-md-3"></div>
+					<a href="index.html" class="btn btn-danger col-xs-12 col-md-2">Zurück</a>
+					<div class="col-md-2"></div>
+					<button class="btn btn-primary col-xs-12 col-md-2">Account erstellen</button>
+				</div>
+			</form>
 		</div>      
 		<!-- /only visible for larger devices -->
 	</div>
