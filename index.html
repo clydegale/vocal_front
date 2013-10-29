@@ -1,7 +1,7 @@
 <!-- 
 	Git cherry-pick for (printf) debugging
 	TODO: refactor loginForm to only use one view for all devices
-	TODO: sidebar with upcoming events 
+	TODO: sidebar with upcoming events
 	TODO: Fix Week ribbons
 	TODO: dynamic respons if account creation worked or not (whats the problem if not?) needs to be done on the serverside
 	TODO: Check usability with phones/tablets
@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
@@ -26,77 +26,77 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-          <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button> -->
-          <a class="navbar-brand" href="#">VoCal</a>
+            <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button> -->
+            <a class="navbar-brand" href="#">VoCal</a>
         </div>
-      </div>
     </div>
+</div>
 
-    <div class="container" id="contentLogin">
+<div class="container" id="contentLogin">
 
-	<div class="starter-template">
+    <div class="starter-template">
         <h1>Willkommen beim Vovinam Event Kalender</h1>
         <!-- only visible for small devices -->
         <div class="visible-xs visible-sm">
-        	<div class="row">
-		        <div class="" style="margin-bottom: 5px">
-			      <input type="text" class="form-control" placeholder="Username">
-			    </div>
-			    <div class="" style="margin-bottom: 5px">
-			      <input type="password" class="form-control" placeholder="Password">
-			    </div>
-	        </div>
-			    <div class="row">
-			    	<div class="col-xs-12 col-md-6 pull-left" style="margin-top: 8px; margin-bottom: 8px">    		
-				    	<input type="checkbox" class="">  Merke meinen Login
-			    	</div>
-					<a href="loggedIn.html" class="btn btn-primary pull-right col-md-1 col-xs-12">Login</a>
-			    	<a href="accountCreation.html" class="pull-right col-md-5 col-xs-12" style="margin-top: 8px; margin-bottom: 8px">Noch kein Benutzerkonto? Hier klicken</a>
-			    </div>
-		</div>
-		<!-- /only visible for small devices -->
-		
-		<!-- only visible for larger devices -->	
-		<div class="hidden-xs hidden-sm">
-        	<div class="row">
-		        <div class="" style="margin-bottom: 5px; padding-left: 33%; padding-right: 33%">
-			      <input type="text" class="form-control" placeholder="Username">
-			    </div>
-			    <div class="" style="margin-bottom: 5px; padding-left: 33%; padding-right: 33%">
-			      <input type="password" class="form-control" placeholder="Password">
-			    </div>
-	        </div>
-			    <div class="row" style="padding-left: 33%; padding-right: 33%; margin-left: -4px; margin-right: -4px">
-			    	<div class="pull-left" style="margin-top: 8px; margin-bottom: 8px">    		
-				    	<input type="checkbox" class="">  Merke meinen Login
-			    	</div>
-					<a href="loggedIn.html" class="btn btn-primary pull-right">Login</a>
-			    	<a href="accountCreation.html" class="pull-right">Noch kein Benutzerkonto? Hier klicken</a>
-			    </div>
-		</div>      
-		<!-- /only visible for larger devices -->
-	</div>
-    </div><!-- /.container -->
+            <div class="row">
+                <div class="" style="margin-bottom: 5px">
+                    <input type="text" class="form-control" placeholder="Username">
+                </div>
+                <div class="" style="margin-bottom: 5px">
+                    <input type="password" class="form-control" placeholder="Password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6 pull-left" style="margin-top: 8px; margin-bottom: 8px">
+                    <input type="checkbox" class=""> Merke meinen Login
+                </div>
+                <a href="loggedIn.html" class="btn btn-primary pull-right col-md-1 col-xs-12">Login</a>
+                <a href="accountCreation.html" class="pull-right col-md-5 col-xs-12"
+                   style="margin-top: 8px; margin-bottom: 8px">Noch kein Benutzerkonto? Hier klicken</a>
+            </div>
+        </div>
+        <!-- /only visible for small devices -->
+
+        <!-- only visible for larger devices -->
+        <div class="hidden-xs hidden-sm">
+            <div class="row">
+                <div class="" style="margin-bottom: 5px; padding-left: 33%; padding-right: 33%">
+                    <input type="text" class="form-control" placeholder="Username">
+                </div>
+                <div class="" style="margin-bottom: 5px; padding-left: 33%; padding-right: 33%">
+                    <input type="password" class="form-control" placeholder="Password">
+                </div>
+            </div>
+            <div class="row" style="padding-left: 33%; padding-right: 33%; margin-left: -4px; margin-right: -4px">
+                <div class="pull-left" style="margin-top: 8px; margin-bottom: 8px">
+                    <input type="checkbox" class=""> Merke meinen Login
+                </div>
+                <a href="loggedIn.html" class="btn btn-primary pull-right">Login</a>
+                <a href="accountCreation.html" class="pull-right">Noch kein Benutzerkonto? Hier klicken</a>
+            </div>
+        </div>
+        <!-- /only visible for larger devices -->
+    </div>
+</div>
+<!-- /.container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
 </html>
