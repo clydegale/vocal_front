@@ -1,20 +1,11 @@
-
-
 "use strict";
 
-// Object handling various settings and paths
-var managerOptions = {
-	templateDir : "tmpls/ui/",
-	jsDir : "js/",
-
-}
-
 /*
- * Following three functions will load the specific view using AJAX requests to the templates in tmpls/ui/
+ * The following three functions will load the specific view using AJAX requests to the templates in tmpls/ui/
  */
 function loadOverview() {
 	$.ajax({
-		url : managerOptions.templateDir + 'overview.html',
+		url : managerOptions.dirs.templateDir + 'overview.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true,
@@ -33,7 +24,7 @@ function loadOverview() {
 
 function loadCalendar() {
 	$.ajax({
-		url : managerOptions.templateDir + 'calendar.html',
+		url : managerOptions.dirs.templateDir + 'calendar.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true,
@@ -55,7 +46,7 @@ function loadCalendar() {
 
 function loadSettings() {
 	$.ajax({
-		url : managerOptions.templateDir + 'settings.html',
+		url : managerOptions.dirs.templateDir + 'settings.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true,
