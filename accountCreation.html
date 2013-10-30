@@ -86,7 +86,7 @@
 					<div class="col-lg-4 col-md-4 col-xs-3">
 						<label class="control-label pull-right">Standort</label>
 					</div>
-					<div class="col-lg-4 col-md-4 col-xs-7">
+					<div class="col-lg-4 col-md-4 col-xs-7" id="locationSelector">
 			    		<select class="form-control"> <!-- should be filled dynamically by querying the server default: bitte auswählen -->
 							<option>Standort1</option>
 							<option>Standort2</option>
@@ -134,5 +134,18 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/accountCreationHelper.js"></script>
+    <script>
+        $.ajax({
+            url : "http://vocal.pi:8080/VoCalServices/MockService/getLocations",
+            dataType : 'text',
+            type : 'GET',
+            async : true
+            //cache: true,
+        }).done(function(json) {
+            console.log(json);
+        }).fail(function() {
+            console.log("Error");
+        });
+    </script>
   </body>
 </html>
