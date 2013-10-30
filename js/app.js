@@ -5,7 +5,7 @@
 	var options = {
 		events_source: 'http://vocal.pi/eventsNew.json.php',
 		view: 'month',
-		tmpl_path: 'tmpls/',
+		tmpl_path: 'tmpls/calendar/',
 		tmpl_cache: false,
 		day: 'now',
 		language: 'de-DE',
