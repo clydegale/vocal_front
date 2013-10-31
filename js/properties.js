@@ -9,5 +9,13 @@ var managerOptions = {
     },
     services : {
         locationSelectorURL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations"
+    },
+    siteStates: {
+        loginScreen: "loginScreen",
+        accountCreation: "accountCreation",
+        overview: "overview",
+        calendar: "calendar",
+        settings: "settings",
+        none: ""
     }
 }

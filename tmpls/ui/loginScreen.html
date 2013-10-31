@@ -1,0 +1,35 @@
+<div class="starter-template">
+    <h1>Willkommen beim Vovinam Event Kalender</h1>
+
+    <form class="form-horizontal" role="form">
+        <!-- Mail adress loginField -->
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <input type="text" class="form-control" placeholder="E-Mail Adresse">
+            </div>
+            <div class="col-md-4 col-xs-2"></div>
+        </div>
+        <!-- password loginField-->
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <input type="password" class="form-control" placeholder="Passwort">
+            </div>
+            <div class="col-md-4 col-xs-2"></div>
+        </div>
+        <!-- Buttons visible for large Devices -->
+        <div class="form-group visible-md visible-lg" style="margin: 0% 3%">
+            <div class="col-md-5"></div>
+            <div class="col-md-2"></div>
+            <!--<button class="btn btn-primary col-xs-12 col-md-1">Login</button>-->
+            <a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-md-1" onclick="loadOverview()">Login</a>
+        </div>
+        <!-- Buttons Visible for small devices -->
+        <div class="form-group visible-sm visible-xs" style="margin: 0% 20%">
+            <!--<button class="btn btn-primary btn-block">Login</button>-->
+            <a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-md-1" onclick="loadOverview()">Login</a>
+        </div>
+        <a href="javascript:void(0)" style="margin-top: 50%" onclick="loadAccountCreation()">Noch kein Benutzerkonto? Hier klicken</a>
+    </form>
+</div>

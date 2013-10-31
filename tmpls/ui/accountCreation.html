@@ -1,0 +1,86 @@
+<div class="starter-template">
+    <h1>Benutzerkonto erstellen</h1>
+    <div class="">
+        <form class="form-horizontal" role="form">
+            <!-- Vorname Inputfield -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Vorname</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="text" class="form-control" placeholder="Vorname">
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- Nachname Inputfield -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Nachname</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="text" class="form-control" placeholder="Nachname">
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- E-Mail Adress Inputfield -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">E-Mail</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="email" class="form-control" placeholder="E-Mail Adresse">
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- Passwort Inputfield -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Passwort</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="password" class="form-control" placeholder="Passwort" id="passwordInputField" onkeyup="checkPasswordValidity(this.id)">
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- Standort selection -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Standort</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7"> <!-- should be filled dynamically by querying the server default: bitte auswählen -->
+                    <select class="form-control" id="locationSelector">
+                        <option selected="selected">Bitte einen Standort wählen</option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- Gürtelfarbe selection -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Gürtelfarbe</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <select class="form-control">
+                        <option value="beltcolor-white">Weiß</option>
+                        <option value="beltcolor-blue">Blau</option>
+                        <option value="beltcolor-yellow">Gelb</option>
+                        <option value="beltcolor-red">Rot</option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- Buttons visible for large Devices -->
+            <div class="form-group visible-md visible-lg" style="margin: 0% 3%"> <!-- onclick check if all fields are filled -->
+                <div class="col-md-4"></div>
+                <a href="index.html" class="btn btn-danger col-xs-12 col-md-1">Zurück</a>
+                <div class="col-md-2"></div>
+                <button class="btn btn-primary col-xs-12 col-md-1">Abschicken</button>
+            </div>
+            <!-- Buttons Visible for small devices -->
+            <div class="form-group visible-sm visible-xs" style="margin: 0% 20%"> <!-- onclick check if all fields are filled -->
+                <button class="btn btn-primary btn-block">Abschicken</button>
+                <a href="index.html" class="btn btn-danger btn-block">Zurück</a>
+            </div>
+        </form>
+    </div>
+</div>
