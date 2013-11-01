@@ -1,14 +1,14 @@
 "use strict";
 
 /*
- * The following three functions will load the specific view using AJAX requests to the templates in tmpls/ui/
+ * The following functions will load the specific view using AJAX requests to the templates in tmpls/ui/
  */
 function loadLoginScreen() {
     $.ajax({
-        url : managerOptions.dirs.templateDir + 'loginScreen.html',
+        url : managerProperties.dirs.templateDir + 'loginScreen.html',
         dataType : 'html',
         type : 'GET',
-        async : true,
+        async : true
         //cache: true,
     }).done(function(html) {
             $('#contentMain').html(html);
@@ -19,7 +19,7 @@ function loadLoginScreen() {
             $('#navbar-settings').removeClass("active");
 
             //Update the current pageState
-            $.miniMenu.currentSiteState = managerOptions.siteStates.loginScreen;
+            _updateSessionStorage(managerProperties.siteStates.loginScreen)
         }).fail(function() {
             console.log("Error with AJAX Query to the index.html template");
         });
@@ -27,10 +27,10 @@ function loadLoginScreen() {
 
 function loadAccountCreation() {
     $.ajax({
-        url : managerOptions.dirs.templateDir + 'accountCreation.html',
+        url : managerProperties.dirs.templateDir + 'accountCreation.html',
         dataType : 'html',
         type : 'GET',
-        async : true,
+        async : true
         //cache: true,
     }).done(function(html) {
             $('#contentMain').html(html);
@@ -40,10 +40,10 @@ function loadAccountCreation() {
             $('#navbar-calendar').removeClass("active");
             $('#navbar-settings').removeClass("active");
 
-            $.getScript(managerOptions.jsDir + "accountCreationHelper.js")
+            $.getScript(managerProperties.jsDir + "accountCreationHelper.js")
 
-            //Update the current pageState  
-            $.miniMenu.currentSiteState = managerOptions.siteStates.accountCreation;
+            //Update the current pageState
+            _updateSessionStorage(managerProperties.siteStates.accountCreation)
         }).fail(function() {
             console.log("Error with AJAX Query to the accountCreation.html template");
         });
@@ -51,7 +51,7 @@ function loadAccountCreation() {
 
 function loadOverview() {
 	$.ajax({
-		url : managerOptions.dirs.templateDir + 'overview.html',
+		url : managerProperties.dirs.templateDir + 'overview.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -60,14 +60,14 @@ function loadOverview() {
 		$('#contentMain').html(html);
 
         // Unhide toolbar buttons
-        $('navbar-content').removeClass("invisible");
+        $('#navbar-content').removeClass("invisible");
 		//Setting topbar buttons accordingly
 		$('#navbar-home').addClass("active");
 		$('#navbar-calendar').removeClass("active");
 		$('#navbar-settings').removeClass("active");
 
         //Update the current pageState
-        $.miniMenu.currentSiteState = managerOptions.siteStates.overview
+        _updateSessionStorage(managerProperties.siteStates.overview)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the overview.html template");
 	});
@@ -75,7 +75,7 @@ function loadOverview() {
 
 function loadCalendar() {
 	$.ajax({
-		url : managerOptions.dirs.templateDir + 'calendar.html',
+		url : managerProperties.dirs.templateDir + 'calendar.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true,
@@ -86,13 +86,13 @@ function loadCalendar() {
 		$('#navbar-calendar').addClass("active");
 		$('#navbar-settings').removeClass("active");
 
-		$.getScript(managerOptions.jsDir + "calendar.js");
-		$.getScript(managerOptions.jsDir + "underscore-min.js");
-		$.getScript(managerOptions.jsDir + "language/de-DE.js");
-		$.getScript(managerOptions.jsDir + "app.js");
+		$.getScript(managerProperties.jsDir + "calendar.js");
+		$.getScript(managerProperties.jsDir + "underscore-min.js");
+		$.getScript(managerProperties.jsDir + "language/de-DE.js");
+		$.getScript(managerProperties.jsDir + "app.js");
 
         //Update the current pageState
-        $.miniMenu.currentSiteState = managerOptions.siteStates.calendar
+        _updateSessionStorage(managerProperties.siteStates.calendar)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the calendar.html template");
 	});
@@ -100,7 +100,7 @@ function loadCalendar() {
 
 function loadSettings() {
 	$.ajax({
-		url : managerOptions.dirs.templateDir + 'settings.html',
+		url : managerProperties.dirs.templateDir + 'settings.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true,
@@ -112,7 +112,7 @@ function loadSettings() {
 		$('#navbar-settings').addClass("active");
 
         //Update the current pageState
-        $.miniMenu.currentSiteState = managerOptions.siteStates.settings
+        _updateSessionStorage(managerProperties.siteStates.settings)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the settings.html template");
 	});
@@ -120,19 +120,19 @@ function loadSettings() {
 
 function loadCurrentState(currentState) {
     switch (currentState) {
-        case managerOptions.siteStates.loginScreen:
+        case managerProperties.siteStates.loginScreen:
             loadLoginScreen()
             break;
-        case managerOptions.siteStates.accountCreation:
+        case managerProperties.siteStates.accountCreation:
             loadAccountCreation()
             break;
-        case managerOptions.siteStates.overview:
+        case managerProperties.siteStates.overview:
             loadOverview()
             break;
-        case managerOptions.siteStates.calendar:
+        case managerProperties.siteStates.calendar:
             loadCalendar()
             break;
-        case managerOptions.siteStates.settings:
+        case managerProperties.siteStates.settings:
             loadSettings()
             break;
         default:
@@ -140,10 +140,35 @@ function loadCurrentState(currentState) {
 
     }
 }
+
+function isStorageDefined() {
+    if(Storage != undefined) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function _updateSessionStorage(currentSiteState) {
+    sessionStorage.setItem("currentSiteState", currentSiteState)
+}
+
+function debug_clearSessionStorage() {
+    sessionStorage.clear()
+}
+
+function logout() { // TODO: write so the server will be notified when user logs out
+    sessionStorage.clear();
+    loadLoginScreen();
+}
+
 // ---------------------
 
 // Initialize the page by loading the Index template first
-window.currentState = managerOptions.siteStates.index
-$.miniMenu = new Object();
-$.miniMenu.currentSiteState = managerOptions.siteStates.index
-$(document).ready(loadCurrentState(window.currentState));
+if(isStorageDefined() && (sessionStorage.firstVisit == null)) {
+    sessionStorage.currentSiteState = managerProperties.siteStates.index
+    sessionStorage.firstVisit = true;
+} else {
+    console.log("No Storage object found") // TODO: Show bootstrap error message here
+}
+$(document).ready(loadCurrentState(sessionStorage.getItem(["currentSiteState"])));

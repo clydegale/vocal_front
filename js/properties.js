@@ -2,7 +2,7 @@
 
 console.log("properties loaded")
 
-var managerOptions = {
+var managerProperties = {
     dirs: {
         templateDir : "tmpls/ui/",
         jsDir : "js/"
@@ -16,6 +16,6 @@ var managerOptions = {
         overview: "overview",
         calendar: "calendar",
         settings: "settings",
-        none: ""
+        none: null
     }
 }

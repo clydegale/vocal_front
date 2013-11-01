@@ -1,5 +1,6 @@
 <!-- 
 	Git cherry-pick for (printf) debugging
+	TODO: throw bootstrap error if sessionStorage is not supported
 	TODO: sidebar with upcoming events
 	TODO: Fix Week ribbons
 	TODO: dynamic respons if account creation worked or not (whats the problem if not?) needs to be done on the serverside
@@ -53,7 +54,7 @@
                 </li>
                 <li>
                     <form class="navbar-form">
-                        <a href="index.html" class="btn btn-danger"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                        <a href="javascript:void(0)" class="btn btn-danger" onclick="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a>
                     </form>
                 </li>
             </ul>
