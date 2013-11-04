@@ -1,6 +1,6 @@
-"use strict"
+"use strict";
 
-console.log("properties loaded")
+console.log("properties loaded");
 
 var managerProperties = {
     dirs: {
@@ -26,4 +26,4 @@ var managerProperties = {
         DANGER: "alert-danger"
     },
     SLIDE_DURATION: 500
-}
+};
