@@ -15,7 +15,7 @@ var managerProperties = {
         LOGIN_SCREEN: "loginScreen",
         ACCOUNT_CREATION: "accountCreation",
         OVERVIEW: "overview",
-        calendar: "calendar",
+        CALENDAR: "calendar",
         settings: "settings",
         none: null
     },

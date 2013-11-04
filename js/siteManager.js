@@ -7,7 +7,7 @@
  */
 function loadLoginScreen() {
     $.ajax({
-        url : managerProperties.dirs.TEMPLATE_UI_DIR + 'loginScreen.html',
+        url : managerProperties.dirs.TEMPLATE_UI + 'loginScreen.html',
         dataType : 'html',
         type : 'GET',
         async : true
@@ -27,7 +27,7 @@ function loadLoginScreen() {
 
 function loadAccountCreation() {
     $.ajax({
-        url : managerProperties.dirs.TEMPLATE_UI_DIR + 'accountCreation.html',
+        url : managerProperties.dirs.TEMPLATE_UI + 'accountCreation.html',
         dataType : 'html',
         type : 'GET',
         async : true
@@ -49,7 +49,7 @@ function loadAccountCreation() {
 
 function loadOverview() {
 	$.ajax({
-		url : managerProperties.dirs.TEMPLATE_UI_DIR + 'overview.html',
+		url : managerProperties.dirs.TEMPLATE_UI + 'overview.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -73,7 +73,7 @@ function loadOverview() {
 
 function loadCalendar() {
 	$.ajax({
-		url : managerProperties.dirs.TEMPLATE_UI_DIR + 'calendar.html',
+		url : managerProperties.dirs.TEMPLATE_UI + 'calendar.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -90,7 +90,7 @@ function loadCalendar() {
 		$.getScript(managerProperties.dirs.JS + "app.js");
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.calendar)
+        _updateSessionStorage(managerProperties.siteStates.CALENDAR)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the calendar.html template");
 	});
@@ -98,7 +98,7 @@ function loadCalendar() {
 
 function loadSettings() {
 	$.ajax({
-		url : managerProperties.dirs.TEMPLATE_UI_DIR + 'settings.html',
+		url : managerProperties.dirs.TEMPLATE_UI + 'settings.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -127,7 +127,7 @@ function loadCurrentState(currentState) {
         case managerProperties.siteStates.OVERVIEW:
             loadOverview();
             break;
-        case managerProperties.siteStates.calendar:
+        case managerProperties.siteStates.CALENDAR:
             loadCalendar();
             break;
         case managerProperties.siteStates.settings:
