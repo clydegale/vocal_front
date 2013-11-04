@@ -19,7 +19,7 @@ function loadLoginScreen() {
             $('#navbar-content').addClass("invisible");
 
             //Update the current pageState
-            _updateSessionStorage(managerProperties.siteStates.loginScreen)
+            _updateSessionStorage(managerProperties.siteStates.LOGIN_SCREEN)
         }).fail(function() {
             console.log("Error with AJAX Query to the index.html template");
         });
@@ -41,7 +41,7 @@ function loadAccountCreation() {
             $.getScript(managerProperties.dirs.JS + "accountCreationHelper.js");
 
             //Update the current pageState
-            _updateSessionStorage(managerProperties.siteStates.accountCreation)
+            _updateSessionStorage(managerProperties.siteStates.ACCOUNT_CREATION)
         }).fail(function() {
             console.log("Error with AJAX Query to the accountCreation.html template");
         });
@@ -65,7 +65,7 @@ function loadOverview() {
 		$('#navbar-settings').removeClass("active");
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.overview)
+        _updateSessionStorage(managerProperties.siteStates.OVERVIEW)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the overview.html template");
 	});
@@ -118,13 +118,13 @@ function loadSettings() {
 
 function loadCurrentState(currentState) {
     switch (currentState) {
-        case managerProperties.siteStates.loginScreen:
+        case managerProperties.siteStates.LOGIN_SCREEN:
             loadLoginScreen();
             break;
-        case managerProperties.siteStates.accountCreation:
+        case managerProperties.siteStates.ACCOUNT_CREATION:
             loadAccountCreation();
             break;
-        case managerProperties.siteStates.overview:
+        case managerProperties.siteStates.OVERVIEW:
             loadOverview();
             break;
         case managerProperties.siteStates.calendar:

@@ -12,9 +12,9 @@ var managerProperties = {
         LOCATION_SELECTOR_URL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations"
     },
     siteStates: {
-        loginScreen: "loginScreen",
-        accountCreation: "accountCreation",
-        overview: "overview",
+        LOGIN_SCREEN: "loginScreen",
+        ACCOUNT_CREATION: "accountCreation",
+        OVERVIEW: "overview",
         calendar: "calendar",
         settings: "settings",
         none: null
