@@ -10,7 +10,7 @@ function checkPasswordValidity(inputFormID) {
  * location Objects
  */
 $.ajax({
-    url : managerOptions.services.locationSelectorURL,
+    url : managerProperties.services.locationSelectorURL,
     dataType : 'json',
     type : 'GET',
     async : true
