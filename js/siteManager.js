@@ -139,13 +139,8 @@ function loadCurrentState(currentState) {
     }
 }
 
-// TODO: simplify if statement
 function isStorageDefined() {
-    if(Storage != undefined) {
-        return true
-    } else {
-        return false
-    }
+    return Storage != undefined
 }
 
 function _updateSessionStorage(currentSiteState) {
