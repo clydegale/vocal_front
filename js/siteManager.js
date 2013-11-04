@@ -119,26 +119,27 @@ function loadSettings() {
 function loadCurrentState(currentState) {
     switch (currentState) {
         case managerProperties.siteStates.loginScreen:
-            loadLoginScreen()
+            loadLoginScreen();
             break;
         case managerProperties.siteStates.accountCreation:
-            loadAccountCreation()
+            loadAccountCreation();
             break;
         case managerProperties.siteStates.overview:
-            loadOverview()
+            loadOverview();
             break;
         case managerProperties.siteStates.calendar:
-            loadCalendar()
+            loadCalendar();
             break;
         case managerProperties.siteStates.settings:
-            loadSettings()
+            loadSettings();
             break;
         default:
-            loadLoginScreen()
+            loadLoginScreen();
 
     }
 }
 
+// TODO: simplify if statement
 function isStorageDefined() {
     if(Storage != undefined) {
         return true
@@ -148,12 +149,13 @@ function isStorageDefined() {
 }
 
 function _updateSessionStorage(currentSiteState) {
-    sessionStorage.setItem("currentSiteState", currentSiteState)
+    sessionStorage.setItem("currentSiteState", currentSiteState);
 }
 
-function _setNavbarButtons(buttonName) {
-    var buttons = $('#navbar-buttons').children()
-}
+// TODO: Implement
+//function _setNavbarButtons(buttonName) {
+//    var buttons = $('#navbar-buttons').children();
+//}
 
 function logout() { // TODO: write so the server will be notified when user logs out
     sessionStorage.clear();
@@ -161,20 +163,41 @@ function logout() { // TODO: write so the server will be notified when user logs
 }
 
 function closeAlert(button) {
-    $(button).parent(".alert").slideUp(500)
+    var alertArea = $(button).parent(".alert");
+    alertArea.slideUp(managerProperties.SLIDE_DURATION);
+    // Need to set Timeout so the colors wont change while the slide animation is still going
+    setTimeout(function() {
+        _resetAlertType(alertArea);
+    }, managerProperties.SLIDE_DURATION);
 }
 
 function showAlert(alertType, message) {
-    alertArea = $('#alertArea')
+    var alertArea = $('#alertArea');
+    var textArea = $('#alertAreaText');
+    alertArea.slideUp(managerProperties.SLIDE_DURATION);
+
+    setTimeout(function() {
+        _resetAlertType(alertArea);
+
+        alertArea.addClass(alertType);
+        textArea.html(message);
+        alertArea.slideDown(managerProperties.SLIDE_DURATION);
+    }, managerProperties.SLIDE_DURATION);
 }
 
+function _resetAlertType(alertArea) {
+    alertArea.removeClass(managerProperties.alertTypes.DANGER);
+    alertArea.removeClass(managerProperties.alertTypes.SUCCESS);
+    alertArea.removeClass(managerProperties.alertTypes.WARNING);
+    alertArea.removeClass(managerProperties.alertTypes.INFO);
+}
 // ---------------------
 
 // Initialize the page by loading the Index template first
 if(isStorageDefined() && (sessionStorage.visited == null)) {
-    sessionStorage.currentSiteState = managerProperties.siteStates.index
+    sessionStorage.currentSiteState = managerProperties.siteStates.index;
     sessionStorage.visited = true;
 } else {
-    console.log("No Storage object found") // TODO: Show bootstrap error message here
+    console.log("No Storage object found"); // TODO: Show bootstrap error message here
 }
 $(document).ready(loadCurrentState(sessionStorage.getItem(["currentSiteState"])));

@@ -18,11 +18,12 @@ var managerProperties = {
         calendar: "calendar",
         settings: "settings",
         none: null
-    }
-}
-
-var alertTypes = {
-    success: "alert-success",
-    warning: "alert-warning",
-    error: "alert-error"
+    },
+    alertTypes: {
+        SUCCESS: "alert-success",
+        INFO: "alert-info",
+        WARNING: "alert-warning",
+        DANGER: "alert-danger"
+    },
+    SLIDE_DURATION: 500
 }
