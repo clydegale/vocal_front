@@ -7,7 +7,7 @@
  */
 function loadLoginScreen() {
     $.ajax({
-        url : managerProperties.dirs.templateUIDir + 'loginScreen.html',
+        url : managerProperties.dirs.TEMPLATE_UI_DIR + 'loginScreen.html',
         dataType : 'html',
         type : 'GET',
         async : true
@@ -27,7 +27,7 @@ function loadLoginScreen() {
 
 function loadAccountCreation() {
     $.ajax({
-        url : managerProperties.dirs.templateUIDir + 'accountCreation.html',
+        url : managerProperties.dirs.TEMPLATE_UI_DIR + 'accountCreation.html',
         dataType : 'html',
         type : 'GET',
         async : true
@@ -38,7 +38,7 @@ function loadAccountCreation() {
             //Setting topbar buttons accordingly
             $('#navbar-content').addClass("invisible");
 
-            $.getScript(managerProperties.dirs.jsDir + "accountCreationHelper.js")
+            $.getScript(managerProperties.dirs.jsDir + "accountCreationHelper.js");
 
             //Update the current pageState
             _updateSessionStorage(managerProperties.siteStates.accountCreation)
@@ -49,7 +49,7 @@ function loadAccountCreation() {
 
 function loadOverview() {
 	$.ajax({
-		url : managerProperties.dirs.templateUIDir + 'overview.html',
+		url : managerProperties.dirs.TEMPLATE_UI_DIR + 'overview.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -73,7 +73,7 @@ function loadOverview() {
 
 function loadCalendar() {
 	$.ajax({
-		url : managerProperties.dirs.templateUIDir + 'calendar.html',
+		url : managerProperties.dirs.TEMPLATE_UI_DIR + 'calendar.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -98,10 +98,10 @@ function loadCalendar() {
 
 function loadSettings() {
 	$.ajax({
-		url : managerProperties.dirs.templateUIDir + 'settings.html',
+		url : managerProperties.dirs.TEMPLATE_UI_DIR + 'settings.html',
 		dataType : 'html',
 		type : 'GET',
-		async : true,
+		async : true
 		//cache: true,
 	}).done(function(html) {
 		$('#contentMain').html(html);
