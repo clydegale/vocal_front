@@ -236,6 +236,9 @@
 .event-special {
   background-color: #800080;
 }
+.event-my {
+    background-color: #ff00ff;
+}
 .day-highlight:hover,
 .day-highlight {
   background-color: #dddddd;
@@ -263,6 +266,10 @@
 .day-highlight.dh-event-special:hover,
 .day-highlight.dh-event-special {
   background-color: #ffe6ff;
+}
+.day-highlight.dh-event-my:hover,
+.day-highlight.dh-event-my {
+    background-color: #ff00ff;
 }
 .cal-week-box [class*="cal-cell"] {
   white-space: nowrap;

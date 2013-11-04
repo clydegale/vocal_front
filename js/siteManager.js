@@ -1,3 +1,5 @@
+// TODO: disable top bar in every function
+
 "use strict";
 
 /*
@@ -5,7 +7,7 @@
  */
 function loadLoginScreen() {
     $.ajax({
-        url : managerProperties.dirs.templateDir + 'loginScreen.html',
+        url : managerProperties.dirs.templateUIDir + 'loginScreen.html',
         dataType : 'html',
         type : 'GET',
         async : true
@@ -14,9 +16,7 @@ function loadLoginScreen() {
             $('#contentMain').html(html);
 
             //Setting topbar buttons accordingly
-            $('#navbar-home').addClass("active");
-            $('#navbar-calendar').removeClass("active");
-            $('#navbar-settings').removeClass("active");
+            $('#navbar-content').addClass("invisible");
 
             //Update the current pageState
             _updateSessionStorage(managerProperties.siteStates.loginScreen)
@@ -27,7 +27,7 @@ function loadLoginScreen() {
 
 function loadAccountCreation() {
     $.ajax({
-        url : managerProperties.dirs.templateDir + 'accountCreation.html',
+        url : managerProperties.dirs.templateUIDir + 'accountCreation.html',
         dataType : 'html',
         type : 'GET',
         async : true
@@ -36,11 +36,9 @@ function loadAccountCreation() {
             $('#contentMain').html(html);
 
             //Setting topbar buttons accordingly
-            $('#navbar-home').addClass("active");
-            $('#navbar-calendar').removeClass("active");
-            $('#navbar-settings').removeClass("active");
+            $('#navbar-content').addClass("invisible");
 
-            $.getScript(managerProperties.jsDir + "accountCreationHelper.js")
+            $.getScript(managerProperties.dirs.jsDir + "accountCreationHelper.js")
 
             //Update the current pageState
             _updateSessionStorage(managerProperties.siteStates.accountCreation)
@@ -51,7 +49,7 @@ function loadAccountCreation() {
 
 function loadOverview() {
 	$.ajax({
-		url : managerProperties.dirs.templateDir + 'overview.html',
+		url : managerProperties.dirs.templateUIDir + 'overview.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -75,10 +73,10 @@ function loadOverview() {
 
 function loadCalendar() {
 	$.ajax({
-		url : managerProperties.dirs.templateDir + 'calendar.html',
+		url : managerProperties.dirs.templateUIDir + 'calendar.html',
 		dataType : 'html',
 		type : 'GET',
-		async : true,
+		async : true
 		//cache: true,
 	}).done(function(html) {
 		$('#contentMain').html(html);
@@ -86,10 +84,10 @@ function loadCalendar() {
 		$('#navbar-calendar').addClass("active");
 		$('#navbar-settings').removeClass("active");
 
-		$.getScript(managerProperties.jsDir + "calendar.js");
-		$.getScript(managerProperties.jsDir + "underscore-min.js");
-		$.getScript(managerProperties.jsDir + "language/de-DE.js");
-		$.getScript(managerProperties.jsDir + "app.js");
+		$.getScript(managerProperties.dirs.jsDir + "calendar.js");
+		$.getScript(managerProperties.dirs.jsDir + "underscore-min.js");
+		$.getScript(managerProperties.dirs.jsDir + "language/de-DE.js");
+		$.getScript(managerProperties.dirs.jsDir + "app.js");
 
         //Update the current pageState
         _updateSessionStorage(managerProperties.siteStates.calendar)
@@ -100,7 +98,7 @@ function loadCalendar() {
 
 function loadSettings() {
 	$.ajax({
-		url : managerProperties.dirs.templateDir + 'settings.html',
+		url : managerProperties.dirs.templateUIDir + 'settings.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true,
@@ -153,8 +151,8 @@ function _updateSessionStorage(currentSiteState) {
     sessionStorage.setItem("currentSiteState", currentSiteState)
 }
 
-function debug_clearSessionStorage() {
-    sessionStorage.clear()
+function _setNavbarButtons(buttonName) {
+    var buttons = $('#navbar-buttons').children()
 }
 
 function logout() { // TODO: write so the server will be notified when user logs out
@@ -162,12 +160,20 @@ function logout() { // TODO: write so the server will be notified when user logs
     loadLoginScreen();
 }
 
+function closeAlert(button) {
+    $(button).parent(".alert").slideUp(500)
+}
+
+function showAlert(alertType, message) {
+    alertArea = $('#alertArea')
+}
+
 // ---------------------
 
 // Initialize the page by loading the Index template first
-if(isStorageDefined() && (sessionStorage.firstVisit == null)) {
+if(isStorageDefined() && (sessionStorage.visited == null)) {
     sessionStorage.currentSiteState = managerProperties.siteStates.index
-    sessionStorage.firstVisit = true;
+    sessionStorage.visited = true;
 } else {
     console.log("No Storage object found") // TODO: Show bootstrap error message here
 }

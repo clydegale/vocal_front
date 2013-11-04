@@ -4,7 +4,8 @@ console.log("properties loaded")
 
 var managerProperties = {
     dirs: {
-        templateDir : "tmpls/ui/",
+        templateUIDir : "tmpls/ui/",
+        templateCalendarDir: "tmpls/calendar/",
         jsDir : "js/"
     },
     services : {
@@ -18,4 +19,10 @@ var managerProperties = {
         settings: "settings",
         none: null
     }
+}
+
+var alertTypes = {
+    success: "alert-success",
+    warning: "alert-warning",
+    error: "alert-error"
 }
