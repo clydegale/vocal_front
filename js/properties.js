@@ -4,7 +4,7 @@ console.log("properties loaded");
 
 var managerProperties = {
     dirs: {
-        TEMPLATE_UI_DIR : "tmpls/ui/",
+        TEMPLATE_UI : "tmpls/ui/",
         TEMPLATE_CALENDAR: "tmpls/calendar/",
         jsDir : "js/"
     },
