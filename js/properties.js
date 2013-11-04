@@ -16,8 +16,8 @@ var managerProperties = {
         ACCOUNT_CREATION: "accountCreation",
         OVERVIEW: "overview",
         CALENDAR: "calendar",
-        settings: "settings",
-        none: null
+        SETTINGS: "settings",
+        NONE: null
     },
     alertTypes: {
         SUCCESS: "alert-success",

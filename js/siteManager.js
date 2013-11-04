@@ -110,7 +110,7 @@ function loadSettings() {
 		$('#navbar-settings').addClass("active");
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.settings)
+        _updateSessionStorage(managerProperties.siteStates.SETTINGS)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the settings.html template");
 	});
@@ -130,7 +130,7 @@ function loadCurrentState(currentState) {
         case managerProperties.siteStates.CALENDAR:
             loadCalendar();
             break;
-        case managerProperties.siteStates.settings:
+        case managerProperties.siteStates.SETTINGS:
             loadSettings();
             break;
         default:
