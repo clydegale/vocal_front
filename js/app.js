@@ -5,7 +5,7 @@
 	var options = {
 		events_source: 'http://vocal.pi/eventsNew.json.php',
 		view: 'month',
-		tmpl_path: managerProperties.dirs.templateCalendarDir,
+		tmpl_path: managerProperties.dirs.TEMPLATE_CALENDAR,
 		tmpl_cache: false,
 		day: 'now',
 		language: 'de-DE',
