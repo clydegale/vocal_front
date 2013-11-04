@@ -6,7 +6,7 @@ var managerProperties = {
     dirs: {
         TEMPLATE_UI : "tmpls/ui/",
         TEMPLATE_CALENDAR: "tmpls/calendar/",
-        jsDir : "js/"
+        JS : "js/"
     },
     services : {
         locationSelectorURL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations"

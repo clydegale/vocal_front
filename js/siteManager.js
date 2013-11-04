@@ -38,7 +38,7 @@ function loadAccountCreation() {
             //Setting topbar buttons accordingly
             $('#navbar-content').addClass("invisible");
 
-            $.getScript(managerProperties.dirs.jsDir + "accountCreationHelper.js");
+            $.getScript(managerProperties.dirs.JS + "accountCreationHelper.js");
 
             //Update the current pageState
             _updateSessionStorage(managerProperties.siteStates.accountCreation)
@@ -84,10 +84,10 @@ function loadCalendar() {
 		$('#navbar-calendar').addClass("active");
 		$('#navbar-settings').removeClass("active");
 
-		$.getScript(managerProperties.dirs.jsDir + "calendar.js");
-		$.getScript(managerProperties.dirs.jsDir + "underscore-min.js");
-		$.getScript(managerProperties.dirs.jsDir + "language/de-DE.js");
-		$.getScript(managerProperties.dirs.jsDir + "app.js");
+		$.getScript(managerProperties.dirs.JS + "calendar.js");
+		$.getScript(managerProperties.dirs.JS + "underscore-min.js");
+		$.getScript(managerProperties.dirs.JS + "language/de-DE.js");
+		$.getScript(managerProperties.dirs.JS + "app.js");
 
         //Update the current pageState
         _updateSessionStorage(managerProperties.siteStates.calendar)
