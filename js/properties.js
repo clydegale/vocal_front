@@ -1,23 +1,23 @@
-"use strict"
+"use strict";
 
-console.log("properties loaded")
+console.log("properties loaded");
 
 var managerProperties = {
     dirs: {
-        templateUIDir : "tmpls/ui/",
-        templateCalendarDir: "tmpls/calendar/",
-        jsDir : "js/"
+        TEMPLATE_UI : "tmpls/ui/",
+        TEMPLATE_CALENDAR: "tmpls/calendar/",
+        JS : "js/"
     },
     services : {
-        locationSelectorURL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations"
+        LOCATION_SELECTOR_URL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations"
     },
     siteStates: {
-        loginScreen: "loginScreen",
-        accountCreation: "accountCreation",
-        overview: "overview",
-        calendar: "calendar",
-        settings: "settings",
-        none: null
+        LOGIN_SCREEN: "loginScreen",
+        ACCOUNT_CREATION: "accountCreation",
+        OVERVIEW: "overview",
+        CALENDAR: "calendar",
+        SETTINGS: "settings",
+        NONE: null
     },
     alertTypes: {
         SUCCESS: "alert-success",
@@ -26,4 +26,4 @@ var managerProperties = {
         DANGER: "alert-danger"
     },
     SLIDE_DURATION: 500
-}
+};

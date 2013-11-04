@@ -7,7 +7,7 @@
  */
 function loadLoginScreen() {
     $.ajax({
-        url : managerProperties.dirs.templateUIDir + 'loginScreen.html',
+        url : managerProperties.dirs.TEMPLATE_UI + 'loginScreen.html',
         dataType : 'html',
         type : 'GET',
         async : true
@@ -19,7 +19,7 @@ function loadLoginScreen() {
             $('#navbar-content').addClass("invisible");
 
             //Update the current pageState
-            _updateSessionStorage(managerProperties.siteStates.loginScreen)
+            _updateSessionStorage(managerProperties.siteStates.LOGIN_SCREEN)
         }).fail(function() {
             console.log("Error with AJAX Query to the index.html template");
         });
@@ -27,7 +27,7 @@ function loadLoginScreen() {
 
 function loadAccountCreation() {
     $.ajax({
-        url : managerProperties.dirs.templateUIDir + 'accountCreation.html',
+        url : managerProperties.dirs.TEMPLATE_UI + 'accountCreation.html',
         dataType : 'html',
         type : 'GET',
         async : true
@@ -38,10 +38,10 @@ function loadAccountCreation() {
             //Setting topbar buttons accordingly
             $('#navbar-content').addClass("invisible");
 
-            $.getScript(managerProperties.dirs.jsDir + "accountCreationHelper.js")
+            $.getScript(managerProperties.dirs.JS + "accountCreationHelper.js");
 
             //Update the current pageState
-            _updateSessionStorage(managerProperties.siteStates.accountCreation)
+            _updateSessionStorage(managerProperties.siteStates.ACCOUNT_CREATION)
         }).fail(function() {
             console.log("Error with AJAX Query to the accountCreation.html template");
         });
@@ -49,7 +49,7 @@ function loadAccountCreation() {
 
 function loadOverview() {
 	$.ajax({
-		url : managerProperties.dirs.templateUIDir + 'overview.html',
+		url : managerProperties.dirs.TEMPLATE_UI + 'overview.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -65,7 +65,7 @@ function loadOverview() {
 		$('#navbar-settings').removeClass("active");
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.overview)
+        _updateSessionStorage(managerProperties.siteStates.OVERVIEW)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the overview.html template");
 	});
@@ -73,7 +73,7 @@ function loadOverview() {
 
 function loadCalendar() {
 	$.ajax({
-		url : managerProperties.dirs.templateUIDir + 'calendar.html',
+		url : managerProperties.dirs.TEMPLATE_UI + 'calendar.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -84,13 +84,13 @@ function loadCalendar() {
 		$('#navbar-calendar').addClass("active");
 		$('#navbar-settings').removeClass("active");
 
-		$.getScript(managerProperties.dirs.jsDir + "calendar.js");
-		$.getScript(managerProperties.dirs.jsDir + "underscore-min.js");
-		$.getScript(managerProperties.dirs.jsDir + "language/de-DE.js");
-		$.getScript(managerProperties.dirs.jsDir + "app.js");
+		$.getScript(managerProperties.dirs.JS + "calendar.js");
+		$.getScript(managerProperties.dirs.JS + "underscore-min.js");
+		$.getScript(managerProperties.dirs.JS + "language/de-DE.js");
+		$.getScript(managerProperties.dirs.JS + "app.js");
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.calendar)
+        _updateSessionStorage(managerProperties.siteStates.CALENDAR)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the calendar.html template");
 	});
@@ -98,10 +98,10 @@ function loadCalendar() {
 
 function loadSettings() {
 	$.ajax({
-		url : managerProperties.dirs.templateUIDir + 'settings.html',
+		url : managerProperties.dirs.TEMPLATE_UI + 'settings.html',
 		dataType : 'html',
 		type : 'GET',
-		async : true,
+		async : true
 		//cache: true,
 	}).done(function(html) {
 		$('#contentMain').html(html);
@@ -110,7 +110,7 @@ function loadSettings() {
 		$('#navbar-settings').addClass("active");
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.settings)
+        _updateSessionStorage(managerProperties.siteStates.SETTINGS)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the settings.html template");
 	});
@@ -118,19 +118,19 @@ function loadSettings() {
 
 function loadCurrentState(currentState) {
     switch (currentState) {
-        case managerProperties.siteStates.loginScreen:
+        case managerProperties.siteStates.LOGIN_SCREEN:
             loadLoginScreen();
             break;
-        case managerProperties.siteStates.accountCreation:
+        case managerProperties.siteStates.ACCOUNT_CREATION:
             loadAccountCreation();
             break;
-        case managerProperties.siteStates.overview:
+        case managerProperties.siteStates.OVERVIEW:
             loadOverview();
             break;
-        case managerProperties.siteStates.calendar:
+        case managerProperties.siteStates.CALENDAR:
             loadCalendar();
             break;
-        case managerProperties.siteStates.settings:
+        case managerProperties.siteStates.SETTINGS:
             loadSettings();
             break;
         default:
