@@ -9,7 +9,7 @@ var managerProperties = {
         JS : "js/"
     },
     services : {
-        locationSelectorURL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations"
+        LOCATION_SELECTOR_URL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations"
     },
     siteStates: {
         loginScreen: "loginScreen",
