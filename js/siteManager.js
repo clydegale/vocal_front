@@ -134,7 +134,7 @@ function loadCurrentState(currentState) {
 }
 
 function isStorageDefined() {
-    return Storage != undefined;
+    return ((Storage != undefined) && (window.sessionStorage != undefined));
 }
 
 function _updateSessionStorage(currentSiteState) {
@@ -187,13 +187,26 @@ function _resetAlertType(alertArea) {
     alertArea.removeClass(managerProperties.alertTypes.WARNING);
     alertArea.removeClass(managerProperties.alertTypes.INFO);
 }
+
+function initializeSite() {
+
+}
 // ---------------------
 
 // Initialize the page by loading the Index template first
-if(isStorageDefined() && (sessionStorage.visited == null)) {
-    sessionStorage.currentSiteState = managerProperties.siteStates.index;
-    sessionStorage.visited = true;
-} else {
-    console.log("No Storage object found"); // TODO: Show bootstrap error message here
-}
-$(document).ready(loadCurrentState(sessionStorage.getItem(["currentSiteState"])));
+$(document).ready(function() {
+    if(isStorageDefined() && (sessionStorage.visited == null)) {
+        sessionStorage.currentSiteState = managerProperties.siteStates.index;
+        sessionStorage.visited = true;
+    } else if (sessionStorage.visited == "true") {
+        loadCurrentState(sessionStorage.getItem(["currentSiteState"]));
+    } else {
+        loadLoginScreen();
+        console.log("No Storage object found"); // TODO: Show bootstrap error message here
+        showAlert(managerProperties.alertTypes.DANGER, "Ihr Browser verfügt nicht über ein sessionStorage Objekt, die Seite wird nicht korrekt Funktioniern<br>" +
+            "Bitte nutzen sie einen der Folgenden Browser:<br>" +
+            "&#149; Internet Explorer 8 oder höher<br>" +
+            "&#149; Firefox 3.5 oder höher<br>" +
+            "&#149; Chrome 3 oder höher")
+    }
+});
