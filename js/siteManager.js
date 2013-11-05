@@ -1,5 +1,3 @@
-// TODO: disable top bar in every function
-
 "use strict";
 
 /*
@@ -78,6 +76,8 @@ function loadCalendar() {
 		//cache: true,
 	}).done(function(html) {
 		$('#contentMain').html(html);
+        // Unhide toolbar buttons
+        $('#navbar-content').removeClass("invisible");
         _setNavbarButtons(managerProperties.navbarButtons.CALENDAR);
 
 		$.getScript(managerProperties.dirs.JS + "calendar.js");
@@ -101,6 +101,8 @@ function loadSettings() {
 		//cache: true,
 	}).done(function(html) {
 		$('#contentMain').html(html);
+        // Unhide toolbar buttons
+        $('#navbar-content').removeClass("invisible");
         _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
         //Update the current pageState
@@ -201,8 +203,9 @@ $(document).ready(function() {
     } else if (sessionStorage.visited == "true") {
         loadCurrentState(sessionStorage.getItem(["currentSiteState"]));
     } else {
+        // TODO: implement error message for browsers without html5
         loadLoginScreen();
-        console.log("No Storage object found"); // TODO: Show bootstrap error message here
+        console.log("No Storage object found");
         showAlert(managerProperties.alertTypes.DANGER, "Ihr Browser verfügt nicht über ein sessionStorage Objekt, die Seite wird nicht korrekt Funktioniern<br>" +
             "Bitte nutzen sie einen der Folgenden Browser:<br>" +
             "&#149; Internet Explorer 8 oder höher<br>" +
