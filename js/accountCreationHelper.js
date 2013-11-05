@@ -5,7 +5,7 @@ function checkPasswordValidity(inputFormID) {
 	console.log(passwordForm);
 }
 
-/* Query the Webservice for all known location
+/* Query the Webservice for all known locations
  * Returned will be a JSON Data Transfer Object containing the
  * location Objects
  */

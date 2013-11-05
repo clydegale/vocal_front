@@ -60,9 +60,7 @@ function loadOverview() {
         // Unhide toolbar buttons
         $('#navbar-content').removeClass("invisible");
 		//Setting topbar buttons accordingly
-		$('#navbar-home').addClass("active");
-		$('#navbar-calendar').removeClass("active");
-		$('#navbar-settings').removeClass("active");
+		_setNavbarButtons(managerProperties.navbarButtons.OVERVIEW)
 
         //Update the current pageState
         _updateSessionStorage(managerProperties.siteStates.OVERVIEW)
@@ -80,9 +78,7 @@ function loadCalendar() {
 		//cache: true,
 	}).done(function(html) {
 		$('#contentMain').html(html);
-		$('#navbar-home').removeClass("active");
-		$('#navbar-calendar').addClass("active");
-		$('#navbar-settings').removeClass("active");
+        _setNavbarButtons(managerProperties.navbarButtons.CALENDAR);
 
 		$.getScript(managerProperties.dirs.JS + "calendar.js");
 		$.getScript(managerProperties.dirs.JS + "underscore-min.js");
@@ -105,9 +101,7 @@ function loadSettings() {
 		//cache: true,
 	}).done(function(html) {
 		$('#contentMain').html(html);
-		$('#navbar-home').removeClass("active");
-		$('#navbar-calendar').removeClass("active");
-		$('#navbar-settings').addClass("active");
+        _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
         //Update the current pageState
         _updateSessionStorage(managerProperties.siteStates.SETTINGS)
@@ -140,17 +134,24 @@ function loadCurrentState(currentState) {
 }
 
 function isStorageDefined() {
-    return Storage != undefined
+    return Storage != undefined;
 }
 
 function _updateSessionStorage(currentSiteState) {
     sessionStorage.setItem("currentSiteState", currentSiteState);
 }
 
-// TODO: Implement
-//function _setNavbarButtons(buttonName) {
-//    var buttons = $('#navbar-buttons').children();
-//}
+// Internal function to toggle the different Buttons in the header bar
+function _setNavbarButtons(buttonName) {
+    var buttons = $('#navbar-buttons').children();
+    buttons.each(function() {
+        var button = $(this);
+        button.removeClass();
+        if(button.attr('id') == buttonName) {
+            button.addClass("active");
+        }
+    })
+}
 
 function logout() { // TODO: write so the server will be notified when user logs out
     sessionStorage.clear();

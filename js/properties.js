@@ -25,5 +25,10 @@ var managerProperties = {
         WARNING: "alert-warning",
         DANGER: "alert-danger"
     },
+    navbarButtons: {
+        OVERVIEW: "navbar-home",
+        CALENDAR: "navbar-calendar",
+        SETTINGS: "navbar-settings"
+    },
     SLIDE_DURATION: 500
 };
