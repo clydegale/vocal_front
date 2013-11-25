@@ -1,14 +1,14 @@
 <div class="starter-template">
     <h1>Benutzerkonto erstellen</h1>
     <div class="">
-        <form class="form-horizontal" role="form">
+        <form id="accountCreationForm" class="form-horizontal" role="form" name="accountCreationForm">
             <!-- Vorname Inputfield -->
             <div class="form-group">
                 <div class="col-lg-4 col-md-4 col-xs-3">
                     <label class="control-label pull-right">Vorname</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <input type="text" class="form-control" placeholder="Vorname">
+                    <input type="text" class="form-control" placeholder="Vorname" name="firstname" id="firstname">
                 </div>
                 <div class="col-md-4 col-xs-2"></div>
             </div>
@@ -18,7 +18,7 @@
                     <label class="control-label pull-right">Nachname</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <input type="text" class="form-control" placeholder="Nachname">
+                    <input type="text" class="form-control" placeholder="Nachname" name="lastname" id="lastname">
                 </div>
                 <div class="col-md-4 col-xs-2"></div>
             </div>
@@ -28,17 +28,18 @@
                     <label class="control-label pull-right">E-Mail</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <input type="email" class="form-control" placeholder="E-Mail Adresse">
+                    <input type="email" class="form-control" placeholder="E-Mail Adresse" name="email" id="email">
                 </div>
                 <div class="col-md-4 col-xs-2"></div>
             </div>
             <!-- Passwort Inputfield -->
+            <!--TODO: create second password field -->
             <div class="form-group">
                 <div class="col-lg-4 col-md-4 col-xs-3">
                     <label class="control-label pull-right">Passwort</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <input type="password" class="form-control" placeholder="Passwort" id="passwordInputField" onkeyup="checkPasswordValidity(this.id)">
+                    <input type="password" class="form-control" placeholder="Passwort" name="password" id="password">
                 </div>
                 <div class="col-md-4 col-xs-2"></div>
             </div>
@@ -48,7 +49,7 @@
                     <label class="control-label pull-right">Standort</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7"> <!-- should be filled dynamically by querying the server default: bitte auswählen -->
-                    <select class="form-control" id="locationSelector">
+                    <select class="form-control" name="location" id="location">
                         <option selected="selected">Bitte einen Standort wählen</option>
                     </select>
                 </div>
@@ -60,7 +61,7 @@
                     <label class="control-label pull-right">Gürtelfarbe</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <select class="form-control">
+                    <select class="form-control" name="grade" id="grade">
                         <option value="CHILD">Weiß</option>
                         <option value="DISCIPLE">Blau</option>
                         <option value="TRAINER">Gelb</option>

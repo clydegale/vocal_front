@@ -9,7 +9,8 @@ var managerProperties = {
         JS : "js/"
     },
     services : {
-        LOCATION_SELECTOR_URL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations"
+        LOCATION_SELECTOR_URL: "http://vocal.pi:8080/VoCalServices/MockService/getLocations",
+        CREATE_USER_URL: "http://vocal.pi:8080/VoCalServices/UserMgmt/createUser"
     },
     siteStates: {
         LOGIN_SCREEN: "loginScreen",
@@ -29,6 +30,17 @@ var managerProperties = {
         OVERVIEW: "navbar-home",
         CALENDAR: "navbar-calendar",
         SETTINGS: "navbar-settings"
+    },
+    userCreationErrors: {
+        FIRSTNAME_MISSING: "FIRSTNAME_MISSING",
+        LASTNAME_MISSING: "LASTNAME_MISSING",
+        EMAIL_MISSING: "EMAIL_MISSING",
+        GRADE_MISSING: "GRADE_MISSING",
+        LOCATION_MISSING: "SCHOOL_MISSING",
+        PASSWORD_MISSING: "PASSWORD_MISSING"
+    },
+    errorMessages: {
+        FIELD_NOT_EMPTY_MSG: "Dieses Feld darf nicht leer sein"
     },
     SLIDE_DURATION: 500
 };

@@ -17,7 +17,7 @@ function loadLoginScreen() {
             $('#navbar-content').addClass("invisible");
 
             //Update the current pageState
-            _updateSessionStorage(managerProperties.siteStates.LOGIN_SCREEN)
+            _updateCurrentSiteState(managerProperties.siteStates.LOGIN_SCREEN)
         }).fail(function() {
             console.log("Error with AJAX Query to the index.html template");
         });
@@ -39,7 +39,7 @@ function loadAccountCreation() {
             $.getScript(managerProperties.dirs.JS + "accountCreationHelper.js");
 
             //Update the current pageState
-            _updateSessionStorage(managerProperties.siteStates.ACCOUNT_CREATION)
+            _updateCurrentSiteState(managerProperties.siteStates.ACCOUNT_CREATION)
         }).fail(function() {
             console.log("Error with AJAX Query to the accountCreation.html template");
         });
@@ -61,7 +61,7 @@ function loadOverview() {
 		_setNavbarButtons(managerProperties.navbarButtons.OVERVIEW)
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.OVERVIEW)
+        _updateCurrentSiteState(managerProperties.siteStates.OVERVIEW)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the overview.html template");
 	});
@@ -86,7 +86,7 @@ function loadCalendar() {
 		$.getScript(managerProperties.dirs.JS + "app.js");
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.CALENDAR)
+        _updateCurrentSiteState(managerProperties.siteStates.CALENDAR)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the calendar.html template");
 	});
@@ -106,7 +106,7 @@ function loadSettings() {
         _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
         //Update the current pageState
-        _updateSessionStorage(managerProperties.siteStates.SETTINGS)
+        _updateCurrentSiteState(managerProperties.siteStates.SETTINGS)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the settings.html template");
 	});
@@ -139,7 +139,7 @@ function isStorageDefined() {
     return ((Storage != undefined) && (window.sessionStorage != undefined));
 }
 
-function _updateSessionStorage(currentSiteState) {
+function _updateCurrentSiteState(currentSiteState) {
     sessionStorage.setItem("currentSiteState", currentSiteState);
 }
 
@@ -190,15 +190,12 @@ function _resetAlertType(alertArea) {
     alertArea.removeClass(managerProperties.alertTypes.INFO);
 }
 
-function initializeSite() {
-
-}
 // ---------------------
 
 // Initialize the page by loading the Index template first
 $(document).ready(function() {
     if(isStorageDefined() && (sessionStorage.visited == null)) {
-        sessionStorage.currentSiteState = managerProperties.siteStates.index;
+        sessionStorage.currentSiteState = managerProperties.siteStates.LOGIN_SCREEN;
         sessionStorage.visited = true;
     } else if (sessionStorage.visited == "true") {
         loadCurrentState(sessionStorage.getItem(["currentSiteState"]));
