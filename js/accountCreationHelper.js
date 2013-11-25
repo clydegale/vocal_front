@@ -70,6 +70,7 @@ function _handleUsercreationErrors(errorDTO) {
     console.log(errorDTO["success"]);
     console.log(errorDTO.content);
     if(errorDTO["success"]) {
+        // TODO: show success message after loading loginpage
         console.log("success == 1");
         loadLoginScreen();
         return
