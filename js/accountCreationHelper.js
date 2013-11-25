@@ -22,11 +22,15 @@ $.ajax({
 
 // Helper function to fill the <select> tag with the locations
 function _generateLocationSelector(locationsDTO) {
-    var select = $('#location');
+    var select = $('#schoollocation');
 
     // Put Object of Objects into an Array of Objects (for Sorting)
     var sortable = [];
     for (var object in locationsDTO) {
+        // may or may not be a hack
+        if(locationsDTO[object] == null) {
+            continue
+        }
         sortable.push({
             'key': object,
             'value': locationsDTO[object]
@@ -47,6 +51,7 @@ function _generateLocationSelector(locationsDTO) {
     }
 }
 
+// TODO: show AJAX loading gif while executing query
 $('#accountCreationForm').submit(function(event) {
     event.preventDefault();
     console.log("Default Prevented");
@@ -96,15 +101,36 @@ function _handleUsercreationErrors(errorDTO) {
         $('#password').parent().parent().addClass("has-error");
         errorMessage += 'Das Feld <b>Password</b> darf nicht leer sein <br>'
     }
-    if($.inArray(managerProperties.userCreationErrors.LOCATION_MISSING, errorDTO.content) != -1) {
+    if($.inArray(managerProperties.userCreationErrors.SCHOOL_LOCATION_MISSING, errorDTO.content) != -1) {
         console.log("Found missing location");
-        $('#location').parent().parent().addClass("has-error");
+        $('#schoollocation').parent().parent().addClass("has-error");
         errorMessage += 'Bitte Wählen sie einen <b>Standort</b> aus<br>'
     }
     if($.inArray(managerProperties.userCreationErrors.GRADE_MISSING, errorDTO.content) != -1) {
         console.log("Found missing grade");
         $('#grade').parent().parent().addClass("has-error");
         errorMessage += 'Bitte Wählen sie eine <b>Gürtelfarbe</b> aus<br>'
+    }
+    // TODO: Test
+    if($.inArray(managerProperties.userCreationErrors.EMAIL_INVALID, errorDTO.content) != -1) {
+        console.log("Invalid E-Mail");
+        $('#email').parent().parent().addClass("has-error");
+        errorMessage += 'Bitte geben sie eine gültige <b>E-Mail Adresse</b> an<br>'
+    }
+    if($.inArray(managerProperties.userCreationErrors.EMAIL_ALREADY_IN_USE, errorDTO.content) != -1) {
+        console.log("Email in use");
+        $('#email').parent().parent().addClass("has-error");
+        errorMessage += 'Die angegebene <b>E-Mail</b> wird bereit verwendet.'
+    }
+    if($.inArray(managerProperties.userCreationErrors.PASSWORD_TOO_SHORT, errorDTO.content) != -1) {
+        console.log("Short password");
+        $('#password').parent().parent().addClass("has-error");
+        errorMessage += 'Bitte Wählen sie ein <b>Passwort</b> mit mindestens sechs Zeichen'
+    }
+    if($.inArray(managerProperties.userCreationErrors.PASSWORDS_DONT_MATCH, errorDTO.content) != -1) {
+        console.log("Passwords dont match");
+        $('#password').parent().parent().addClass("has-error");
+        errorMessage += 'Ihre eingegeben <b>Passwörter</b> stimmen nicht überein'
     }
 
     showAlert(managerProperties.alertTypes.DANGER, errorMessage)
