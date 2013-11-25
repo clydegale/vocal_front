@@ -194,10 +194,14 @@ function _resetAlertType(alertArea) {
 
 // Initialize the page by loading the Index template first
 $(document).ready(function() {
+    console.log("Document Ready");
     if(isStorageDefined() && (sessionStorage.visited == null)) {
+        console.log("Storage defined; not yet visted");
         sessionStorage.currentSiteState = managerProperties.siteStates.LOGIN_SCREEN;
         sessionStorage.visited = true;
+        loadCurrentState(sessionStorage.getItem(["currentSiteState"]));
     } else if (sessionStorage.visited == "true") {
+        console.log("Storage defined; visted");
         loadCurrentState(sessionStorage.getItem(["currentSiteState"]));
     } else {
         // TODO: implement error message for browsers without html5
