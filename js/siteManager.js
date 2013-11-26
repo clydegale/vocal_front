@@ -161,16 +161,16 @@ function _setNavbarButtons(buttonName) {
 
 function logoutUser() { // TODO: write so the server will be notified when user logs out
     $.ajax({
-        url : managerProperties.services.CREATE_USER_URL,
+        url : managerProperties.services.LOGOUT_USER_URL,
         dataType : 'json',
         type : 'POST',
         async : true,
-        data : form.serialize()
-    }).done(_handleUsercreationErrors
+        data: "sessionId=" + sessionStorage.getItem("sessionId")
+    }).done(function(data) {
 
-        ).fail(function() {
-            console.log("userCreate Query Failed")
-        });
+    }).fail(function() {
+        console.log("userCreate Query Failed")
+    });
     sessionStorage.clear();
     loadLoginScreen();
 }

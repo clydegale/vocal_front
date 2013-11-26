@@ -46,6 +46,14 @@ var managerProperties = {
         EMAIL_ALREADY_IN_USE:       "EMAIL_ALREADY_IN_USE",
         EMAIL_INVALID:              "EMAIL_INVALID"
     },
+    userSessionStorageObject: {
+        SESSION_ID:         "sessionId",
+        FIRSTNAME:          "firstName",
+        LASTNAME:           "lastName",
+        EMAIL:              "email",
+        GRADE:              "grade",
+        SCHOOL_LOCATION:    "schoolLocation"
+    },
     loginErrors: {
         AUTHENTICATION_FAILED:  "AUTHENTICATION_FAILED",
         INTERNAL_ERROR:         "INTERNAL_ERROR"

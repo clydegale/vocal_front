@@ -29,10 +29,10 @@ function _handleLoginErrors(errorDTO) {
 function _fillUserSession(content) {
     console.log("Success: Login");
     console.log(content);
-    sessionStorage.setItem("sessionID", content.sessionId);
-    sessionStorage.setItem("firstName", content.user.firstName);
-    sessionStorage.setItem("lastName", content.user.lastName);
-    sessionStorage.setItem("email", content.user.email);
-    sessionStorage.setItem("grade", content.user.grade);
-    sessionStorage.setItem("schoolLocation", content.user.schoolLocation);
+    sessionStorage.setItem(managerProperties.userSessionStorageObject.SESSION_ID, content.sessionId);
+    sessionStorage.setItem(managerProperties.userSessionStorageObject.FIRSTNAME, content.user.firstName);
+    sessionStorage.setItem(managerProperties.userSessionStorageObject.LASTNAME, content.user.lastName);
+    sessionStorage.setItem(managerProperties.userSessionStorageObject.EMAIL, content.user.email);
+    sessionStorage.setItem(managerProperties.userSessionStorageObject.GRADE, content.user.grade);
+    sessionStorage.setItem(managerProperties.userSessionStorageObject.SCHOOL_LOCATION, content.user.schoolLocation);
 }
