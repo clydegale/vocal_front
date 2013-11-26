@@ -74,15 +74,15 @@
             <!-- Buttons visible for large Devices -->
             <div class="form-group visible-md visible-lg" style="margin: 0% 3%">
                 <div class="col-md-4"></div>
-                <a href="index.html" class="btn btn-danger col-xs-12 col-md-1">Zurück</a>
+                <a class="btn btn-danger col-xs-12 col-md-1" onclick="loadLoginScreen()">Zurück</a>
                 <div class="col-md-2"></div>
-                <button class="btn btn-primary col-xs-12 col-md-1">Abschicken</button>
+                <input class="btn btn-primary col-xs-12 col-md-1" type="submit" value="Senden">
             </div>
             <!-- Buttons Visible for small devices -->
             <div class="form-group visible-sm visible-xs" style="margin: 0% 20%">
                 <!-- TODO: Check why on mobile the button won't submit -->
-                <button class="btn btn-primary btn-block">Abschicken</button>
-                <a href="index.html" class="btn btn-danger btn-block">Zurück</a>
+                <input class="btn btn-primary btn-block" type="submit" value="Senden">
+                <a class="btn btn-danger btn-block" onclick="loadLoginScreen()">Zurück</a>
             </div>
         </form>
     </div>

@@ -54,7 +54,7 @@ function _generateLocationSelector(locationsDTO) {
 // TODO: show AJAX loading gif while executing query
 $('#accountCreationForm').submit(function(event) {
     event.preventDefault();
-    console.log("Default Prevented");
+    console.log("Default Prevented: AccountCreation");
 
     var form = $('#accountCreationForm');
     $.ajax({
@@ -63,9 +63,7 @@ $('#accountCreationForm').submit(function(event) {
         type : 'POST',
         async : true,
         data : form.serialize()
-    }).done(_handleUsercreationErrors
-
-     ).fail(function() {
+    }).fail(function() {
        console.log("userCreate Query Failed")
     });
 });

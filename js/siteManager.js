@@ -16,6 +16,8 @@ function loadLoginScreen() {
             //Setting topbar buttons accordingly
             $('#navbar-content').addClass("invisible");
 
+            $.getScript(managerProperties.dirs.JS + "loginHelper.js");
+
             //Update the current pageState
             _updateCurrentSiteState(managerProperties.siteStates.LOGIN_SCREEN)
         }).fail(function() {
@@ -57,11 +59,13 @@ function loadOverview() {
 
         // Unhide toolbar buttons
         $('#navbar-content').removeClass("invisible");
+        console.log(sessionStorage)
+        $('#navbar-username').html(sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName"));
 		//Setting topbar buttons accordingly
-		_setNavbarButtons(managerProperties.navbarButtons.OVERVIEW)
+		_setNavbarButtons(managerProperties.navbarButtons.OVERVIEW);
 
         //Update the current pageState
-        _updateCurrentSiteState(managerProperties.siteStates.OVERVIEW)
+        _updateCurrentSiteState(managerProperties.siteStates.OVERVIEW);
 	}).fail(function() {
 		console.log("Error with AJAX Query to the overview.html template");
 	});
@@ -155,7 +159,18 @@ function _setNavbarButtons(buttonName) {
     })
 }
 
-function logout() { // TODO: write so the server will be notified when user logs out
+function logoutUser() { // TODO: write so the server will be notified when user logs out
+    $.ajax({
+        url : managerProperties.services.CREATE_USER_URL,
+        dataType : 'json',
+        type : 'POST',
+        async : true,
+        data : form.serialize()
+    }).done(_handleUsercreationErrors
+
+        ).fail(function() {
+            console.log("userCreate Query Failed")
+        });
     sessionStorage.clear();
     loadLoginScreen();
 }
