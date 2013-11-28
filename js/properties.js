@@ -20,7 +20,7 @@ var managerProperties = {
         ACCOUNT_CREATION:   "accountCreation",
         OVERVIEW:           "overview",
         CALENDAR:           "calendar",
-        SETTINGS:           "settings",
+        USER_SETTINGS:      "userSettings",
         NONE:               null
     },
     alertTypes: {

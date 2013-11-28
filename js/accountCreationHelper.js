@@ -8,6 +8,7 @@ function checkPasswordValidity(inputFormID) {
 /* Query the Webservice for all known locations
  * Returned will be a JSON Data Transfer Object containing the
  * location Objects
+ * _generateLocationSelector is defined in siteManager.js
  */
 $.ajax({
     url : managerProperties.services.LOCATION_SELECTOR_URL,
@@ -19,37 +20,6 @@ $.ajax({
  ).fail(function() {
     console.log("Error");
 });
-
-// Helper function to fill the <select> tag with the locations
-function _generateLocationSelector(locationsDTO) {
-    var select = $('#schoollocation');
-
-    // Put Object of Objects into an Array of Objects (for Sorting)
-    var sortable = [];
-    for (var object in locationsDTO) {
-        // may or may not be a hack
-        if(locationsDTO[object] == null) {
-            continue
-        }
-        sortable.push({
-            'key': object,
-            'value': locationsDTO[object]
-        });
-    }
-
-    // Sort the Array of Objects by the Objects values
-    sortable.sort(function(a, b) {
-        return a.value.toLowerCase() > b.value.toLowerCase();
-    });
-
-    // Create a <option> Element for each Object in the Array and add it to the Select Element
-    for (var key in sortable) {
-        var option = document.createElement("option");
-        option.textContent = sortable[key].value;
-        option.value = sortable[key].key;
-        $(select).append(option)
-    }
-}
 
 // TODO: show AJAX loading gif while executing query
 $('#accountCreationForm').submit(function(event) {

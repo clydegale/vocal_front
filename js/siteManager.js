@@ -96,9 +96,9 @@ function loadCalendar() {
 	});
 }
 
-function loadSettings() {
+function loadUserSettings() {
 	$.ajax({
-		url : managerProperties.dirs.TEMPLATE_UI + 'settings.html',
+		url : managerProperties.dirs.TEMPLATE_UI + 'userSettings.html',
 		dataType : 'html',
 		type : 'GET',
 		async : true
@@ -109,11 +109,20 @@ function loadSettings() {
         $('#navbar-content').removeClass("invisible");
         _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
+        $.getScript(managerProperties.dirs.JS + "userSettingsHelper.js");
+        populateAccountEditForm();
+
         //Update the current pageState
-        _updateCurrentSiteState(managerProperties.siteStates.SETTINGS)
+        _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
 	}).fail(function() {
 		console.log("Error with AJAX Query to the settings.html template");
 	});
+}
+function populateAccountEditForm() {
+    $('#editFirstname').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.FIRSTNAME));
+    $('#editLastname').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.LASTNAME));
+    $('#editEmail').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.EMAIL));
+    //$('#editSchoollocation')
 }
 
 function loadCurrentState(currentState) {
@@ -130,8 +139,8 @@ function loadCurrentState(currentState) {
         case managerProperties.siteStates.CALENDAR:
             loadCalendar();
             break;
-        case managerProperties.siteStates.SETTINGS:
-            loadSettings();
+        case managerProperties.siteStates.USER_SETTINGS:
+            loadUserSettings();
             break;
         default:
             loadLoginScreen();
@@ -205,6 +214,37 @@ function _resetAlertType(alertArea) {
     alertArea.removeClass(managerProperties.alertTypes.INFO);
 }
 
+// Helper function to fill the <select> tag with the locations
+function _generateLocationSelector(locationsDTO) {
+    // Using attribute selector instead of id so i wont have to differntiate between the accountCreationForm and the userEditForm
+    var select = $('select[name=schoollocation]');
+
+    // Put Object of Objects into an Array of Objects (for Sorting)
+    var sortable = [];
+    for (var object in locationsDTO) {
+        // may or may not be a hack
+        if(locationsDTO[object] == null) {
+            continue
+        }
+        sortable.push({
+            'key': object,
+            'value': locationsDTO[object]
+        });
+    }
+
+    // Sort the Array of Objects by the Objects values
+    sortable.sort(function(a, b) {
+        return a.value.toLowerCase() > b.value.toLowerCase();
+    });
+
+    // Create a <option> Element for each Object in the Array and add it to the Select Element
+    for (var key in sortable) {
+        var option = document.createElement("option");
+        option.textContent = sortable[key].value;
+        option.value = sortable[key].key;
+        $(select).append(option)
+    }
+}
 // ---------------------
 
 // Initialize the page by loading the Index template first

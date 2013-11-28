@@ -23,6 +23,16 @@ function _handleLoginErrors(errorDTO) {
     if(errorDTO.success) {
         _fillUserSession(errorDTO.content);
         loadOverview();
+    } else {
+        var errorMsg = "";
+        if($.inArray(managerProperties.loginErrors.AUTHENTICATION_FAILED, errorDTO.content) != -1) {
+            errorMsg = "Fehler beim Anmelden: Falsche E-Mail oder Passwort <br>";
+        }
+        if ($.inArray(managerProperties.loginErrors.INTERNAL_ERROR, errorDTO.content) != -1) {
+            console.log(errorDTO.content);
+            errorMsg += "Interner Fehler";
+        }
+        showAlert(managerProperties.alertTypes.DANGER, errorMsg);
     }
 }
 
