@@ -54,6 +54,13 @@ var managerProperties = {
         GRADE:              "grade",
         SCHOOL_LOCATION:    "schoolLocation"
     },
+    userEditSuccessCodes: {
+        PASSWORD_CHANGED:           "PASSWORD_CHANGED",
+        FIRSTNAME_CHANGED:          "FIRSTNAME_CHANGED",
+        LASTNAME_CHANGED:           "LASTNAME_CHANGED",
+        GRADE_CHANGED:              "GRADE_CHANGED",
+        SCHOOL_LOCATION_CHANGED:    "SCHOOL_LOCATION_CHANGED"
+    },
     loginErrors: {
         AUTHENTICATION_FAILED:  "AUTHENTICATION_FAILED",
         INTERNAL_ERROR:         "INTERNAL_ERROR"

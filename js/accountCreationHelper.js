@@ -33,7 +33,8 @@ $('#accountCreationForm').submit(function(event) {
         type : 'POST',
         async : true,
         data : form.serialize()
-    }).fail(function() {
+    }).done(_handleUsercreationErrors
+     ).fail(function() {
        console.log("userCreate Query Failed")
     });
 });
@@ -49,6 +50,7 @@ function _handleUsercreationErrors(errorDTO) {
         return
     }
     var errorMessage = "";
+    // TODO: add delay, so fields wont show up as red before the error message is displayed
     if($.inArray(managerProperties.userCreationErrors.FIRSTNAME_MISSING, errorDTO.content) != -1) {
         console.log("Found missing firstname");
         $('#firstname').parent().parent().addClass("has-error");

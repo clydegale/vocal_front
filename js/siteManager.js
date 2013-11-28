@@ -109,20 +109,15 @@ function loadUserSettings() {
         $('#navbar-content').removeClass("invisible");
         _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
-        $.getScript(managerProperties.dirs.JS + "userSettingsHelper.js");
-        populateAccountEditForm();
+        $.getScript(managerProperties.dirs.JS + "userSettingsHelper.js", function(data, textStatus, jqxhr) {
+            //populateAccountEditForm()
+        });
 
         //Update the current pageState
         _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
 	}).fail(function() {
-		console.log("Error with AJAX Query to the settings.html template");
+		console.log("Error with AJAX Query to the userSettings.html template");
 	});
-}
-function populateAccountEditForm() {
-    $('#editFirstname').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.FIRSTNAME));
-    $('#editLastname').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.LASTNAME));
-    $('#editEmail').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.EMAIL));
-    //$('#editSchoollocation')
 }
 
 function loadCurrentState(currentState) {
@@ -216,7 +211,7 @@ function _resetAlertType(alertArea) {
 
 // Helper function to fill the <select> tag with the locations
 function _generateLocationSelector(locationsDTO) {
-    // Using attribute selector instead of id so i wont have to differntiate between the accountCreationForm and the userEditForm
+    // Using attribute selector instead of id so i wont have to differentiate between the accountCreationForm and the userEditForm
     var select = $('select[name=schoollocation]');
 
     // Put Object of Objects into an Array of Objects (for Sorting)
