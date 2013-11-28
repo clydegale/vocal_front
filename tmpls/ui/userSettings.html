@@ -1,0 +1,75 @@
+<div class="starter-template">
+    <h1>Benutzerdaten ändern</h1>
+    <div class="">
+        <form id="userEditForm" class="form-horizontal" role="form" name="userEditForm">
+            <!-- Vorname Inputfield -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Vorname</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="text" class="form-control" placeholder="" name="firstname" id="editFirstname">
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- Nachname Inputfield -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Nachname</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="text" class="form-control" placeholder="" name="lastname" id="editLastname">
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- E-Mail Adress Inputfield -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">E-Mail</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="text" class="form-control" disabled placeholder="" name="email" id="editEmail">
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- Standort selection -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Standort</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7"> <!-- should be filled dynamically by querying the server default: bitte auswählen -->
+                    <select class="form-control" name="schoollocation" id="editSchoollocation">
+                    </select>
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- Buttons visible for large Devices -->
+            <div class="form-group visible-md visible-lg" style="margin: 0% 3%">
+                <div class="col-md-4"></div>
+                <a class="btn btn-danger col-xs-12 col-md-1" onclick="loadOverview()">Zurück</a>
+                <div class="col-md-2"></div>
+                <!-- INFO: small hack, might needs to be removed-->
+                <input class="btn btn-primary col-xs-12 col-md-1" type="submit" value="Senden" style="height: 34px">
+            </div>
+            <!-- Buttons Visible for small devices -->
+            <div class="form-group visible-sm visible-xs" style="margin: 0% 20%">
+                <!-- TODO: Check why on mobile the button won't submit -->
+                <input class="btn btn-primary btn-block" type="submit" value="Senden">
+                <a class="btn btn-danger btn-block" onclick="loadOverview()">Zurück</a>
+            </div>
+        </form>
+
+        <!-- Passwort Inputfield -->
+        <!--TODO: create second password field
+        <div class="form-group">
+            <div class="col-lg-4 col-md-4 col-xs-3">
+                <label class="control-label pull-right">Passwort</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-7">
+                <input type="password" class="form-control" placeholder="Passwort" name="password" id="password">
+            </div>
+            <div class="col-md-4 col-xs-2"></div>
+        </div>
+        -->
+    </div>
+</div>
