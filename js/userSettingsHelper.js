@@ -37,13 +37,13 @@ $('#userEditForm').submit(function(event) {
 
     var form = $('#userEditForm');
     form.children('#editEmail').remove();
-    $.ajax({
+    $.securityCrucialAjaxPOST({
         url : managerProperties.services.EDIT_USER_URL,
         dataType : 'json',
         type : 'POST',
         async : true,
         data : form.serialize()
-    }).done(_handleUserEditErrors
+    }).success(_handleUserEditErrors(data, code, jqXHR, "Hallo")
      ).fail(function() {
             console.log("userCreate Query Failed")
     });
@@ -51,9 +51,9 @@ $('#userEditForm').submit(function(event) {
 
 function _handleUserEditErrors(errorDTO) {
     console.log(errorDTO);
-    //if(errorDTO.success == 0) {
-        // TODO: implement errorchecking and logout if Sessionid is invalid
-    //}
+//    if(errorDTO.success == 0) {
+//
+//    }
 
 
 }

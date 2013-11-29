@@ -242,6 +242,16 @@ function _generateLocationSelector(locationsDTO) {
 }
 // ---------------------
 
+$.securityCrucialAjaxPOST = function(options) {
+    if(managerProperties.userSessionStorageObject.SESSION_ID != null) {
+        options.data += "&sessionId=" + sessionStorage.getItem(managerProperties.userSessionStorageObject.SESSION_ID);
+    } else {
+        console.log("WARNING: No sessionId found");
+    }
+    options.type = 'POST';
+    return $.ajax(options);
+};
+
 // Initialize the page by loading the Index template first
 $(document).ready(function() {
     console.log("Document Ready");
