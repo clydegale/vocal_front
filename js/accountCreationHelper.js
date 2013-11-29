@@ -43,6 +43,7 @@ function _handleUsercreationErrors(errorDTO) {
     console.log(errorDTO);
     console.log(errorDTO["success"]);
     console.log(errorDTO.content);
+    // TODO: access success with errorDTO.success (and test)
     if(errorDTO["success"]) {
         // TODO: show success message after loading loginpage
         console.log("success == 1");

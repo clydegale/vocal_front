@@ -189,6 +189,9 @@ function closeAlert(button) {
 }
 
 function showAlert(alertType, message) {
+    if(message == null || message == '') {
+        return;
+    }
     var alertArea = $('#alertArea');
     var textArea = $('#alertAreaText');
     alertArea.slideUp(managerProperties.SLIDE_DURATION);
