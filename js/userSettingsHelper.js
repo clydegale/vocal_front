@@ -11,7 +11,7 @@ $.ajax({
         console.log("Error");
 });
 
-function populateAccountEditForm() {
+function _populateAccountEditForm() {
     $('#editFirstname').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.FIRSTNAME));
     $('#editLastname').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.LASTNAME));
     $('#editEmail').attr("value", sessionStorage.getItem(managerProperties.userSessionStorageObject.EMAIL));
@@ -27,7 +27,7 @@ function populateAccountEditForm() {
 // Wrapper function to initialize the userSettingsView so we won't run into a racecondition
 function initUserSettingsView(locationsDTO) {
     _generateLocationSelector(locationsDTO);
-    populateAccountEditForm();
+    _populateAccountEditForm();
 }
 
 // TODO: wrap jQuery Ajax call to include sessionid in all security crucial queries

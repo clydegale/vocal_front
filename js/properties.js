@@ -2,6 +2,9 @@
 
 console.log("properties loaded");
 
+// TODO: change service URL after working update of the Webservice
+// LOCATION_SELECTOR_URL:  "http://10.25.0.99:8080/VoCalServices/LocationMgmt/getLocations"
+
 var managerProperties = {
     dirs: {
         TEMPLATE_UI :       "tmpls/ui/",
@@ -9,11 +12,11 @@ var managerProperties = {
         JS :                "js/"
     },
     services : {
-        LOCATION_SELECTOR_URL:  "http://5.9.99.52:10080/VoCalServices/LocationMgmt/getLocations",
-        CREATE_USER_URL:        "http://5.9.99.52:10080/VoCalServices/UserMgmt/createUser",
-        LOGIN_USER_URL:         "http://5.9.99.52:10080/VoCalServices/SessionMgmt/login",
-        LOGOUT_USER_URL:        "http://5.9.99.52:10080/VoCalServices/SessionMgmt/logout",
-        EDIT_USER_URL:          "http://5.9.99.52:10080/VoCalServices/UserMgmt/editUser"
+        LOCATION_SELECTOR_URL:  "http://10.25.0.99:8080/VoCalServices/MockService/getLocations",
+        CREATE_USER_URL:        "http://10.25.0.99:8080/VoCalServices/UserMgmt/createUser",
+        LOGIN_USER_URL:         "http://10.25.0.99:8080/VoCalServices/SessionMgmt/login",
+        LOGOUT_USER_URL:        "http://10.25.0.99:8080/VoCalServices/SessionMgmt/logout",
+        EDIT_USER_URL:          "http://10.25.0.99:8080/VoCalServices/UserMgmt/editUser"
     },
     siteStates: {
         LOGIN_SCREEN:       "loginScreen",
