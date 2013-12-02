@@ -49,6 +49,11 @@ function loadAccountCreation() {
 }
 
 function loadOverview() {
+    // Throws User back to loginPage if no session is found == not logged in
+    if(sessionStorage.getItem(managerProperties.userSessionStorageObject.SESSION_ID) == null) {
+        loadLoginScreen();
+        return;
+    }
 	$.ajax({
 		url : managerProperties.dirs.TEMPLATE_UI + 'overview.html',
 		dataType : 'html',
@@ -165,12 +170,11 @@ function _setNavbarButtons(buttonName) {
 }
 
 function logoutUser() { // TODO: write so the server will be notified when user logs out
-    $.ajax({
+    $.securityCrucialAjaxPOST({
         url : managerProperties.services.LOGOUT_USER_URL,
         dataType : 'json',
         type : 'POST',
-        async : true,
-        data: "sessionId=" + sessionStorage.getItem("sessionId")
+        async : true
     }).done(function(data) {
 
     }).fail(function() {
@@ -251,7 +255,7 @@ function beforeRedirect() {
 
 $.securityCrucialAjaxPOST = function(options) {
     if(managerProperties.userSessionStorageObject.SESSION_ID != null) {
-        options.data += "&sessionId=" + sessionStorage.getItem(managerProperties.userSessionStorageObject.SESSION_ID);
+        options.data += "&sessionid=" + sessionStorage.getItem(managerProperties.userSessionStorageObject.SESSION_ID);
     } else {
         console.log("WARNING: No sessionId found");
     }

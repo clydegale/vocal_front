@@ -2,9 +2,6 @@
 
 console.log("properties loaded");
 
-// TODO: change service URL after working update of the Webservice
-// LOCATION_SELECTOR_URL:  "http://10.25.0.99:8080/VoCalServices/LocationMgmt/getLocations"
-
 var managerProperties = {
     dirs: {
         TEMPLATE_UI :       "tmpls/ui/",

@@ -54,7 +54,7 @@
             <ul class="nav navbar-nav" id="navbar-buttons">
                 <li id="navbar-home"><a href="javascript:void(0)" onclick="loadOverview()">Home</a></li>
                 <li id="navbar-calendar"><a href="javascript:void(0)" onclick="loadCalendar()">Kalender</a></li>
-                <li id="navbar-settings"><a href="javascript:void(0)" onclick="">Einstellungen</a></li>
+                <li id="navbar-settings"><a href="javascript:void(0)" onclick="loadUserSettings()">Einstellungen</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -69,8 +69,8 @@
         </div><!--/.nav-collapse -->
     </div>
 </div>
-<div class="container">
-    <div class="alert alert-dismissable" id="alertArea" style="margin-top: 1em; display: none">
+<div class="container starter-template">
+    <div class="alert alert-dismissable" id="alertArea" style="margin-top: 1em; display: none; text-align: left">
         <button type="button" class="close" onclick="closeAlert(this)">&times;</button>
         <div id="alertAreaText"></div>
     </div>
