@@ -9,11 +9,11 @@ var managerProperties = {
         JS :                "js/"
     },
     services : {
-        LOCATION_SELECTOR_URL:  "http://vocal.pi:8080/VoCalServices/MockService/getLocations",
-        CREATE_USER_URL:        "http://vocal.pi:8080/VoCalServices/UserMgmt/createUser",
-        LOGIN_USER_URL:         "http://vocal.pi:8080/VoCalServices/SessionMgmt/login",
-        LOGOUT_USER_URL:        "http://vocal.pi:8080/VoCalServices/SessionMgmt/logout",
-        EDIT_USER_URL:          "http://vocal.pi:8080/VoCalServices/UserMgmt/editUser"
+        LOCATION_SELECTOR_URL:  "http://5.9.99.52:10080/VoCalServices/LocationMgmt/getLocations",
+        CREATE_USER_URL:        "http://5.9.99.52:10080/VoCalServices/UserMgmt/createUser",
+        LOGIN_USER_URL:         "http://5.9.99.52:10080/VoCalServices/SessionMgmt/login",
+        LOGOUT_USER_URL:        "http://5.9.99.52:10080/VoCalServices/SessionMgmt/logout",
+        EDIT_USER_URL:          "http://5.9.99.52:10080/VoCalServices/UserMgmt/editUser"
     },
     siteStates: {
         LOGIN_SCREEN:       "loginScreen",
@@ -64,6 +64,9 @@ var managerProperties = {
     loginErrors: {
         AUTHENTICATION_FAILED:  "AUTHENTICATION_FAILED",
         INTERNAL_ERROR:         "INTERNAL_ERROR"
+    },
+    createEventErrors: {
+        NO_ATTENDANCE_GRADE_SELECTED: "NO_ATTENDANCE_GRADE_SELECTED"
     },
     SLIDE_DURATION: 500
 };

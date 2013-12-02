@@ -4,6 +4,7 @@
  * The following functions will load the specific view using AJAX requests to the templates in tmpls/ui/
  */
 function loadLoginScreen() {
+    beforeRedirect();
     $.ajax({
         url : managerProperties.dirs.TEMPLATE_UI + 'loginScreen.html',
         dataType : 'html',
@@ -199,6 +200,7 @@ function showAlert(alertType, message) {
         alertArea.addClass(alertType);
         textArea.html(message);
         alertArea.slideDown(managerProperties.SLIDE_DURATION);
+        window.scrollTo(0,0)
     }, managerProperties.SLIDE_DURATION);
 }
 
@@ -241,7 +243,9 @@ function _generateLocationSelector(locationsDTO) {
     }
 }
 // ---------------------
+function beforeRedirect() {
 
+}
 // Initialize the page by loading the Index template first
 $(document).ready(function() {
     console.log("Document Ready");

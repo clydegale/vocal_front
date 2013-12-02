@@ -12,10 +12,10 @@ $('#loginForm').submit(function(event) {
         async : true,
         data : form.serialize()
     }).done(_handleLoginErrors
-
-        ).fail(function() {
+     ).fail(function() {
             console.log("login query failed");
-        });
+            showAlert(managerProperties.alertTypes.DANGER, "Fehler beim Login");
+     });
 });
 
 function _handleLoginErrors(errorDTO) {
