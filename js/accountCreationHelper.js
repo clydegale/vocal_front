@@ -47,7 +47,7 @@ function _handleUsercreationErrors(errorDTO) {
     if(errorDTO["success"]) {
         // TODO: show success message after loading loginpage
         console.log("success == 1");
-        loadLoginScreen();
+        loadView(managerProperties.siteStates.LOGIN_SCREEN);
         return
     }
     var errorMessage = "";
