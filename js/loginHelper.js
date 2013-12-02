@@ -22,7 +22,7 @@ function _handleLoginErrors(errorDTO) {
     console.log(errorDTO);
     if(errorDTO.success) {
         _fillUserSession(errorDTO.content);
-        loadOverview();
+        loadView(managerProperties.siteStates.OVERVIEW);
     } else {
         var errorMsg = "";
         if($.inArray(managerProperties.loginErrors.AUTHENTICATION_FAILED, errorDTO.content) != -1) {

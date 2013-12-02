@@ -10,7 +10,8 @@
 	TODO: Disable complete page if viewed with < IE 8
 	(TODO: replace Umlauts)
 	TODO: rework navbar visibility changes
-	TODO: IMPORTANT: change jQuery.ajax().done to .success
+	TODO: change all == to ===
+	TODO: add using strict (function() {...})
 -->
 
 <!DOCTYPE html>
@@ -47,14 +48,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="javascript:void(0)" onclick="loadOverview()">VoCal</a>
+            <a class="navbar-brand" href="javascript:void(0)" onclick="loadView('overview')">VoCal</a>
         </div> <!-- navbar-header-->
 
         <div class="collapse navbar-collapse" id="navbar-content">
             <ul class="nav navbar-nav" id="navbar-buttons">
-                <li id="navbar-home"><a href="javascript:void(0)" onclick="loadOverview()">Home</a></li>
-                <li id="navbar-calendar"><a href="javascript:void(0)" onclick="loadCalendar()">Kalender</a></li>
-                <li id="navbar-settings"><a href="javascript:void(0)" onclick="loadUserSettings()">Einstellungen</a></li>
+                <li id="navbar-home"><a href="javascript:void(0)" onclick="loadView('overview')">Home</a></li>
+                <li id="navbar-calendar"><a href="javascript:void(0)" onclick="loadView('calendar')">Kalender</a></li>
+                <li id="navbar-settings"><a href="javascript:void(0)" onclick="loadView('userSettings')">Einstellungen</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

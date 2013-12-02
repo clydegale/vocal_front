@@ -1,131 +1,123 @@
 "use strict";
 
+// TODO: close errors on page view
+function loadView(view) {
+    console.log("Executed on every view load");
+    $.ajax({
+        url : managerProperties.dirs.TEMPLATE_UI + view + ".html",
+        dataType : 'html',
+        type : 'GET',
+        async : true
+        //cache: true,
+    }).done(function(data, textStatus, jqXHR) {
+            loadViewCallback(data, textStatus, jqXHR, view)
+    }).fail(function() {
+            console.log("Error with AJAX Query: " + view);
+    });
+}
+
+function loadViewCallback(data, textStatus, jqXHR, view) {
+    switch (view) {
+        case managerProperties.siteStates.LOGIN_SCREEN:
+            loadLoginScreen(data);
+            break;
+        case managerProperties.siteStates.ACCOUNT_CREATION:
+            loadAccountCreation(data);
+            break;
+        case managerProperties.siteStates.OVERVIEW:
+            loadOverview(data);
+            break;
+        case managerProperties.siteStates.CALENDAR:
+            loadCalendar(data);
+            break;
+        case managerProperties.siteStates.USER_SETTINGS:
+            loadUserSettings(data);
+            break;
+        default:
+            loadLoginScreen(data);
+
+    }
+}
 /*
  * The following functions will load the specific view using AJAX requests to the templates in tmpls/ui/
  */
-function loadLoginScreen() {
-    beforeRedirect();
-    $.ajax({
-        url : managerProperties.dirs.TEMPLATE_UI + 'loginScreen.html',
-        dataType : 'html',
-        type : 'GET',
-        async : true
-        //cache: true,
-    }).done(function(html) {
-            $('#contentMain').html(html);
+function loadLoginScreen(html) {
+    $('#contentMain').html(html);
 
-            //Setting topbar buttons accordingly
-            $('#navbar-content').addClass("invisible");
+    //Setting topbar buttons accordingly
+    $('#navbar-content').addClass("invisible");
 
-            $.getScript(managerProperties.dirs.JS + "loginHelper.js");
+    $.getScript(managerProperties.dirs.JS + "loginHelper.js");
 
-            //Update the current pageState
-            _updateCurrentSiteState(managerProperties.siteStates.LOGIN_SCREEN)
-        }).fail(function() {
-            console.log("Error with AJAX Query to the index.html template");
-        });
+    //Update the current pageState
+    _updateCurrentSiteState(managerProperties.siteStates.LOGIN_SCREEN)
+
 }
 
-function loadAccountCreation() {
-    $.ajax({
-        url : managerProperties.dirs.TEMPLATE_UI + 'accountCreation.html',
-        dataType : 'html',
-        type : 'GET',
-        async : true
-        //cache: true,
-    }).done(function(html) {
-            $('#contentMain').html(html);
+function loadAccountCreation(html) {
+    $('#contentMain').html(html);
 
-            //Setting topbar buttons accordingly
-            $('#navbar-content').addClass("invisible");
+    //Setting topbar buttons accordingly
+    $('#navbar-content').addClass("invisible");
 
-            $.getScript(managerProperties.dirs.JS + "accountCreationHelper.js");
+    $.getScript(managerProperties.dirs.JS + "accountCreationHelper.js");
 
-            //Update the current pageState
-            _updateCurrentSiteState(managerProperties.siteStates.ACCOUNT_CREATION)
-        }).fail(function() {
-            console.log("Error with AJAX Query to the accountCreation.html template");
-        });
+    //Update the current pageState
+    _updateCurrentSiteState(managerProperties.siteStates.ACCOUNT_CREATION);
 }
 
-function loadOverview() {
+
+function loadOverview(html) {
     // Throws User back to loginPage if no session is found == not logged in
     if(sessionStorage.getItem(managerProperties.userSessionStorageObject.SESSION_ID) == null) {
-        loadLoginScreen();
+        loadView(managerProperties.siteStates.LOGIN_SCREEN);
         return;
     }
-	$.ajax({
-		url : managerProperties.dirs.TEMPLATE_UI + 'overview.html',
-		dataType : 'html',
-		type : 'GET',
-		async : true
-		//cache: true,
-	}).done(function(html) {
-		$('#contentMain').html(html);
+    $('#contentMain').html(html);
 
-        // Unhide toolbar buttons
-        $('#navbar-content').removeClass("invisible");
-        console.log(sessionStorage)
-        $('#navbar-username').html(sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName"));
-		//Setting topbar buttons accordingly
-		_setNavbarButtons(managerProperties.navbarButtons.OVERVIEW);
+    // Unhide toolbar buttons
+    $('#navbar-content').removeClass("invisible");
+    console.log(sessionStorage)
+    $('#navbar-username').html(sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName"));
+    //Setting topbar buttons accordingly
+    _setNavbarButtons(managerProperties.navbarButtons.OVERVIEW);
 
-        //Update the current pageState
-        _updateCurrentSiteState(managerProperties.siteStates.OVERVIEW);
-	}).fail(function() {
-		console.log("Error with AJAX Query to the overview.html template");
-	});
+    //Update the current pageState
+    _updateCurrentSiteState(managerProperties.siteStates.OVERVIEW);
+
 }
 
-function loadCalendar() {
-	$.ajax({
-		url : managerProperties.dirs.TEMPLATE_UI + 'calendar.html',
-		dataType : 'html',
-		type : 'GET',
-		async : true
-		//cache: true,
-	}).done(function(html) {
-		$('#contentMain').html(html);
-        // Unhide toolbar buttons
-        $('#navbar-content').removeClass("invisible");
-        _setNavbarButtons(managerProperties.navbarButtons.CALENDAR);
+function loadCalendar(html) {
+    $('#contentMain').html(html);
+    // Unhide toolbar buttons
+    $('#navbar-content').removeClass("invisible");
+    _setNavbarButtons(managerProperties.navbarButtons.CALENDAR);
 
-		$.getScript(managerProperties.dirs.JS + "calendar.js");
-		$.getScript(managerProperties.dirs.JS + "underscore-min.js");
-		$.getScript(managerProperties.dirs.JS + "language/de-DE.js");
-		$.getScript(managerProperties.dirs.JS + "app.js");
+    $.getScript(managerProperties.dirs.JS + "calendar.js");
+    $.getScript(managerProperties.dirs.JS + "underscore-min.js");
+    $.getScript(managerProperties.dirs.JS + "language/de-DE.js");
+    $.getScript(managerProperties.dirs.JS + "app.js");
 
-        //Update the current pageState
-        _updateCurrentSiteState(managerProperties.siteStates.CALENDAR)
-	}).fail(function() {
-		console.log("Error with AJAX Query to the calendar.html template");
-	});
+    //Update the current pageState
+    _updateCurrentSiteState(managerProperties.siteStates.CALENDAR)
 }
 
-function loadUserSettings() {
-	$.ajax({
-		url : managerProperties.dirs.TEMPLATE_UI + 'userSettings.html',
-		dataType : 'html',
-		type : 'GET',
-		async : true
-		//cache: true,
-	}).done(function(html) {
-		$('#contentMain').html(html);
-        // Unhide toolbar buttons
-        $('#navbar-content').removeClass("invisible");
-        _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
+function loadUserSettings(html) {
+    $('#contentMain').html(html);
+    // Unhide toolbar buttons
+    $('#navbar-content').removeClass("invisible");
+    _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
-        $.getScript(managerProperties.dirs.JS + "userSettingsHelper.js", function(data, textStatus, jqxhr) {
-            //populateAccountEditForm()
-        });
+    $.getScript(managerProperties.dirs.JS + "userSettingsHelper.js", function(data, textStatus, jqxhr) {
+        //populateAccountEditForm()
+    });
 
-        //Update the current pageState
-        _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
-	}).fail(function() {
-		console.log("Error with AJAX Query to the userSettings.html template");
-	});
+    //Update the current pageState
+    _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
+
 }
 
+// TODO: should be removable after refactoring the loadView
 function loadCurrentState(currentState) {
     switch (currentState) {
         case managerProperties.siteStates.LOGIN_SCREEN:
@@ -150,7 +142,7 @@ function loadCurrentState(currentState) {
 }
 
 function isStorageDefined() {
-    return ((Storage != undefined) && (window.sessionStorage != undefined));
+    return !((typeof Storage === "undefined") || (typeof window.sessionStorage === "undefined"));
 }
 
 function _updateCurrentSiteState(currentSiteState) {
@@ -181,7 +173,7 @@ function logoutUser() { // TODO: write so the server will be notified when user 
         console.log("userCreate Query Failed")
     });
     sessionStorage.clear();
-    loadLoginScreen();
+    loadView(managerProperties.siteStates.LOGIN_SCREEN);
 }
 
 function closeAlert(button) {
@@ -270,18 +262,19 @@ $(document).ready(function() {
         console.log("Storage defined; not yet visted");
         sessionStorage.currentSiteState = managerProperties.siteStates.LOGIN_SCREEN;
         sessionStorage.visited = true;
-        loadCurrentState(sessionStorage.getItem(["currentSiteState"]));
+        loadView(sessionStorage.getItem(["currentSiteState"]));
     } else if (sessionStorage.visited == "true") {
         console.log("Storage defined; visted");
-        loadCurrentState(sessionStorage.getItem(["currentSiteState"]));
+        loadView(sessionStorage.getItem(["currentSiteState"]));
     } else {
         // TODO: implement error message for browsers without html5
-        loadLoginScreen();
+        loadView(managerProperties.siteStates.LOGIN_SCREEN);
         console.log("No Storage object found");
-        showAlert(managerProperties.alertTypes.DANGER, "Ihr Browser verfügt nicht über ein sessionStorage Objekt, die Seite wird nicht korrekt Funktioniern<br>" +
+        showAlert(managerProperties.alertTypes.DANGER,
+            "Ihr Browser verfügt nicht über ein sessionStorage Objekt, die Seite wird nicht korrekt Funktioniern<br>" +
             "Bitte nutzen sie einen der Folgenden Browser:<br>" +
             "&#149; Internet Explorer 8 oder höher<br>" +
             "&#149; Firefox 3.5 oder höher<br>" +
-            "&#149; Chrome 3 oder höher")
+            "&#149; Chrome 3 oder höher");
     }
 });
