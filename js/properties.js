@@ -12,7 +12,7 @@ var managerProperties = {
         JS :                "js/"
     },
     services : {
-        LOCATION_SELECTOR_URL:  "http://10.25.0.99:8080/VoCalServices/MockService/getLocations",
+        LOCATION_SELECTOR_URL:  "http://10.25.0.99:8080/VoCalServices/LocationMgmt/getLocations",
         CREATE_USER_URL:        "http://10.25.0.99:8080/VoCalServices/UserMgmt/createUser",
         LOGIN_USER_URL:         "http://10.25.0.99:8080/VoCalServices/SessionMgmt/login",
         LOGOUT_USER_URL:        "http://10.25.0.99:8080/VoCalServices/SessionMgmt/logout",
