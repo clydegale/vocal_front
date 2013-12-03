@@ -94,7 +94,7 @@ function loadCalendar(html) {
     _setNavbarButtons(managerProperties.navbarButtons.CALENDAR);
 
     $.getScript(managerProperties.dirs.JS + "calendar.js");
-    $.getScript(managerProperties.dirs.JS + "underscore-min.js");
+    $.getScript(managerProperties.dirs.JS + "underscore.js");
     $.getScript(managerProperties.dirs.JS + "language/de-DE.js");
     $.getScript(managerProperties.dirs.JS + "app.js");
 

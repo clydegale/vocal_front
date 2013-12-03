@@ -42,13 +42,13 @@ window.calendar_languages['de-DE'] = {
 	ms10: 'Nov',
 	ms11: 'Dez',
 
-	d0: 'Sonntag',
-	d1: 'Montag',
-	d2: 'Dienstag',
-	d3: 'Mittwoch',
-	d4: 'Donnerstag',
-	d5: 'Freitag',
-	d6: 'Samstag',
+	d0: 'So',
+	d1: 'Mo',
+	d2: 'Di',
+	d3: 'Mi',
+	d4: 'Do',
+	d5: 'Fr',
+	d6: 'Sa',
 
 	first_day: 1,
 
@@ -65,3 +65,12 @@ window.calendar_languages['de-DE'] = {
 		'26-12': 'Zweiter Weihnachtsfeiertag',
 	}
 };
+/*
+ d0: 'Sonntag',
+ d1: 'Montag',
+ d2: 'Dienstag',
+ d3: 'Mittwoch',
+ d4: 'Donnerstag',
+ d5: 'Freitag',
+ d6: 'Samstag',
+ */
