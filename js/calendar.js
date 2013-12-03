@@ -8,8 +8,7 @@
  */
 "use strict";
 
-/* TODO: disable "Week" ribbon
-
+/* TODO:
  */
 
 Date.prototype.getWeek = function() {
@@ -33,7 +32,6 @@ if(!String.prototype.format) {
 	};
 }
 
-;
 (function($) {
 
 	var defaults = {
@@ -807,6 +805,10 @@ if(!String.prototype.format) {
             var child = $(this).children("span");
             child.click();
         });
+
+        // Joe gets all events (only in the monthly overview) and removes their links, so the wont be clickable
+        var events = $('*[class~="cal-month-day"] *[class~="event"]');
+        events.removeAttr("href");
 
 		this['_update_' + this.options.view]();
 

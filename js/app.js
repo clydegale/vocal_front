@@ -1,9 +1,10 @@
 (function($) {
 
-	"use strict";
+    //events_source: 'http://vocal.pi/eventsNew.json.php',
 
-	var options = {
-		events_source: 'http://vocal.pi/eventsNew.json.php',
+	"use strict";
+    var options = {
+        events_source: "eventsNew.json.php",
 		view: 'month',
 		tmpl_path: managerProperties.dirs.TEMPLATE_CALENDAR,
 		tmpl_cache: false,
