@@ -8,6 +8,10 @@
  */
 "use strict";
 
+/* TODO: disable "Week" ribbon
+
+ */
+
 Date.prototype.getWeek = function() {
 	var onejan = new Date(this.getFullYear(), 0, 1);
 	return Math.ceil((((this.getTime() - onejan.getTime()) / 86400000) + onejan.getDay() + 1) / 7);
