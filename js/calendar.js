@@ -793,14 +793,20 @@ if(!String.prototype.format) {
 			self.options.day = $(this).data('cal-date');
 			self.view(view);
 		});
-		$('.cal-cell').dblclick(function() {
-			var view = $('[data-cal-date]', this).data('cal-view');
-			if(!self.options.views[view].enable) {
-				return;
-			}
-			self.options.day = $('[data-cal-date]', this).data('cal-date');
-			self.view(view);
-		});
+//		$('.cal-cell').dblclick(function() {
+//			var view = $('[data-cal-date]', this).data('cal-view');
+//			if(!self.options.views[view].enable) {
+//				return;
+//			}
+//			self.options.day = $('[data-cal-date]', this).data('cal-date');
+//			self.view(view);
+//		});
+
+        //Joe: Registers an onclick listener so the day will be shown if you click into the whole cell, not just the number
+        $('*[class~="cal-day-inmonth"]').click(function() {
+            var child = $(this).children("span");
+            child.click();
+        });
 
 		this['_update_' + this.options.view]();
 
@@ -862,30 +868,30 @@ if(!String.prototype.format) {
 	};
 
 	Calendar.prototype._update_month = function() {
-		this._update_month_year();
-
-		var week = $(document.createElement('div')).attr('id', 'cal-week-box');
-		week.html(this.locale.week);
-		var start = this.options.position.start.getFullYear() + '-' + this.options.position.start.getMonthFormatted() + '-';
-		$('.cal-month-box .cal-row-fluid')
-			.on('mouseenter',function() {
-				var child = $('.cal-cell1:first-child .cal-month-day', this);
-				var day = (child.hasClass('cal-month-first-row') ? 1 : $('[data-cal-date]', child).text());
-				day = (day < 10 ? '0' + day : day);
-				week.attr('data-cal-week', start + day).show().appendTo(child);
-			})
-			.on('mouseleave', function() {
-				week.hide();
-			})
-		;
-
-		var self = this;
-
-		week.click(function() {
-			self.options.day = $(this).data('cal-week');
-			self.view('week');
-		});
-
+//		this._update_month_year();
+//
+//		var week = $(document.createElement('div')).attr('id', 'cal-week-box');
+//		week.html(this.locale.week);
+//		var start = this.options.position.start.getFullYear() + '-' + this.options.position.start.getMonthFormatted() + '-';
+//		$('.cal-month-box .cal-row-fluid')
+//			.on('mouseenter',function() {
+//				var child = $('.cal-cell1:first-child .cal-month-day', this);
+//				var day = (child.hasClass('cal-month-first-row') ? 1 : $('[data-cal-date]', child).text());
+//				day = (day < 10 ? '0' + day : day);
+//				week.attr('data-cal-week', start + day).show().appendTo(child);
+//			})
+//			.on('mouseleave', function() {
+//				week.hide();
+//			})
+//		;
+//
+//		var self = this;
+//
+//		week.click(function() {
+//			self.options.day = $(this).data('cal-week');
+//			self.view('week');
+//		});
+//
 		$('a.event').mouseenter(function() {
 			$('a[data-event-id="' + $(this).data('event-id')+'"]').closest('.cal-cell1').addClass('day-highlight dh-' + $(this).data('event-class'));
 		});

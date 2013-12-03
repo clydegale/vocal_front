@@ -336,7 +336,7 @@ span[data-cal-date] {
   font-size: 1.2em;
   font-weight: normal;
   opacity: 0.5;
-  cursor: pointer;
+  cursor: default;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
