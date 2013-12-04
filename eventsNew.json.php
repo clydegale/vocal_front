@@ -72,6 +72,14 @@
       "class": "event-important",
       "start": "1401210854000",
       "end": "1401300854000"
+    },
+    {
+      "id": "333",
+      "title": "Mein Event 3",
+      "url": "google.com",
+      "class": "event-important",
+      "start": "1377993600000",
+      "end": "1385856000000"
     }
   ]
 }

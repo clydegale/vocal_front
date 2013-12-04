@@ -3,7 +3,6 @@
 $('#loginForm').submit(function(event) {
     event.preventDefault();
     console.log("Default Prevented: Login");
-
     var form = $('#loginForm');
     $.ajax({
         url : managerProperties.services.LOGIN_USER_URL,
@@ -45,4 +44,5 @@ function _fillUserSession(content) {
     sessionStorage.setItem(managerProperties.userSessionStorageObject.EMAIL, content.user.email);
     sessionStorage.setItem(managerProperties.userSessionStorageObject.GRADE, content.user.grade);
     sessionStorage.setItem(managerProperties.userSessionStorageObject.SCHOOL_LOCATION, content.user.schoolLocation);
+    sessionStorage.setItem(managerProperties.userSessionStorageObject.ROLE, content.user.role);
 }

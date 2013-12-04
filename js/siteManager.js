@@ -3,6 +3,7 @@
 // TODO: close errors on page view
 function loadView(view) {
     console.log("Executed on every view load");
+    console.log("Current View: " + view)
     $.ajax({
         url : managerProperties.dirs.TEMPLATE_UI + view + ".html",
         dataType : 'html',
@@ -33,6 +34,8 @@ function loadViewCallback(data, textStatus, jqXHR, view) {
         case managerProperties.siteStates.USER_SETTINGS:
             loadUserSettings(data);
             break;
+        case managerProperties.siteStates.CREATE_EVENT:
+            loadCreateEvent(data);
         default:
             loadLoginScreen(data);
 
@@ -67,17 +70,24 @@ function loadAccountCreation(html) {
 }
 
 
-function loadOverview(html) {
+function loadOverview(rawHTML) {
     // Throws User back to loginPage if no session is found == not logged in
     if(sessionStorage.getItem(managerProperties.userSessionStorageObject.SESSION_ID) == null) {
         loadView(managerProperties.siteStates.LOGIN_SCREEN);
         return;
     }
-    $('#contentMain').html(html);
+
+
+    /* Reads the raw template of the Overview and proccesses it through the _ template function (used to dynamically
+        show more settings to users with more privileges
+     */
+    var rawHTMLTmpl = _.template(rawHTML);
+    var processdHTML = rawHTMLTmpl({userRole: sessionStorage.getItem(managerProperties.userSessionStorageObject.ROLE)});
+    $('#contentMain').html(processdHTML);
 
     // Unhide toolbar buttons
     $('#navbar-content').removeClass("invisible");
-    console.log(sessionStorage)
+    console.log(sessionStorage);
     $('#navbar-username').html(sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName"));
     //Setting topbar buttons accordingly
     _setNavbarButtons(managerProperties.navbarButtons.OVERVIEW);
@@ -94,7 +104,7 @@ function loadCalendar(html) {
     _setNavbarButtons(managerProperties.navbarButtons.CALENDAR);
 
     $.getScript(managerProperties.dirs.JS + "calendar.js");
-    $.getScript(managerProperties.dirs.JS + "underscore.js");
+//    $.getScript(managerProperties.dirs.JS + "underscore.js");
     $.getScript(managerProperties.dirs.JS + "language/de-DE.js");
     $.getScript(managerProperties.dirs.JS + "app.js");
 
@@ -115,6 +125,20 @@ function loadUserSettings(html) {
     //Update the current pageState
     _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
 
+}
+
+function loadCreateEvent(html) {
+    $('#contentMain').html(html);
+    // Unhide toolbar buttons
+    $('#navbar-content').removeClass("invisible");
+    _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
+
+    $.getScript(managerProperties.dirs.JS + "userSettingsHelper.js", function(data, textStatus, jqxhr) {
+        //populateAccountEditForm()
+    });
+
+    //Update the current pageState
+    _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
 }
 
 // TODO: should be removable after refactoring the loadView
@@ -210,6 +234,7 @@ function _resetAlertType(alertArea) {
     alertArea.removeClass(managerProperties.alertTypes.INFO);
 }
 
+
 // Helper function to fill the <select> tag with the locations
 function _generateLocationSelector(locationsDTO) {
     // Using attribute selector instead of id so i wont have to differentiate between the accountCreationForm and the userEditForm
@@ -258,6 +283,8 @@ $.securityCrucialAjaxPOST = function(options) {
 // Initialize the page by loading the Index template first
 $(document).ready(function() {
     console.log("Document Ready");
+    console.log("Disable jQM ajax page transition handling");
+    $.mobile.ajaxEnabled = false;
     if(isStorageDefined() && (sessionStorage.visited == null)) {
         console.log("Storage defined; not yet visted");
         sessionStorage.currentSiteState = managerProperties.siteStates.LOGIN_SCREEN;

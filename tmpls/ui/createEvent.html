@@ -1,0 +1,121 @@
+<div>
+    <h1>Event erstellen</h1>
+    <div class="">
+        <form id="createEventForm" class="form-horizontal" role="form" name="createEventForm">
+            <!-- Vorname Inputfield -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Eventtitel</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="text" class="form-control" name="eventtitle" id="eventtitle">
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Beschreibung</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <textarea type="text" class="form-control" rows="2" name="eventdescription" id="eventdescription"></textarea>
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+            <!-- start und endpicker hier -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Startdatum</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <input type="date" class="form-control" data-role="datebox" name="mydate" id="mydate" data-options='{"mode": "flipbox", "overrideDateFormat": "dd/mm/YYYY"}' />
+                    <input type="date" class="form-control" data-role="datebox" name="mydate1" id="mydate1" data-options='{"mode": "timeflipbox"}'>
+                    <input type="date" class="form-control" data-role="datebox" name="mydate2" id="mydate2" data-options='{"mode": "timeflipbox"' />
+                </div>
+            </div>
+            <!-- Eventtype selection -->
+            <!-- TODO: fill dynamically via webservice-->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Eventtyp</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <select class="form-control" name="eventtype" id="eventtype">
+                        <option selected="selected" value="NOT_SELECTED">Bitte Typ wählen</option>
+                        <option value="EXAM">Prüfung</option>
+                        <option value="DEMO">Vorführung</option>
+                        <option value="SEMINAR">Lehrgang</option>
+                        <option value="COMPETITION">Wettkampf</option>
+                        <option value="MEETING">Treffen</option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+
+            <!-- Gürtelfarbe / einladungen selection -->
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Einladen</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="child">
+                            Kinder
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="disciple">
+                            Schüler
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="trainer">
+                            Trainer
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="master">
+                            Meister
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-2"></div>
+            </div>
+
+
+
+            <!-- Buttons visible for large Devices -->
+            <div class="form-group visible-md visible-lg" style="margin: 0% 3%">
+                <div class="col-md-4"></div>
+                <a class="btn btn-danger col-xs-12 col-md-1" onclick="loadView('overview')">Zurück</a>
+                <div class="col-md-2"></div>
+                <!-- INFO: small hack, might needs to be removed-->
+                <input class="btn btn-primary col-xs-12 col-md-1" type="submit" value="Senden" style="height: 34px">
+            </div>
+            <!-- Buttons Visible for small devices -->
+            <div class="form-group visible-sm visible-xs" style="margin: 0% 20%">
+                <!-- TODO: Check why on mobile the button won't submit -->
+                <input class="btn btn-primary btn-block" type="submit" value="Senden">
+                <a class="btn btn-danger btn-block" onclick="loadView('overview')">Zurück</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--
+impl            sessionid=$SESSIONID
+input text      title=$EVENTTITLE
+input text      description=$EVENTDESCRIPTION
+input jQmobile  startdate=$STARTDATE
+input jQmobile  enddate=$ENDDATE
+input dropdown  type=$EVENTTYPE
+
+                child=$CHILD
+checkbox        disciple=$DISCIPLE
+                trainer=$TRAINER
+                master=$MASTER
+
+-->

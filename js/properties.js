@@ -21,6 +21,7 @@ var managerProperties = {
         OVERVIEW:           "overview",
         CALENDAR:           "calendar",
         USER_SETTINGS:      "userSettings",
+        CREATE_EVENT:       "createEvent",
         NONE:               null
     },
     alertTypes: {
@@ -52,7 +53,8 @@ var managerProperties = {
         LASTNAME:           "lastName",
         EMAIL:              "email",
         GRADE:              "grade",
-        SCHOOL_LOCATION:    "schoolLocation"
+        SCHOOL_LOCATION:    "schoolLocation",
+        ROLE:               "role"
     },
     userEditSuccessCodes: {
         PASSWORD_CHANGED:           "PASSWORD_CHANGED",

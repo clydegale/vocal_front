@@ -9,6 +9,16 @@
 			Kalender Anzeigen
 		</p>
 	</div>
+    <% if(userRole === "ADMIN" || userRole === "MANAGER") { %>
+        <div class="col-sm-6" onclick="loadView('createEvent')">
+            <a href="javascript:void(0)">
+                <img src="resources/star.png" alt="" class="img-rounded img-responsive highlight" width="40%" height="40%" style="margin: 0 auto">
+            </a>
+            <p>
+                Event erstellen
+            </p>
+        </div>
+    <% } %>
 	<div class="col-sm-6">
 		<a href="javascript:void(0)" onclick="loadView('userSettings')">
 		<img src="resources/Settings-icon.png" alt="" class="img-rounded img-responsive highlight" width="40%" height="40%" style="margin: 0 auto">
