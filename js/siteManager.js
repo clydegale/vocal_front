@@ -133,10 +133,6 @@ function loadCreateEvent(html) {
     $('#navbar-content').removeClass("invisible");
     _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
-    $.getScript(managerProperties.dirs.JS + "userSettingsHelper.js", function(data, textStatus, jqxhr) {
-        //populateAccountEditForm()
-    });
-
     //Update the current pageState
     _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
 }
@@ -267,8 +263,6 @@ function _generateLocationSelector(locationsDTO) {
     }
 }
 // ---------------------
-function beforeRedirect() {
-}
 
 $.securityCrucialAjaxPOST = function(options) {
     if(managerProperties.userSessionStorageObject.SESSION_ID != null) {
@@ -283,8 +277,6 @@ $.securityCrucialAjaxPOST = function(options) {
 // Initialize the page by loading the Index template first
 $(document).ready(function() {
     console.log("Document Ready");
-    console.log("Disable jQM ajax page transition handling");
-    $.mobile.ajaxEnabled = false;
     if(isStorageDefined() && (sessionStorage.visited == null)) {
         console.log("Storage defined; not yet visted");
         sessionStorage.currentSiteState = managerProperties.siteStates.LOGIN_SCREEN;

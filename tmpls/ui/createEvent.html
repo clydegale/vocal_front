@@ -24,16 +24,42 @@
             <!-- start und endpicker hier -->
             <div class="form-group">
                 <div class="col-lg-4 col-md-4 col-xs-3">
-                    <label class="control-label pull-right">Startdatum</label>
+                    <label class="control-label pull-right">Start</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <input type="date" class="form-control" data-role="datebox" name="mydate" id="mydate" data-options='{"mode": "flipbox", "overrideDateFormat": "dd/mm/YYYY"}' />
-                    <input type="date" class="form-control" data-role="datebox" name="mydate1" id="mydate1" data-options='{"mode": "timeflipbox"}'>
-                    <input type="date" class="form-control" data-role="datebox" name="mydate2" id="mydate2" data-options='{"mode": "timeflipbox"' />
+                    <div class="col-xs-8" style="padding: 0">
+                            <input type="text" class="form-control" name="startdate" id="startdate" value=""  />
+                    </div>
+                    <div class="col-xs-4" style="padding: 0">
+                        <input type="text" class="form-control" name="starttime" id="starttime" value="">
+                    </div>
                 </div>
             </div>
+            <div class="well">
+                <div id="datetimepicker2" class="input-append">
+                    <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text"></input>
+                    <span class="add-on">
+                      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                      </i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-xs-3">
+                    <label class="control-label pull-right">Ende</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-7">
+                    <div class="col-xs-8" style="padding: 0">
+                        <input type="date" class="form-control" data-role="datebox" name="enddate" id="enddate" value="" data-options='{"mode": "flipbox", "overrideDateFormat": "dd/mm/YYYY"}' />
+                    </div>
+                    <div class="col-xs-4" style="padding: 0">
+                        <input type="time" class="form-control" data-role="datebox" name="endtime" id="endtime" data-options='{"mode": "timeflipbox"}'>
+                    </div>
+                </div>
+            </div>
+
             <!-- Eventtype selection -->
-            <!-- TODO: fill dynamically via webservice-->
+            <!-- TODO: fill dynamically via webservice -->
             <div class="form-group">
                 <div class="col-lg-4 col-md-4 col-xs-3">
                     <label class="control-label pull-right">Eventtyp</label>
