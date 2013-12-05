@@ -133,6 +133,10 @@ function loadCreateEvent(html) {
     $('#navbar-content').removeClass("invisible");
     _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
+//    debugger;
+//    $('#startdate').datepicker();
+//    $('#enddate').datepicker();
+
     //Update the current pageState
     _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
 }
