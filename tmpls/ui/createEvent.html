@@ -1,23 +1,24 @@
 <div>
     <h1>Event erstellen</h1>
     <div class="">
-        <form id="createEventForm" class="form-horizontal" role="form" name="createEventForm">
+        <form id="createEventForm" class="form-horizontal" role="form" name="createEventForm" bef>
             <!-- Vorname Inputfield -->
             <div class="form-group">
                 <div class="col-lg-4 col-md-4 col-xs-3">
                     <label class="control-label pull-right">Eventtitel</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <input type="text" class="form-control" name="eventtitle" id="eventtitle">
+                    <input type="text" class="form-control" name="title" id="eventtitle" placeholder="Eventtitel">
                 </div>
                 <div class="col-md-4 col-xs-2"></div>
             </div>
+            <!-- Description inputfield -->
             <div class="form-group">
                 <div class="col-lg-4 col-md-4 col-xs-3">
                     <label class="control-label pull-right">Beschreibung</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <textarea type="text" class="form-control" rows="2" name="eventdescription" id="eventdescription"></textarea>
+                    <textarea type="text" class="form-control" rows="2" name="descritpion" id="eventdescription" placeholder="Beschreibungstext"></textarea>
                 </div>
                 <div class="col-md-4 col-xs-2"></div>
             </div>
@@ -28,10 +29,10 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
                     <div class="col-xs-8" style="padding: 0">
-                            <input type="text" class="form-control add-on" name="startdate" id="startdate" data-date-format="dd.mm.yy" value="" readonly style="background-color: #FFFFFF"/>
+                            <input type="date" class="form-control" name="startdate" id="startdate" value=""/>
                     </div>
                     <div class="col-xs-4" style="padding: 0">
-                        <input type="text" class="form-control" name="starttime" id="starttime" value="">
+                        <input type="time" class="form-control" name="starttime" id="starttime" value="00:00">
                     </div>
                 </div>
             </div>
@@ -41,10 +42,10 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
                     <div class="col-xs-8" style="padding: 0">
-                        <input type="text" class="form-control" name="enddate" id="enddate" value="" readonly style="background-color: #FFFFFF"/>
+                        <input type="date" class="form-control" name="enddate" id="enddate" value=""/>
                     </div>
                     <div class="col-xs-4" style="padding: 0">
-                        <input type="time" class="form-control" data-role="datebox" name="endtime" id="endtime" data-options='{"mode": "timeflipbox"}'>
+                        <input type="time" class="form-control" data-role="datebox" name="endtime" id="endtime" value="00:00">
                     </div>
                 </div>
             </div>
@@ -56,7 +57,7 @@
                     <label class="control-label pull-right">Eventtyp</label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-7">
-                    <select class="form-control" name="eventtype" id="eventtype">
+                    <select class="form-control" name="type" id="eventtype">
                         <option selected="selected" value="NOT_SELECTED">Bitte Typ wählen</option>
                         <option value="EXAM">Prüfung</option>
                         <option value="DEMO">Vorführung</option>
@@ -76,25 +77,29 @@
                 <div class="col-lg-4 col-md-4 col-xs-7">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="child">
+                            <input type="checkbox" name="child" id="child" value="true" checked>
+                            <input type='hidden' name="child" id="childHidden" value="false">
                             Kinder
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="disciple">
+                            <input type="checkbox" name="disciple" id="disciple" value="true" checked>
+                            <input type='hidden' name="disciple" id="discipleHidden" value="false">
                             Schüler
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="trainer">
+                            <input type="checkbox" name="trainer" id="trainer" value="true" checked>
+                            <input type='hidden' name="trainer" id="trainerHidden" value="false">
                             Trainer
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="master">
+                            <input type="checkbox" name="master" id="master" value="true" checked>
+                            <input type='hidden' name="master" id="masterHidden" value="false">
                             Meister
                         </label>
                     </div>
@@ -121,14 +126,6 @@
         </form>
     </div>
 </div>
-<script>
-    $('#startdate').datetimepicker({
-        dateFormat: "dd.mm.yy",
-        addSliderAccess: true,
-        sliderAccessArgs: { touchonly: true }
-    });
-//    $('#enddate').datepicker({"dateFormat": "dd.mm.yy"});
-</script>
 <!--
 impl            sessionid=$SESSIONID
 input text      title=$EVENTTITLE

@@ -13,7 +13,8 @@ var managerProperties = {
         CREATE_USER_URL:        "http://10.25.0.99:8080/VoCalServices/UserMgmt/createUser",
         LOGIN_USER_URL:         "http://10.25.0.99:8080/VoCalServices/SessionMgmt/login",
         LOGOUT_USER_URL:        "http://10.25.0.99:8080/VoCalServices/SessionMgmt/logout",
-        EDIT_USER_URL:          "http://10.25.0.99:8080/VoCalServices/UserMgmt/editUser"
+        EDIT_USER_URL:          "http://10.25.0.99:8080/VoCalServices/UserMgmt/editUser",
+        CREATE_EVENT_URL:       "http://10.25.0.99:8080/VoCalServices/EventMgmt/createEvent"
     },
     siteStates: {
         LOGIN_SCREEN:       "loginScreen",

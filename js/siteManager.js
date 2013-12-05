@@ -36,6 +36,7 @@ function loadViewCallback(data, textStatus, jqXHR, view) {
             break;
         case managerProperties.siteStates.CREATE_EVENT:
             loadCreateEvent(data);
+            break;
         default:
             loadLoginScreen(data);
 
@@ -133,9 +134,7 @@ function loadCreateEvent(html) {
     $('#navbar-content').removeClass("invisible");
     _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
 
-//    debugger;
-//    $('#startdate').datepicker();
-//    $('#enddate').datepicker();
+    $.getScript(managerProperties.dirs.JS + "createEventHelper.js")
 
     //Update the current pageState
     _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
@@ -266,6 +265,7 @@ function _generateLocationSelector(locationsDTO) {
         $(select).append(option)
     }
 }
+
 // ---------------------
 
 $.securityCrucialAjaxPOST = function(options) {
