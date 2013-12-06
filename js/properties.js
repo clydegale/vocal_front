@@ -68,8 +68,20 @@ var managerProperties = {
         AUTHENTICATION_FAILED:  "AUTHENTICATION_FAILED",
         INTERNAL_ERROR:         "INTERNAL_ERROR"
     },
+    sessionErrors: {
+        SESSION_INVALID: "SESSION_INVALID"
+    },
     createEventErrors: {
-        NO_ATTENDANCE_GRADE_SELECTED: "NO_ATTENDANCE_GRADE_SELECTED"
+        TITLE_MISSING:                  "TITLE_MISSING",
+        STARTDATE_MISSING:              "STARTDATE_MISSING",
+        ENDDATE_MISSING:                "ENDDATE_MISSING",
+        STARTDATE_AFTER_ENDDATE:        "STARTDATE_AFTER_ENDDATE",
+        NO_ATTENDANCE_GRADE_SELECTED:   "NO_ATTENDANCE_GRADE_SELECTED",
+        EVENT_TYPE_MISSING:             "EVENT_TYPE_MISSING"
+    },
+    formats: {
+        ISO_FORMAT: "ISO_FORMAT",
+        GERMAN_FORMAT: "GERMAN_FORMAT"
     },
     SLIDE_DURATION: 500
 };

@@ -42,7 +42,9 @@ $('#userEditForm').submit(function(event) {
         type : 'POST',
         async : true,
         data : form.serialize()
-    }).success(_handleUserEditErrors
+    }).success(function(errorDTO) {
+            securityCrucialErrorHandler(errorDTO, _handleUserEditErrors)
+        }
      ).fail(function() {
             console.log("userCreate Query Failed")
     });
@@ -53,21 +55,21 @@ $('#userEditForm').submit(function(event) {
 function _handleUserEditErrors(errorDTO) {
     console.log(errorDTO);
     if(errorDTO.success == 0) {
-        showAlert(managerProperties.alertTypes.DANGER, "TEMP ERROR")
-        // TODO: implement generic "kickout" method if sessionId is invalid and stop execution / throw user back to loginpage
+        // invalid session id is handled by the securityCrucialErrorHandler
+        showAlert(managerProperties.alertTypes.DANGER, "Something bad happened")
     } else if (errorDTO.success == 1) {
         var errorMessage = "";
-        if($.inArray(managerProperties.userEditSuccessCodes.FIRSTNAME_CHANGED, errorDTO.content.successcodes) != -1) {
+        if($.inArray(managerProperties.userEditSuccessCodes.FIRSTNAME_CHANGED, errorDTO.content.successcode) != -1) {
             console.log("Changed Firstname");
             errorMessage += 'Ihr <b>Vorname</b> wurde geändert.<br>';
             sessionStorage.setItem(managerProperties.userSessionStorageObject.FIRSTNAME, errorDTO.content.user[managerProperties.userSessionStorageObject.FIRSTNAME])
         }
-        if($.inArray(managerProperties.userEditSuccessCodes.LASTNAME_CHANGED, errorDTO.content.successcodes) != -1) {
+        if($.inArray(managerProperties.userEditSuccessCodes.LASTNAME_CHANGED, errorDTO.content.successcode) != -1) {
             console.log("Changed Lastname");
             errorMessage += 'Ihr <b>Nachname</b> wurde geändert.<br>';
             sessionStorage.setItem(managerProperties.userSessionStorageObject.LASTNAME, errorDTO.content.user[managerProperties.userSessionStorageObject.LASTNAME])
         }
-        if($.inArray(managerProperties.userEditSuccessCodes.SCHOOL_LOCATION_CHANGED, errorDTO.content.successcodes) != -1) {
+        if($.inArray(managerProperties.userEditSuccessCodes.SCHOOL_LOCATION_CHANGED, errorDTO.content.successcode) != -1) {
             console.log("Changed SchoolLocation");
             errorMessage += 'Ihr <b>Standort</b> wurde geändert.';
             sessionStorage.setItem(managerProperties.userSessionStorageObject.SCHOOL_LOCATION, errorDTO.content.user[managerProperties.userSessionStorageObject.SCHOOL_LOCATION])
@@ -75,6 +77,9 @@ function _handleUserEditErrors(errorDTO) {
 
         showAlert(managerProperties.alertTypes.SUCCESS, errorMessage);
         // TODO: update navbar content
+        // update the form and name in the navbar
+        _populateAccountEditForm();
+        $('#navbar-username').html(sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName"));
     }
 
 

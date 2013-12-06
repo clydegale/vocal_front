@@ -1,7 +1,8 @@
 "use strict";
 
 // TODO: close errors on page view
-function loadView(view) {
+function loadView(view, afterLoadViewCallback, beforeViewCallback) {
+    beforeViewChange(beforeViewCallback)
     console.log("Executed on every view load");
     console.log("Current View: " + view)
     $.ajax({
@@ -11,13 +12,13 @@ function loadView(view) {
         async : true
         //cache: true,
     }).done(function(data, textStatus, jqXHR) {
-            loadViewCallback(data, textStatus, jqXHR, view)
+            handleLoadView(data, textStatus, jqXHR, view, afterLoadViewCallback)
     }).fail(function() {
             console.log("Error with AJAX Query: " + view);
     });
 }
 
-function loadViewCallback(data, textStatus, jqXHR, view) {
+function handleLoadView(data, textStatus, jqXHR, view, afterLoadViewCallback) {
     switch (view) {
         case managerProperties.siteStates.LOGIN_SCREEN:
             loadLoginScreen(data);
@@ -41,6 +42,18 @@ function loadViewCallback(data, textStatus, jqXHR, view) {
             loadLoginScreen(data);
 
     }
+    if(typeof afterLoadViewCallback === 'function') {
+        afterLoadViewCallback();
+    }
+}
+
+function beforeViewChange(beforeViewCallback) {
+    if(typeof beforeViewCallback === 'function') {
+        beforeViewCallback();
+    }
+    // parameter for closeAlert() needs to be the small x button
+    // $('.alert') should safely work since there is always only one .alert node present
+    closeAlert($('.alert').children("button"));
 }
 /*
  * The following functions will load the specific view using AJAX requests to the templates in tmpls/ui/
@@ -266,6 +279,10 @@ function _generateLocationSelector(locationsDTO) {
     }
 }
 
+function resetForm(formID) {
+    $('#' + formID)[0].reset();
+}
+
 // ---------------------
 
 $.securityCrucialAjaxPOST = function(options) {
@@ -277,6 +294,19 @@ $.securityCrucialAjaxPOST = function(options) {
     options.type = 'POST';
     return $.ajax(options);
 };
+
+// layer for all queries where the return object could contain INVALID_ID
+// will be used with all functionality where the user needs to be logged in for
+function securityCrucialErrorHandler(errorDTO, errorHandler) {
+    if(errorDTO.success == 0
+    && ($.inArray(managerProperties.sessionErrors.SESSION_INVALID, errorDTO.content) != -1)) {
+        loadView(managerProperties.siteStates.LOGIN_SCREEN, function() {
+            showAlert(managerProperties.alertTypes.DANGER, "Ihre Sitzung ist nichtmehr gültig, bitte melden sie sich neu an.");
+        })
+    } else {
+        errorHandler(errorDTO);
+    }
+}
 
 // Initialize the page by loading the Index template first
 $(document).ready(function() {
