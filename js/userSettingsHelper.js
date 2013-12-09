@@ -51,7 +51,6 @@ $('#userEditForm').submit(function(event) {
 });
 
 
-// TODO: mark the form entries green on success
 function _handleUserEditErrors(errorDTO) {
     console.log(errorDTO);
     if(errorDTO.success == 0) {

@@ -36,10 +36,7 @@ $('#accountCreationForm').submit(function(event) {
 
 function _handleUsercreationErrors(errorDTO) {
     console.log(errorDTO);
-    console.log(errorDTO["success"]);
-    console.log(errorDTO.content);
-    // TODO: access success with errorDTO.success (and test)
-    if(errorDTO["success"]) {
+    if(errorDTO.success) {
         console.log("success == 1");
         loadView(managerProperties.siteStates.LOGIN_SCREEN, function() {
             showAlert(managerProperties.alertTypes.SUCCESS, "Ihr Benutzeraccount wurde erforlgreich erstellt") // += sie können sich einloggen wenn ein admin sie freigeschalten hat
@@ -78,7 +75,6 @@ function _handleUsercreationErrors(errorDTO) {
         $('#grade').parents(".form-group").addClass("has-error");
         errorMessage += 'Bitte Wählen sie eine <b>Gürtelfarbe</b> aus<br>'
     }
-    // TODO: Test
     if($.inArray(managerProperties.userCreationErrors.EMAIL_INVALID, errorDTO.content) != -1) {
         console.log("Invalid E-Mail");
         $('#email').parents(".form-group").addClass("has-error");

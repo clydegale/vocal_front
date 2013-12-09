@@ -1,6 +1,5 @@
 "use strict";
 
-// TODO: close errors on page view
 function loadView(view, afterLoadViewCallback, beforeViewCallback) {
     beforeViewChange(beforeViewCallback)
     console.log("Executed on every view load");
@@ -153,29 +152,6 @@ function loadCreateEvent(html) {
     _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
 }
 
-// TODO: should be removable after refactoring the loadView
-function loadCurrentState(currentState) {
-    switch (currentState) {
-        case managerProperties.siteStates.LOGIN_SCREEN:
-            loadLoginScreen();
-            break;
-        case managerProperties.siteStates.ACCOUNT_CREATION:
-            loadAccountCreation();
-            break;
-        case managerProperties.siteStates.OVERVIEW:
-            loadOverview();
-            break;
-        case managerProperties.siteStates.CALENDAR:
-            loadCalendar();
-            break;
-        case managerProperties.siteStates.USER_SETTINGS:
-            loadUserSettings();
-            break;
-        default:
-            loadLoginScreen();
-
-    }
-}
 
 function isStorageDefined() {
     return !((typeof Storage === "undefined") || (typeof window.sessionStorage === "undefined"));
@@ -197,7 +173,7 @@ function _setNavbarButtons(buttonName) {
     })
 }
 
-function logoutUser() { // TODO: write so the server will be notified when user logs out
+function logoutUser() {
     $.securityCrucialAjaxPOST({
         url : managerProperties.services.LOGOUT_USER_URL,
         dataType : 'json',

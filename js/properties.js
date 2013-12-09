@@ -14,7 +14,8 @@ var managerProperties = {
         LOGIN_USER_URL:         "http://10.25.0.99:8080/VoCalServices/SessionMgmt/login",
         LOGOUT_USER_URL:        "http://10.25.0.99:8080/VoCalServices/SessionMgmt/logout",
         EDIT_USER_URL:          "http://10.25.0.99:8080/VoCalServices/UserMgmt/editUser",
-        CREATE_EVENT_URL:       "http://10.25.0.99:8080/VoCalServices/EventMgmt/createEvent"
+        CREATE_EVENT_URL:       "http://10.25.0.99:8080/VoCalServices/EventMgmt/createEvent",
+        GET_EVENTS_BY_TIME:     "http://10.25.0.99:8080/VoCalServices/EventMgmt/getEventsBetween"
     },
     siteStates: {
         LOGIN_SCREEN:       "loginScreen",
