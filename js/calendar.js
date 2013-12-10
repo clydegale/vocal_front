@@ -217,6 +217,17 @@ if(!String.prototype.format) {
 		return url;
 	}
 
+    function buildEventsUrlPOST(data) {
+        var separator, key, url;
+        url = "";
+        separator = "";
+        for(key in data) {
+            url += separator + key + '=' + encodeURIComponent(data[key]);
+            separator = '&';
+        }
+        return url;
+    }
+
 	function getExtentedOption(cal, option_name) {
 		var fromOptions = (cal.options[option_name] != null) ? cal.options[option_name] : null;
 		var fromLanguage = (cal.locale[option_name] != null) ? cal.locale[option_name] : null;
@@ -722,15 +733,16 @@ if(!String.prototype.format) {
 				if(source.length) {
 					loader = function() {
 						var events = [];
-						var params = {from: self.options.position.start.getTime(), to: self.options.position.end.getTime()};
+						var params = {startdate: self.options.position.start.getTime(), enddate: self.options.position.end.getTime()};
 						if(browser_timezone.length) {
 							params.browser_timezone = browser_timezone;
 						}
-						$.ajax({
-							url: buildEventsUrl(source, params),
+						$.securityCrucialAjaxPOST({
+							url: managerProperties.services.GET_EVENTS_BY_TIME,
 							dataType: 'json',
                             // TODO: change get to post
-							type: 'GET',
+							type: 'POST',
+                            data: buildEventsUrlPOST(params),
 							async: false
 						}).done(function(json) {
 							if(!json.success) {
@@ -740,6 +752,7 @@ if(!String.prototype.format) {
 								events = json.result;
 							}
 						});
+                        debugger;
 						return events;
 					};
 				}

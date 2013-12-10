@@ -154,13 +154,13 @@
             var dateStringArray = dateString.split(".");
             var day = dateStringArray[0];
             var month = dateStringArray[1] - 1;
-            var year = dateStringArray[2] - 1;
+            var year = dateStringArray[2];
         }
         if(dateStringFormat == managerProperties.formats.ISO_FORMAT) {
             var dateStringArray = dateString.split("-");
             var day = dateStringArray[2];
             var month = dateStringArray[1] - 1;
-            var year = dateStringArray[0] - 1;
+            var year = dateStringArray[0];
         }
         var timeStringArray = timeString.split(":");
         var hour = timeStringArray[0];
@@ -171,8 +171,8 @@
 
     // 05.05.2013
     function isDateStringValid(dateString) {
-        var regexGermanDate = /(?:[01][1-9]|2[0-9]|3[0-1])\.(?:0[1-9]|1[0-2])\.[0-9]{4}/;
-        var regexISODate = /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:[0][1-9]|[1][0-9]|2[0-9]|3[0-1])/;
+        var regexGermanDate = /(?:0[1-9]|1[0-9]|2[0-9]|3[0-1])\.(?:0[1-9]|1[0-2])\.[0-9]{4}/;
+        var regexISODate = /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9]|3[0-1])/;
         if(dateString.match(regexISODate)) {
             return managerProperties.formats.ISO_FORMAT;
         } else if (dateString.match(regexGermanDate)) {

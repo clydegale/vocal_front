@@ -4,7 +4,7 @@
 
 	"use strict";
     var options = {
-        events_source: "eventsNew.json.php",
+        events_source: managerProperties.services.GET_EVENTS_BY_TIME,
 		view: 'month',
 		tmpl_path: managerProperties.dirs.TEMPLATE_CALENDAR,
 		tmpl_cache: false,
