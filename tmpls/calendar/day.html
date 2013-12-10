@@ -1,10 +1,29 @@
 <% if(events.length) { %>
 	<ul class="unstyled list-unstyled cal-event-list">
 		<% _.each(events, function(event){ %>
+        <% var start = {} %>
+        <% var end = {} %>
+        <% start.date = new Date(parseInt(event.start)) %>
+        <% end.date = new Date(parseInt(event.end)) %>
+        <% start.hours = start.date.getHours() < 10 ? "0" + start.date.getHours() : start.date.getHours()%>
+        <% start.minutes = start.date.getMinutes() < 10 ? "0" + start.date.getMinutes() : start.date.getMinutes()%>
+        <% end.hours = end.date.getHours() < 10 ? "0" + end.date.getHours() : end.date.getHours()%>
+        <% end.minutes = end.date.getMinutes() < 10 ? "0" + end.date.getMinutes() : end.date.getMinutes()%>
+        <% console.log(event) %>
+        <% console.log(start) %>
+        <% console.log(end) %>
 			<li><span class="pull-left event <%= event['class'] %>"></span>
-				<a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
-					data-event-class="<%= event['class'] %>" class="event-item">
-					<%= event.title %></a></li>
+				<a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>" data-event-class="<%= event['class'] %>" class="event-item">
+					<%= event.title %>
+                </a>
+                <span class="pull-right">
+                    <%= start.date.toLocaleDateString() %>
+                    <%= start.hours + ":" + start.minutes %>
+                    -
+                    <%= end.date.toLocaleDateString() %>
+                    <%= end.hours + ":" + end.minutes%>
+                </span>
+            </li>
 		<% }) %>
 	</ul>
 <% } else  { %>

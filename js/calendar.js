@@ -729,6 +729,7 @@ if(!String.prototype.format) {
 						$.ajax({
 							url: buildEventsUrl(source, params),
 							dataType: 'json',
+                            // TODO: change get to post
 							type: 'GET',
 							async: false
 						}).done(function(json) {
