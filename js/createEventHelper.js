@@ -49,7 +49,6 @@
             $('#enddate').parents(".form-group").addClass("has-error")
             return;
         }
-
         // remove the start/end date/time from the array
         var tmpObj = {};
         var resultArray = [];
@@ -80,7 +79,6 @@
             postStringArray.push(o.name + "=" + encodeURIComponent(o.value))
         });
         var postString = postStringArray.join("&");
-
 
         debugger;
         $.securityCrucialAjaxPOST({
@@ -174,7 +172,7 @@
     // 05.05.2013
     function isDateStringValid(dateString) {
         var regexGermanDate = /(?:[01][1-9]|2[0-9]|3[0-1])\.(?:0[1-9]|1[0-2])\.[0-9]{4}/;
-        var regexISODate = /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:[01][1-9]|2[0-9]|3[0-1])/;
+        var regexISODate = /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:[0][1-9]|[1][0-9]|2[0-9]|3[0-1])/;
         if(dateString.match(regexISODate)) {
             return managerProperties.formats.ISO_FORMAT;
         } else if (dateString.match(regexGermanDate)) {
