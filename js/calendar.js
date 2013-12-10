@@ -740,7 +740,6 @@ if(!String.prototype.format) {
 						$.securityCrucialAjaxPOST({
 							url: managerProperties.services.GET_EVENTS_BY_TIME,
 							dataType: 'json',
-                            // TODO: change get to post
 							type: 'POST',
                             data: buildEventsUrlPOST(params),
 							async: false
@@ -748,11 +747,10 @@ if(!String.prototype.format) {
 							if(!json.success) {
 								$.error(json.error);
 							}
-							if(json.result) {
-								events = json.result;
+							if(json.content) {
+								events = json.content;
 							}
 						});
-                        debugger;
 						return events;
 					};
 				}
