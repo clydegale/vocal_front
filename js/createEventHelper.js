@@ -28,7 +28,6 @@
         var startTime = _.find(formData, function(formObjects) {return formObjects.name == "starttime"}).value;
         var endDate = _.find(formData, function(formObjects) {return formObjects.name == "enddate"}).value;
         var endTime = _.find(formData, function(formObjects) {return formObjects.name == "endtime"}).value;
-        debugger;
 
         // isDateStringValid returns the date Format if the date is matched, vaild are:
         // YYYY-MM-DD or DD.MM.YYYY
@@ -80,7 +79,6 @@
         });
         var postString = postStringArray.join("&");
 
-        debugger;
         $.securityCrucialAjaxPOST({
             url : managerProperties.services.CREATE_EVENT_URL,
             dataType : 'json',
@@ -89,7 +87,8 @@
             data : postString
         }).done(function(errorDTO) {
              console.log(errorDTO)
-                _handleCreateEventErrors(errorDTO)
+//                _handleCreateEventErrors(errorDTO)
+                securityCrucialErrorHandler(errorDTO, _handleCreateEventErrors)
             }).fail(function() {
                 console.log("eventCreat Query Failed")
             });

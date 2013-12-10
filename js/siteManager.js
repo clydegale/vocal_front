@@ -259,6 +259,27 @@ function resetForm(formID) {
     $('#' + formID)[0].reset();
 }
 
+function setUserAttendance(eventID, attends) {
+
+    $.securityCrucialAjaxPOST({
+        url : managerProperties.services.SET_EVENT_ATTENDANCE,
+        dataType : 'json',
+        type : 'POST',
+        async : true,
+        data : "eventid=" + eventID + "&attends=" + attends
+    }).success(function(errorDTO) {
+            debugger;
+            securityCrucialErrorHandler(errorDTO, _handleSetAttendanceErrors)
+        }
+    ).fail(function() {
+            console.log("userCreate Query Failed")
+        });
+}
+
+function _handleSetAttendanceErrors(errorDTO) {
+    debugger;
+}
+
 // ---------------------
 
 $.securityCrucialAjaxPOST = function(options) {

@@ -9,10 +9,8 @@
         <% start.minutes = start.date.getMinutes() < 10 ? "0" + start.date.getMinutes() : start.date.getMinutes()%>
         <% end.hours = end.date.getHours() < 10 ? "0" + end.date.getHours() : end.date.getHours()%>
         <% end.minutes = end.date.getMinutes() < 10 ? "0" + end.date.getMinutes() : end.date.getMinutes()%>
-        <% console.log(event) %>
-        <% console.log(start) %>
-        <% console.log(end) %>
-			<li><span class="pull-left event <%= event['class'] %>"></span>
+			<li style="padding-top: 0px; padding-bottom: 24px">
+                <span class="pull-left event <%= event['class'] %>"></span>
 				<a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>" data-event-class="<%= event['class'] %>" class="event-item">
 					<%= event.title %>
                 </a>
@@ -22,7 +20,14 @@
                     -
                     <%= end.date.toLocaleDateString() %>
                     <%= end.hours + ":" + end.minutes%>
+
+                    <div>
+                        <a href="javascript:void('Absagen')" class="glyphicon glyphicon-remove pull-right" id='<%= event.id%>' onclick='setUserAttendance(this.id, false)'>Absagen</a>
+                        <a href="javascript:void('Teilnehmen')" class="glyphicon glyphicon-ok pull-right" id='<%= event.id%>' onclick='setUserAttendance(this.id, true)'>Teilnehmen</a>
+                    </div>
                 </span>
+                <div>
+                </div>
             </li>
 		<% }) %>
 	</ul>

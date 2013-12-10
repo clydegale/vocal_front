@@ -1,8 +1,8 @@
-(function($) {
+//(function($) {
 
     //events_source: 'http://vocal.pi/eventsNew.json.php',
-
 	"use strict";
+
     var options = {
         events_source: managerProperties.services.GET_EVENTS_BY_TIME,
 		view: 'month',
@@ -67,4 +67,4 @@
 		var val = $(this).is(':checked') ? $(this).val() : null;
 		calendar.setOptions({modal: val});
 	});
-}(jQuery));
+//}(jQuery));

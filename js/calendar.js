@@ -745,7 +745,7 @@ if(!String.prototype.format) {
 							async: false
 						}).done(function(json) {
 							if(!json.success) {
-								$.error(json.error);
+								showAlert(managerProperties.alertTypes.DANGER, "Invalid Session")
 							}
 							if(json.content) {
 								events = json.content;
