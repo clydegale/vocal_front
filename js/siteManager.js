@@ -268,7 +268,9 @@ function setUserAttendance(eventID, attends) {
         async : true,
         data : "eventid=" + eventID + "&attends=" + attends
     }).success(function(errorDTO) {
+            console.log(attends)
             debugger;
+            errorDTO.attends = attends;
             securityCrucialErrorHandler(errorDTO, _handleSetAttendanceErrors)
         }
     ).fail(function() {
@@ -278,6 +280,17 @@ function setUserAttendance(eventID, attends) {
 
 function _handleSetAttendanceErrors(errorDTO) {
     debugger;
+    if(errorDTO.success) {
+        if(errorDTO.attends == true) {
+            showAlert(managerProperties.alertTypes.SUCCESS, "Sie haben erfolgreich zugesagt");
+        } else if(errorDTO.attends == false) {
+            showAlert(managerProperties.alertTypes.SUCCESS, "Sie haben erfolgreich abgesagt");
+        } else {
+            console.log("this should never happen")
+        }
+    } else {
+        console.log("Internal Error. Set attendance")
+    }
 }
 
 // ---------------------

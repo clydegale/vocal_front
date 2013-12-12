@@ -42,7 +42,7 @@ $('#userEditForm').submit(function(event) {
         type : 'POST',
         async : true,
         data : form.serialize()
-    }).success(function(errorDTO) {
+    }).success(function(errorDTO) {o
             securityCrucialErrorHandler(errorDTO, _handleUserEditErrors)
         }
      ).fail(function() {

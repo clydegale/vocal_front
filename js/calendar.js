@@ -749,6 +749,7 @@ if(!String.prototype.format) {
 							}
 							if(json.content) {
 								events = json.content;
+                                console.log(events)
 							}
 						});
 						return events;
