@@ -1,9 +1,7 @@
 "use strict";
 
 function loadView(view, afterLoadViewCallback, beforeViewCallback) {
-    beforeViewChange(beforeViewCallback)
-    console.log("Executed on every view load");
-    console.log("Current View: " + view)
+    beforeViewChange(beforeViewCallback);
     $.ajax({
         url : managerProperties.dirs.TEMPLATE_UI + view + ".html",
         dataType : 'html',
@@ -100,7 +98,6 @@ function loadOverview(rawHTML) {
 
     // Unhide toolbar buttons
     $('#navbar-content').removeClass("invisible");
-    console.log(sessionStorage);
     $('#navbar-username').html(sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName"));
     //Setting topbar buttons accordingly
     _setNavbarButtons(managerProperties.navbarButtons.OVERVIEW);
@@ -268,7 +265,6 @@ function setUserAttendance(eventID, attends) {
         async : true,
         data : "eventid=" + eventID + "&attends=" + attends
     }).success(function(errorDTO) {
-            console.log(attends)
             errorDTO.attends = attends;
             securityCrucialErrorHandler(errorDTO, _handleSetAttendanceErrors)
         }
@@ -293,7 +289,6 @@ function _handleSetAttendanceErrors(errorDTO) {
 
 function showEventModal(event) {
     var eventID = $(event).attr("data-event-id");
-    console.log(eventID);
     $.securityCrucialAjaxPOST({
         url : managerProperties.services.GET_EVENT_BY_ID,
         dataType : 'json',
@@ -301,7 +296,6 @@ function showEventModal(event) {
         async : true,
         data : "eventid=" + eventID
     }).success(function(errorDTO) {
-            console.log(errorDTO);
             securityCrucialErrorHandler(errorDTO, fillEventModal)
 
     }).fail(function() {
@@ -345,11 +339,9 @@ function fillEventModal(errorDTO) {
     );
     $('#modalDescription').html(event.description);
 
-    console.log(attendants)
     attendants.sort(function(a, b) {
         return a.lastName.toLowerCase() > b.lastName.toLowerCase();
     });
-    console.log(attendants)
 
     // append a line of html for each user
     _.each(attendants, function(attendant) {
@@ -396,14 +388,11 @@ function securityCrucialErrorHandler(errorDTO, errorHandler) {
 
 // Initialize the page by loading the Index template first
 $(document).ready(function() {
-    console.log("Document Ready");
     if(isStorageDefined() && (sessionStorage.visited == null)) {
-        console.log("Storage defined; not yet visted");
         sessionStorage.currentSiteState = managerProperties.siteStates.LOGIN_SCREEN;
         sessionStorage.visited = true;
         loadView(sessionStorage.getItem(["currentSiteState"]));
     } else if (sessionStorage.visited == "true") {
-        console.log("Storage defined; visted");
         loadView(sessionStorage.getItem(["currentSiteState"]));
     } else {
         // TODO: implement error message for browsers without html5
