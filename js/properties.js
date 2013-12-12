@@ -16,7 +16,8 @@ var managerProperties = {
         EDIT_USER_URL:          "http://5.9.99.52:10080/VoCalServices/UserMgmt/editUser",
         CREATE_EVENT_URL:       "http://5.9.99.52:10080/VoCalServices/EventMgmt/createEvent",
         GET_EVENTS_BY_TIME:     "http://5.9.99.52:10080/VoCalServices/EventMgmt/getEventsBetween",
-        SET_EVENT_ATTENDANCE:   "http://5.9.99.52:10080/VoCalServices/UserMgmt/setEventAttendance"
+        SET_EVENT_ATTENDANCE:   "http://5.9.99.52:10080/VoCalServices/UserMgmt/setEventAttendance",
+        GET_EVENT_BY_ID:        "http://5.9.99.52:10080/VoCalServices/EventMgmt/getEventById"
     },
     siteStates: {
         LOGIN_SCREEN:       "loginScreen",

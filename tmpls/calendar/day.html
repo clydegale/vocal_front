@@ -11,7 +11,7 @@
         <% end.minutes = end.date.getMinutes() < 10 ? "0" + end.date.getMinutes() : end.date.getMinutes()%>
 			<li style="padding-top: 0px; padding-bottom: 24px">
                 <span class="pull-left event <%= event['class'] %>"></span>
-				<a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>" data-event-class="<%= event['class'] %>" class="event-item">
+				<a href="" data-event-id="<%= event.id %>" data-event-class="<%= event['class'] %>" class="event-item" data-toggle="modal" data-target="#eventModal" onclick="showEventModal(this)">
 					<%= event.title %>
                 </a>
                 <span class="pull-right">
@@ -34,3 +34,23 @@
 <% } else  { %>
 	<p><%= cal.locale.no_events_in_day %></p>
 <% }  %>
+
+<!-- Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modalTitle"></h4>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div id="modalDateTime"></div>
+                <div id="modalDescription"></div>
+                <ul id="modalAttendants"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="resetModal()">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
