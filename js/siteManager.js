@@ -191,6 +191,7 @@ function logoutUser() {
         console.log("userlogout Query Failed")
     });
     sessionStorage.clear();
+    $('#navbar-eventedit').remove();
     loadView(managerProperties.siteStates.LOGIN_SCREEN);
 }
 
