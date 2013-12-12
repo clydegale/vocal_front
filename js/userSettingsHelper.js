@@ -1,5 +1,3 @@
-// Query the server for all
-
 $.ajax({
     url : managerProperties.services.LOCATION_SELECTOR_URL,
     dataType : 'json',
@@ -68,8 +66,6 @@ function _handleUserEditErrors(errorDTO) {
         }
 
         showAlert(managerProperties.alertTypes.SUCCESS, errorMessage);
-        // TODO: update navbar content
-        // update the form and name in the navbar
         _populateAccountEditForm();
         $('#navbar-username').html(sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName"));
     }

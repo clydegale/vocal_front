@@ -1,3 +1,8 @@
+/*
+    This file stores all constants and "magic strings". helps a lot if there are sudden changes in the webservices or
+    errors.
+ */
+
 "use strict";
 
 var managerProperties = {

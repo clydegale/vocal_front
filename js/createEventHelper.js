@@ -1,3 +1,7 @@
+/*  This file handles the event creation form. default behavior of the form submit is intercepted and handled manually.
+    This way the ajax calls against the webservice can be done with the form data as parameters
+*/
+
 (function($){
     "use strict";
 
@@ -7,8 +11,10 @@
 
         //clear all red borders if there are any
         clearFormErrors();
-        // conditions check if the checkboxes are checked and disables the hidden input field accordingly
-        // hidden inputs are required to send key=false instead of nothing in the post request
+
+        // These conditions check if the checkboxes are checked and disables the hidden input field accordingly
+        // hidden inputs are required to send key=false instead of nothing in the post request. an empty key can not be
+        // handled by the webservice
         if($('#child').prop("checked")) {
             $('#childHidden').prop('disabled', true);
         }
@@ -21,6 +27,13 @@
         if($('#master').prop("checked")) {
             $('#masterHidden').prop('disabled', true);
         }
+
+        // This whole section is necessary so the time sent to the server will be in unixtime * 1000 (ms). on the
+        // serverside the event start and end is exclusively handled via unixtime.
+        // If the normal form input would be used the server would get a {start,end} date and {start,end} time which
+        // are two parameters too much.
+
+        // get the start and end dates/times
         var form = $('#createEventForm');
         var formData = form.serializeArray();
         var startDate = _.find(formData, function(formObjects) {return formObjects.name == "startdate"}).value;
@@ -28,11 +41,12 @@
         var endDate = _.find(formData, function(formObjects) {return formObjects.name == "enddate"}).value;
         var endTime = _.find(formData, function(formObjects) {return formObjects.name == "endtime"}).value;
 
-        // isDateStringValid returns the date Format if the date is matched, vaild are:
-        // YYYY-MM-DD or DD.MM.YYYY
+        // isDateStringValid returns the date Format if the date is matched and false if it isnt.
+        // vaild are: YYYY-MM-DD or DD.MM.YYYY
         var startDateFormat = isDateStringValid(startDate);
         var endDateFormat = isDateStringValid(endDate);
 
+        // is the date/time data valid? if not, throw an error and stop
         if(!(startDateFormat
         && endDateFormat
         && isTimeStringValid(startTime)
@@ -46,6 +60,7 @@
             $('#enddate').parents(".form-group").addClass("has-error")
             return;
         }
+
         // remove the start/end date/time from the array
         var tmpObj = {};
         var resultArray = [];
@@ -59,6 +74,8 @@
             }
             resultArray.push(tmpObj);
         }
+
+        // create a new start and enddate with the extracted data...
         var startDateObj = {
             name: "startdate",
             value: createUnixTimestamp(startDate, startTime, startDateFormat)
@@ -67,16 +84,19 @@
             name: "enddate",
             value: createUnixTimestamp(endDate, endTime, endDateFormat)
         }
-
+        // ...and add it to the array of parameters
         resultArray.push(startDateObj);
         resultArray.push(endDateObj);
 
-        var postStringArray = [];
+        // ensure that the data can be transmitted as a ajax request by URLEncoding all data
+        var parameterArray = [];
         _.each(resultArray, function(o) {
-            postStringArray.push(o.name + "=" + encodeURIComponent(o.value))
+            parameterArray.push(o.name + "=" + encodeURIComponent(o.value))
         });
-        var postString = postStringArray.join("&");
+        // build the AJAX POST data string using the key value pairs in the parameter array
+        var postString = parameterArray.join("&");
 
+        // query the webservice
         $.securityCrucialAjaxPOST({
             url : managerProperties.services.CREATE_EVENT_URL,
             dataType : 'json',
@@ -84,12 +104,12 @@
             async : true,
             data : postString
         }).done(function(errorDTO) {
-//                _handleCreateEventErrors(errorDTO)
                 securityCrucialErrorHandler(errorDTO, _handleCreateEventErrors)
-            }).fail(function() {
+        }).fail(function() {
                 console.log("eventCreat Query Failed")
-            });
+        });
     });
+
 
     function _handleCreateEventErrors(errorDTO) {
         if(errorDTO["success"]) {
@@ -128,15 +148,6 @@
         showAlert(managerProperties.alertTypes.DANGER, errorMessage)
     }
 
-    var now = new Date();
-    // zero is always appended, if date or month is > 9 only the last 2 characters are used (leaving the 0 behind)
-    var dateString = ("0" + now.getDate()).slice(-2) + "." + ("0" + (now.getMonth() + 1)).slice(-2) + "." + (now.getYear() + 1900);
-    var timeString = ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2)
-    $('#startdate').val(dateString);
-    $('#starttime').val(timeString);
-    $('#enddate').val(dateString);
-    $('#endtime').val(timeString);
-
     function createUnixTimestamp(dateString, timeString, dateStringFormat) {
         if(dateStringFormat == managerProperties.formats.GERMAN_FORMAT) {
             var dateStringArray = dateString.split(".");
@@ -157,7 +168,6 @@
         return new Date(year, month, day, hour, minute).getTime();
     }
 
-    // 05.05.2013
     function isDateStringValid(dateString) {
         var regexGermanDate = /(?:0[1-9]|1[0-9]|2[0-9]|3[0-1])\.(?:0[1-9]|1[0-2])\.[0-9]{4}/;
         var regexISODate = /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9]|3[0-1])/;
@@ -169,7 +179,7 @@
             return false;
         }
     }
-    // 14:30
+
     function isTimeStringValid(timeString) {
         var regex = /(?:[0-1][0-9]|2[0-3]):[0-5][0-9]/;
         if(timeString.match(regex)) {
@@ -186,5 +196,16 @@
         $('#eventtype').parents(".form-group").removeClass("has-error")
         $('#eventAttendanceCheckBoxes').parents(".form-group").removeClass("has-error")
     }
+
+    // prefill the start and end times with the current date and time
+    // (will not work in chrome, since chrome is the only browser that handles the "date" inputtype)
+    var now = new Date();
+    // zero is always appended, if date or month is > 9 only the last 2 characters are used (leaving the 0 behind)
+    var dateString = ("0" + now.getDate()).slice(-2) + "." + ("0" + (now.getMonth() + 1)).slice(-2) + "." + (now.getYear() + 1900);
+    var timeString = ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2)
+    $('#startdate').val(dateString);
+    $('#starttime').val(timeString);
+    $('#enddate').val(dateString);
+    $('#endtime').val(timeString);
 
 })(jQuery)

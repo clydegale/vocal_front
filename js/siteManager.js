@@ -5,7 +5,22 @@
     Page transition is handled by the loadView() function. loadView is registered as an onclick listener on all "links" within the pages
     depending on the view parameter specified the specific function will be loaded since there are a few things that cant be handled genericly.
 
+    Most of the functionality of this webapp is done serverside and is provided via webservices. These services are
+    called via ajax calls like this:
 
+     $.securityCrucialAjaxPOST({
+             url : managerProperties.services.EDIT_USER_URL,
+             dataType : 'json',
+             type : 'POST',
+             async : true,
+             data : form.serialize()
+     }).success(function(errorDTO) {
+            securityCrucialErrorHandler(errorDTO, _handleUserEditErrors)
+     }).fail(function() {
+            console.log("userCreate Query Failed")
+     });
+
+     Most of the Helper.js files are focused around using these calls and handling their errors/successes
  */
 
 "use strict";
