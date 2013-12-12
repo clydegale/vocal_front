@@ -8,8 +8,10 @@
 
         //clear all red borders if there are any
         clearFormErrors();
-        // conditions check if the checkboxes are checked and disables the hidden input field accordingly
-        // hidden inputs are required to send key=false instead of nothing in the post request
+
+        // These conditions check if the checkboxes are checked and disables the hidden input field accordingly
+        // hidden inputs are required to send key=false instead of nothing in the post request. an empty key can not be
+        // handled by the webservice
         if($('#child').prop("checked")) {
             $('#childHidden').prop('disabled', true);
         }
@@ -22,6 +24,13 @@
         if($('#master').prop("checked")) {
             $('#masterHidden').prop('disabled', true);
         }
+
+        // This whole section is necessary so the time sent to the server will be in unixtime * 1000 (ms). on the
+        // serverside the event start and end is exclusively handled via unixtime.
+        // If the normal form input would be used the server would get a {start,end} date and {start,end} time which
+        // are two parameters too much.
+
+        // get the start and end dates/times
         var form = $('#createEventForm');
         var formData = form.serializeArray();
         var startDate = _.find(formData, function(formObjects) {return formObjects.name == "startdate"}).value;
@@ -29,11 +38,12 @@
         var endDate = _.find(formData, function(formObjects) {return formObjects.name == "enddate"}).value;
         var endTime = _.find(formData, function(formObjects) {return formObjects.name == "endtime"}).value;
 
-        // isDateStringValid returns the date Format if the date is matched, vaild are:
-        // YYYY-MM-DD or DD.MM.YYYY
+        // isDateStringValid returns the date Format if the date is matched and false if it isnt.
+        // vaild are: YYYY-MM-DD or DD.MM.YYYY
         var startDateFormat = isDateStringValid(startDate);
         var endDateFormat = isDateStringValid(endDate);
 
+        // is the date/time data valid? if not, throw an error and stop
         if(!(startDateFormat
         && endDateFormat
         && isTimeStringValid(startTime)
@@ -48,6 +58,7 @@
             $('#enddate').parents(".form-group").addClass("has-error")
             return;
         }
+
         // remove the start/end date/time from the array
         var tmpObj = {};
         var resultArray = [];
@@ -61,6 +72,8 @@
             }
             resultArray.push(tmpObj);
         }
+
+        // create a new start and enddate with the extracted data...
         var startDateObj = {
             name: "startdate",
             value: createUnixTimestamp(startDate, startTime, startDateFormat)
@@ -69,16 +82,19 @@
             name: "enddate",
             value: createUnixTimestamp(endDate, endTime, endDateFormat)
         }
-
+        // ...and add it to the array of parameters
         resultArray.push(startDateObj);
         resultArray.push(endDateObj);
 
-        var postStringArray = [];
+        // ensure that the data can be transmitted as a ajax request by URLEncoding all data
+        var parameterArray = [];
         _.each(resultArray, function(o) {
-            postStringArray.push(o.name + "=" + encodeURIComponent(o.value))
+            parameterArray.push(o.name + "=" + encodeURIComponent(o.value))
         });
-        var postString = postStringArray.join("&");
+        // build the AJAX POST data string using the key value pairs in the parameter array
+        var postString = parameterArray.join("&");
 
+        // query the webservice
         $.securityCrucialAjaxPOST({
             url : managerProperties.services.CREATE_EVENT_URL,
             dataType : 'json',
@@ -87,7 +103,6 @@
             data : postString
         }).done(function(errorDTO) {
              console.log(errorDTO)
-//                _handleCreateEventErrors(errorDTO)
                 securityCrucialErrorHandler(errorDTO, _handleCreateEventErrors)
             }).fail(function() {
                 console.log("eventCreat Query Failed")
@@ -95,9 +110,7 @@
     });
 
     function _handleCreateEventErrors(errorDTO) {
-        console.log(errorDTO);
         if(errorDTO["success"]) {
-            console.log("success == 1");
             showAlert(managerProperties.alertTypes.SUCCESS, "Das Event wurde erfolgreich erstellt") //
             resetForm("createEventForm");
             return;
@@ -105,34 +118,28 @@
         var errorMessage = "";
         // TODO: add delay, so fields wont show up as red before the error message is displayed
         if($.inArray(managerProperties.createEventErrors.TITLE_MISSING, errorDTO.content) != -1) {
-            console.log("Missing title");
             $('#eventtitle').parents(".form-group").addClass("has-error")
             errorMessage += 'Das Feld <b>Titel</b> darf nicht leer sein <br>'
         }
         if($.inArray(managerProperties.createEventErrors.STARTDATE_MISSING, errorDTO.content) != -1) {
-            console.log("Missing Startdate");
             $('#startdate').parents(".form-group").addClass("has-error")
             errorMessage += 'Bitte geben sie ein <b>Startdadum</b> ein<br>'
         }
         if($.inArray(managerProperties.createEventErrors.STARTDATE_MISSING, errorDTO.content) != -1) {
-            console.log("Missing Startdate");
             $('#enddate').parents(".form-group").addClass("has-error")
             errorMessage += 'Bitte geben sie ein <b>Startdadum</b> ein<br>'
         }
         // start>end
         if($.inArray(managerProperties.createEventErrors.STARTDATE_AFTER_ENDDATE, errorDTO.content) != -1) {
-            console.log("Startdate after enddate");
             $('#startdate').parents(".form-group").addClass("has-error")
             $('#enddate').parents(".form-group").addClass("has-error")
             errorMessage += 'Der gewählten <b>Start</b> liegt nach dem <b>Ende</b>'
         }
         if($.inArray(managerProperties.createEventErrors.EVENT_TYPE_MISSING, errorDTO.content) != -1) {
-            console.log("Missing Eventtype");
             $('#eventtype').parents(".form-group").addClass("has-error")
             errorMessage += 'Bitte wählen sie einen <b>Eventtyp</b> aus<br>'
         }
         if($.inArray(managerProperties.createEventErrors.NO_ATTENDANCE_GRADE_SELECTED, errorDTO.content) != -1) {
-            console.log("Missing Attendance");
             $('#eventAttendanceCheckBoxes').parents(".form-group").addClass("has-error")
             errorMessage += 'Bitte wählen sie mindestens eine <b>Gruppe</b> aus, die <b>eingeladen</b> werden soll.<br>'
         }

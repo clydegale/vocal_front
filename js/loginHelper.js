@@ -1,5 +1,3 @@
-"using strict"
-
 $('#loginForm').submit(function(event) {
     event.preventDefault();
     console.log("Default Prevented: Login");
