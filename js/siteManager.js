@@ -1,4 +1,17 @@
+/*
+    This File handles page transitions and a few helper or dirty functions (since there was no more time for refactoring.
+
+    Page transition is done asynchronically via a template system and ajax calls.
+    Page transition is handled by the loadView() function. loadView is registered as an onclick listener on all "links" within the pages
+    depending on the view parameter specified the specific function will be loaded since there are a few things that cant be handled genericly.
+
+
+ */
+
 "use strict";
+
+// loadView functions
+// ---------------------------------------------------------------------------------------------------------------------
 
 function loadView(view, afterLoadViewCallback, beforeViewCallback) {
     beforeViewChange(beforeViewCallback);
@@ -157,8 +170,10 @@ function loadCreateEvent(html) {
     //Update the current pageState
     _updateCurrentSiteState(managerProperties.siteStates.USER_SETTINGS)
 }
+// End of loadView functions
+// ---------------------------------------------------------------------------------------------------------------------
 
-
+// checks if the HTML5 sessionStorage object is available. It is crucial for the session handling since we're not using cookies
 function isStorageDefined() {
     return !((typeof Storage === "undefined") || (typeof window.sessionStorage === "undefined"));
 }
@@ -179,6 +194,7 @@ function _setNavbarButtons(buttonName) {
     })
 }
 
+// Clears the storage, notifies the server and fixes a small bug
 function logoutUser() {
     $.securityCrucialAjaxPOST({
         url : managerProperties.services.LOGOUT_USER_URL,
@@ -195,15 +211,8 @@ function logoutUser() {
     loadView(managerProperties.siteStates.LOGIN_SCREEN);
 }
 
-function closeAlert(button) {
-    var alertArea = $(button).parent(".alert");
-    alertArea.slideUp(managerProperties.SLIDE_DURATION);
-    // Need to set Timeout so the colors wont change while the slide animation is still going
-    setTimeout(function() {
-        _resetAlertType(alertArea);
-    }, managerProperties.SLIDE_DURATION);
-}
-
+// Alert functions (small red/green popdown that are shown on errors or successes)
+// ---------------------------------------------------------------------------------------------------------------------
 function showAlert(alertType, message) {
     if(message == null || message == '') {
         return;
@@ -222,12 +231,23 @@ function showAlert(alertType, message) {
     }, managerProperties.SLIDE_DURATION);
 }
 
+function closeAlert(button) {
+    var alertArea = $(button).parent(".alert");
+    alertArea.slideUp(managerProperties.SLIDE_DURATION);
+    // Need to set Timeout so the colors wont change while the slide animation is still going
+    setTimeout(function() {
+        _resetAlertType(alertArea);
+    }, managerProperties.SLIDE_DURATION);
+}
+
 function _resetAlertType(alertArea) {
     alertArea.removeClass(managerProperties.alertTypes.DANGER);
     alertArea.removeClass(managerProperties.alertTypes.SUCCESS);
     alertArea.removeClass(managerProperties.alertTypes.WARNING);
     alertArea.removeClass(managerProperties.alertTypes.INFO);
 }
+// End of alert functions
+// ---------------------------------------------------------------------------------------------------------------------
 
 
 // Helper function to fill the <select> tag with the locations
@@ -297,6 +317,8 @@ function _handleSetAttendanceErrors(errorDTO) {
     }
 }
 
+// modal functions (handle the display of event data via the popup window. will be moved to its own file)
+// ---------------------------------------------------------------------------------------------------------------------
 function showEventModal(event) {
     var eventID = $(event).attr("data-event-id");
     $.securityCrucialAjaxPOST({
@@ -319,16 +341,6 @@ function fillEventModal(errorDTO) {
         return;
     }
     resetModal();
-//    content: Object
-//    attendants: Array[7]
-//    class: "SEMINAR"
-//    description: "lkajsdfskafhsdfkhasdfkjhlv aisakjsdf"
-//    end: 1387027560000
-//    id: 20
-//    start: 1386768360000
-//    title: "lkwjdhflakshjf"
-//    __proto__: Object
-//    success: 1
     var event = errorDTO.content;
     var attendants = event.attendants;
     $('#modalTitle').html(event.title);
@@ -370,9 +382,16 @@ function resetModal() {
     $('#modalDescription').html(" ");
     $('#modalAttendants').html(" ")
 }
+// End of modal functions
+// ---------------------------------------------------------------------------------------------------------------------
 
-// ---------------------
-
+/* security abstraction layer
+   these functions wrap existing functionality so one doesn't need to think about appending the sessionID for all the
+   ajax requests to the webserver.
+   Similiar structures apply to the error handler which will always check if the response from the server contains the
+   INVALID_SESSION error and throw the user out if it occurs or calls the specific error handler if it doesn't
+*/
+// ---------------------------------------------------------------------------------------------------------------------
 $.securityCrucialAjaxPOST = function(options) {
     if(managerProperties.userSessionStorageObject.SESSION_ID != null) {
         options.data += "&sessionid=" + sessionStorage.getItem(managerProperties.userSessionStorageObject.SESSION_ID);
@@ -392,11 +411,15 @@ function securityCrucialErrorHandler(errorDTO, errorHandler) {
             showAlert(managerProperties.alertTypes.DANGER, "Ihre Sitzung ist nichtmehr gültig, bitte melden sie sich neu an.");
         })
     } else {
-        errorHandler(errorDTO);
+        if(typeof errorHandler === 'function') {
+            errorHandler(errorDTO);
+        }
     }
 }
+// End of abstraction layer
+// ---------------------------------------------------------------------------------------------------------------------
 
-// Initialize the page by loading the Index template first
+// Initialize the page by loading the Index template first and initializing the sessionStorage
 $(document).ready(function() {
     if(isStorageDefined() && (sessionStorage.visited == null)) {
         sessionStorage.currentSiteState = managerProperties.siteStates.LOGIN_SCREEN;
