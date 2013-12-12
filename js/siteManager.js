@@ -269,7 +269,6 @@ function setUserAttendance(eventID, attends) {
         data : "eventid=" + eventID + "&attends=" + attends
     }).success(function(errorDTO) {
             console.log(attends)
-            debugger;
             errorDTO.attends = attends;
             securityCrucialErrorHandler(errorDTO, _handleSetAttendanceErrors)
         }
@@ -279,7 +278,6 @@ function setUserAttendance(eventID, attends) {
 }
 
 function _handleSetAttendanceErrors(errorDTO) {
-    debugger;
     if(errorDTO.success) {
         if(errorDTO.attends == true) {
             showAlert(managerProperties.alertTypes.SUCCESS, "Sie haben erfolgreich zugesagt");
@@ -291,6 +289,84 @@ function _handleSetAttendanceErrors(errorDTO) {
     } else {
         console.log("Internal Error. Set attendance")
     }
+}
+
+function showEventModal(event) {
+    var eventID = $(event).attr("data-event-id");
+    console.log(eventID);
+    $.securityCrucialAjaxPOST({
+        url : managerProperties.services.GET_EVENT_BY_ID,
+        dataType : 'json',
+        type : 'POST',
+        async : true,
+        data : "eventid=" + eventID
+    }).success(function(errorDTO) {
+            console.log(errorDTO);
+            securityCrucialErrorHandler(errorDTO, fillEventModal)
+
+    }).fail(function() {
+            console.log("geteventbyid Query Failed")
+    });
+}
+
+function fillEventModal(errorDTO) {
+    if(!errorDTO.success) {
+        showAlert(managerProperties.alertTypes.DANGER, "Ein Fehler ist aufgetreten")
+        return;
+    }
+    resetModal();
+//    content: Object
+//    attendants: Array[7]
+//    class: "SEMINAR"
+//    description: "lkajsdfskafhsdfkhasdfkjhlv aisakjsdf"
+//    end: 1387027560000
+//    id: 20
+//    start: 1386768360000
+//    title: "lkwjdhflakshjf"
+//    __proto__: Object
+//    success: 1
+    var event = errorDTO.content;
+    var attendants = event.attendants;
+    $('#modalTitle').html(event.title);
+    var start = {};
+    var end = {};
+    start.date = new Date(parseInt(event.start));
+    end.date = new Date(parseInt(event.end));
+    start.hours = start.date.getHours() < 10 ? "0" + start.date.getHours() : start.date.getHours();
+    start.minutes = start.date.getMinutes() < 10 ? "0" + start.date.getMinutes() : start.date.getMinutes();
+    end.hours = end.date.getHours() < 10 ? "0" + end.date.getHours() : end.date.getHours();
+    end.minutes = end.date.getMinutes() < 10 ? "0" + end.date.getMinutes() : end.date.getMinutes();
+    $('#modalDateTime').html(
+        start.date.toLocaleDateString() + " " +
+        start.hours + ":" + start.minutes +
+        " - " +
+        end.date.toLocaleDateString() + " " +
+        end.hours + ":" + end.minutes + "<br>"
+    );
+    $('#modalDescription').html(event.description);
+
+    console.log(attendants)
+    attendants.sort(function(a, b) {
+        return a.lastName.toLowerCase() > b.lastName.toLowerCase();
+    });
+    console.log(attendants)
+
+    // append a line of html for each user
+    _.each(attendants, function(attendant) {
+        var li = document.createElement("li");
+        if(attendant.attends) {
+            $(li).css("color", "green");
+        }
+        $(li).html(attendant.firstName + " " + attendant.lastName);
+        $('#modalAttendants').append(li);
+    });
+}
+
+function resetModal() {
+    $('#modalTitle').html(" ");
+    $('#modalDateTime').html(" ");
+    $('#modalDescription').html(" ");
+    $('#modalAttendants').html(" ")
 }
 
 // ---------------------

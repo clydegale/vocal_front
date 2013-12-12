@@ -42,10 +42,9 @@ $('#userEditForm').submit(function(event) {
         type : 'POST',
         async : true,
         data : form.serialize()
-    }).success(function(errorDTO) {o
+    }).success(function(errorDTO) {
             securityCrucialErrorHandler(errorDTO, _handleUserEditErrors)
-        }
-     ).fail(function() {
+    }).fail(function() {
             console.log("userCreate Query Failed")
     });
 });
