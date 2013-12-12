@@ -33,9 +33,10 @@ var managerProperties = {
         DANGER:     "alert-danger"
     },
     navbarButtons: {
-        OVERVIEW: "navbar-home",
-        CALENDAR: "navbar-calendar",
-        SETTINGS: "navbar-settings"
+        OVERVIEW:       "navbar-home",
+        CALENDAR:       "navbar-calendar",
+        SETTINGS:       "navbar-settings",
+        CREATE_EVENT:   "navbar-eventedit"
     },
     userCreationErrors: {
         FIRSTNAME_MISSING:          "FIRSTNAME_MISSING",

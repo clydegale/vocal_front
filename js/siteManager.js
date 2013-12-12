@@ -88,6 +88,15 @@ function loadOverview(rawHTML) {
         return;
     }
 
+    if((sessionStorage.getItem(managerProperties.userSessionStorageObject.ROLE) == "ADMIN"
+    ||  sessionStorage.getItem(managerProperties.userSessionStorageObject.ROLE) == "MANAGER")
+    &&  $('#navbar-buttons').children('#navbar-eventedit').size() == 0) {
+
+//      has to be escaped because of the different usages of " and '
+//      var appendHTML = '<li id="navbar-eventedit"><a href="javascript:void(0)" onclick="loadView('createEvent')">Event erstellen</a></li>';
+        var appendHTML = "\x3Cli id=\"navbar-eventedit\"\x3E\x3Ca href=\"javascript:void(0)\" onclick=\"loadView(\'createEvent\')\"\x3EEvent erstellen\x3C\x2Fa\x3E\x3C\x2Fli\x3E";
+        $('#navbar-calendar').after(appendHTML)
+    }
 
     /* Reads the raw template of the Overview and proccesses it through the _ template function (used to dynamically
         show more settings to users with more privileges
@@ -141,7 +150,7 @@ function loadCreateEvent(html) {
     $('#contentMain').html(html);
     // Unhide toolbar buttons
     $('#navbar-content').removeClass("invisible");
-    _setNavbarButtons(managerProperties.navbarButtons.SETTINGS);
+    _setNavbarButtons(managerProperties.navbarButtons.CREATE_EVENT);
 
     $.getScript(managerProperties.dirs.JS + "createEventHelper.js")
 
