@@ -2,7 +2,6 @@
 
 $('#loginForm').submit(function(event) {
     event.preventDefault();
-    console.log("Default Prevented: Login");
     var form = $('#loginForm');
     $.ajax({
         url : managerProperties.services.LOGIN_USER_URL,
@@ -18,7 +17,6 @@ $('#loginForm').submit(function(event) {
 });
 
 function _handleLoginErrors(errorDTO) {
-    console.log(errorDTO);
     if(errorDTO.success) {
         _fillUserSession(errorDTO.content);
         loadView(managerProperties.siteStates.OVERVIEW);
@@ -28,7 +26,6 @@ function _handleLoginErrors(errorDTO) {
             errorMsg = "Fehler beim Anmelden: Falsche E-Mail oder Passwort <br>";
         }
         if ($.inArray(managerProperties.loginErrors.INTERNAL_ERROR, errorDTO.content) != -1) {
-            console.log(errorDTO.content);
             errorMsg += "Interner Fehler";
         }
         showAlert(managerProperties.alertTypes.DANGER, errorMsg);
@@ -36,8 +33,6 @@ function _handleLoginErrors(errorDTO) {
 }
 
 function _fillUserSession(content) {
-    console.log("Success: Login");
-    console.log(content);
     sessionStorage.setItem(managerProperties.userSessionStorageObject.SESSION_ID, content.sessionId);
     sessionStorage.setItem(managerProperties.userSessionStorageObject.FIRSTNAME, content.user.firstName);
     sessionStorage.setItem(managerProperties.userSessionStorageObject.LASTNAME, content.user.lastName);

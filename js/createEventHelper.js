@@ -4,7 +4,6 @@
 
     $('#createEventForm').submit(function(event) {
         event.preventDefault();
-        console.log("Default Prevented: createEventForm");
 
         //clear all red borders if there are any
         clearFormErrors();
@@ -38,7 +37,6 @@
         && endDateFormat
         && isTimeStringValid(startTime)
         && isTimeStringValid(endTime))) {
-            console.log("A string is wrong: " + startDate + ";" + endDate + ";" + startTime + ";" + endTime);
             var errorString = "";
             errorString += "Bitte ein gültiges Datum und eine gültige Uhrzeit eingeben.<br>";
             errorString += "Korrektes Datum: TT.MM.YYYY<br>";
@@ -86,7 +84,6 @@
             async : true,
             data : postString
         }).done(function(errorDTO) {
-             console.log(errorDTO)
 //                _handleCreateEventErrors(errorDTO)
                 securityCrucialErrorHandler(errorDTO, _handleCreateEventErrors)
             }).fail(function() {
@@ -95,9 +92,7 @@
     });
 
     function _handleCreateEventErrors(errorDTO) {
-        console.log(errorDTO);
         if(errorDTO["success"]) {
-            console.log("success == 1");
             showAlert(managerProperties.alertTypes.SUCCESS, "Das Event wurde erfolgreich erstellt") //
             resetForm("createEventForm");
             return;
@@ -105,34 +100,28 @@
         var errorMessage = "";
         // TODO: add delay, so fields wont show up as red before the error message is displayed
         if($.inArray(managerProperties.createEventErrors.TITLE_MISSING, errorDTO.content) != -1) {
-            console.log("Missing title");
             $('#eventtitle').parents(".form-group").addClass("has-error")
             errorMessage += 'Das Feld <b>Titel</b> darf nicht leer sein <br>'
         }
         if($.inArray(managerProperties.createEventErrors.STARTDATE_MISSING, errorDTO.content) != -1) {
-            console.log("Missing Startdate");
             $('#startdate').parents(".form-group").addClass("has-error")
             errorMessage += 'Bitte geben sie ein <b>Startdadum</b> ein<br>'
         }
         if($.inArray(managerProperties.createEventErrors.STARTDATE_MISSING, errorDTO.content) != -1) {
-            console.log("Missing Startdate");
             $('#enddate').parents(".form-group").addClass("has-error")
             errorMessage += 'Bitte geben sie ein <b>Startdadum</b> ein<br>'
         }
         // start>end
         if($.inArray(managerProperties.createEventErrors.STARTDATE_AFTER_ENDDATE, errorDTO.content) != -1) {
-            console.log("Startdate after enddate");
             $('#startdate').parents(".form-group").addClass("has-error")
             $('#enddate').parents(".form-group").addClass("has-error")
             errorMessage += 'Der gewählten <b>Start</b> liegt nach dem <b>Ende</b>'
         }
         if($.inArray(managerProperties.createEventErrors.EVENT_TYPE_MISSING, errorDTO.content) != -1) {
-            console.log("Missing Eventtype");
             $('#eventtype').parents(".form-group").addClass("has-error")
             errorMessage += 'Bitte wählen sie einen <b>Eventtyp</b> aus<br>'
         }
         if($.inArray(managerProperties.createEventErrors.NO_ATTENDANCE_GRADE_SELECTED, errorDTO.content) != -1) {
-            console.log("Missing Attendance");
             $('#eventAttendanceCheckBoxes').parents(".form-group").addClass("has-error")
             errorMessage += 'Bitte wählen sie mindestens eine <b>Gruppe</b> aus, die <b>eingeladen</b> werden soll.<br>'
         }

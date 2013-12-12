@@ -179,7 +179,7 @@ function logoutUser() {
     }).done(function(data) {
 
     }).fail(function() {
-        console.log("userCreate Query Failed")
+        console.log("userlogout Query Failed")
     });
     sessionStorage.clear();
     loadView(managerProperties.siteStates.LOGIN_SCREEN);
@@ -269,7 +269,7 @@ function setUserAttendance(eventID, attends) {
             securityCrucialErrorHandler(errorDTO, _handleSetAttendanceErrors)
         }
     ).fail(function() {
-            console.log("userCreate Query Failed")
+            console.log("userattendance Query Failed")
         });
 }
 

@@ -1,7 +1,5 @@
 "use strict";
 
-console.log("properties loaded");
-
 var managerProperties = {
     dirs: {
         TEMPLATE_UI :       "tmpls/ui/",
