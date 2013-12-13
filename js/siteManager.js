@@ -150,10 +150,12 @@ function loadCalendar(html) {
     $('#navbar-content').removeClass("invisible");
     _setNavbarButtons(managerProperties.navbarButtons.CALENDAR);
 
-    $.getScript(managerProperties.dirs.JS + "calendar.js");
-//    $.getScript(managerProperties.dirs.JS + "underscore.js");
+    $.getScript(managerProperties.dirs.JS + "calendar.js", function() {
+        // Calling the app.js file after calendar.js has been fully loaded to prevent a race condition
+        $.getScript(managerProperties.dirs.JS + "app.js");
+    });
     $.getScript(managerProperties.dirs.JS + "language/de-DE.js");
-    $.getScript(managerProperties.dirs.JS + "app.js");
+
 
     //Update the current pageState
     _updateCurrentSiteState(managerProperties.siteStates.CALENDAR)
@@ -436,7 +438,7 @@ function securityCrucialErrorHandler(errorDTO, errorHandler) {
             showAlert(managerProperties.alertTypes.DANGER, "Ihre Sitzung ist nichtmehr gültig, bitte melden sie sich neu an.");
         })
     } else {
-        if(typeof errorHandler === 'function') {
+        if(typeof errorHandler === 'function') { 
             errorHandler(errorDTO);
         }
     }

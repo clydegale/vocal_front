@@ -34,6 +34,7 @@ var options = {
     }
 };
 
+debugger;
 var calendar = $('#calendar').calendar(options);
 
 $('.btn-group button[data-calendar-nav]').each(function() {
