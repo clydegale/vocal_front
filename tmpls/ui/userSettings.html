@@ -50,12 +50,12 @@
                 <a class="btn btn-danger col-xs-12 col-md-1" onclick="loadView('overview')">Zurück</a>
                 <div class="col-md-2"></div>
                 <!-- INFO: small hack, might needs to be removed-->
-                <input class="btn btn-primary col-xs-12 col-md-1" type="submit" value="Senden" style="height: 34px">
+                <input class="btn btn-primary col-xs-12 col-md-1" type="submit" value="Senden" style="height: 34px" data-loading-text="Senden..." onclick="handleLoadingButton(this)">
             </div>
             <!-- Buttons Visible for small devices -->
             <div class="form-group visible-sm visible-xs" style="margin: 0% 20%">
                 <!-- TODO: Check why on mobile the button won't submit -->
-                <input class="btn btn-primary btn-block" type="submit" value="Senden">
+                <input class="btn btn-primary btn-block" type="submit" value="Senden" data-loading-text="Senden..." onclick="handleLoadingButton(this)">
                 <a class="btn btn-danger btn-block" onclick="loadView('overview')">Zurück</a>
             </div>
         </form>
