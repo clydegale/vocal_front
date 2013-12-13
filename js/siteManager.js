@@ -336,6 +336,16 @@ function _handleSetAttendanceErrors(errorDTO) {
     }
 }
 
+function handleLoadingButton(button) {
+    var btn = $(button);
+    btn.button('loading');
+    setTimeout(function() {
+//        btn.button('reset');
+    }, managerProperties.MAX_TIMEOUTDURATION)
+    // TODO: necessary? cant check right now cause the servers are down
+//    btn.submit();
+}
+
 // modal functions (handle the display of event data via the popup window. will be moved to its own file)
 // ---------------------------------------------------------------------------------------------------------------------
 function showEventModal(event) {
@@ -444,7 +454,18 @@ function securityCrucialErrorHandler(errorDTO, errorHandler) {
 
 // Initialize the page by loading the Index template first and initializing the sessionStorage
 $(document).ready(function() {
-    console.log("Document Ready");
+    $.ajaxSetup({
+        timeout: managerProperties.MAX_TIMEOUTDURATION
+    });
+
+    // Register a global error handler that resets the "Loading..." button
+    $( document ).ajaxError(function(event, jqXHR, ajaxSettings, thrownError) {
+        console.log(event, jqXHR, ajaxSettings, thrownError);
+        // Timeout will be set so the showAlert and the reset of the button happens at the same time
+        setTimeout(function() {
+            $('[data-loading-text]').button('reset');
+        }, managerProperties.SLIDE_DURATION)
+    });
     if(isStorageDefined() && (sessionStorage.visited == null)) {
         console.log("Storage defined; not yet visted");
         sessionStorage.currentSiteState = managerProperties.siteStates.LOGIN_SCREEN;

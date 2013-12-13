@@ -92,5 +92,6 @@ var managerProperties = {
         ISO_FORMAT: "ISO_FORMAT",
         GERMAN_FORMAT: "GERMAN_FORMAT"
     },
-    SLIDE_DURATION: 500
+    SLIDE_DURATION:         500,
+    MAX_TIMEOUTDURATION:    2500
 };
