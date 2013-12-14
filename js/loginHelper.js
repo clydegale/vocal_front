@@ -21,7 +21,7 @@ function _handleLoginErrors(errorDTO) {
     } else {
         var errorMsg = "";
         if($.inArray(managerProperties.loginErrors.AUTHENTICATION_FAILED, errorDTO.content) != -1) {
-            errorMsg = "Fehler beim Anmelden: Falsche E-Mail oder Passwort <br>";
+            errorMsg = "Fehler beim Anmelden: Falsche E-Mail Adresse oder Passwort <br>";
         }
         if ($.inArray(managerProperties.loginErrors.INTERNAL_ERROR, errorDTO.content) != -1) {
             errorMsg += "Interner Fehler";

@@ -438,7 +438,7 @@ function securityCrucialErrorHandler(errorDTO, errorHandler) {
             showAlert(managerProperties.alertTypes.DANGER, "Ihre Sitzung ist nichtmehr gültig, bitte melden sie sich neu an.");
         })
     } else {
-        if(typeof errorHandler === 'function') { 
+        if(typeof errorHandler === 'function') {
             errorHandler(errorDTO);
         }
     }
