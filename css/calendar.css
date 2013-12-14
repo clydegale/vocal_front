@@ -236,26 +236,20 @@
 .event-special {
   background-color: #800080;
 }
-.event-my {
-    background-color: #ff00ff;
-}
 .SEMINAR {
     background-color: #ff00ff;
 }
 .EXAM {
-
+    background-color: #faf58c;
 }
 .DEMO {
-
-}
-.SEMINAR {
-
+    background-color: #648998;
 }
 .COMPETITION {
-
+    background-color: #5cd3eb;
 }
 .MEETING {
-
+    background-color: #a6ee41;
 }
 
 .day-highlight:hover,
