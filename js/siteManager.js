@@ -245,6 +245,7 @@ function showAlert(alertType, message) {
         textArea.html(message);
         alertArea.slideDown(managerProperties.SLIDE_DURATION);
         window.scrollTo(0,0)
+        $('[data-loading-text]').button('reset');
     }, managerProperties.SLIDE_DURATION);
 }
 
